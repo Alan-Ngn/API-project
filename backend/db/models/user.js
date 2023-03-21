@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'spotId'
       })
 
-      // User.belongsToMany(models.Spot, {
-      //   through: models.Review,
-      //   foreignKey: 'userId',
-      //   otherKey: 'spotId'
-      // })
+      User.belongsToMany(models.Spot, {
+        through: models.Review,
+        foreignKey: 'userId',
+        otherKey: 'spotId'
+      })
     }
   };
 
