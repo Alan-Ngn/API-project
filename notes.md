@@ -12,7 +12,8 @@
 
     - Seeder Setup
 
-        - npx sequelize seed:generate --name demo-user
+        - npx sequelize seed:generate --name demo-spots
+        - npx sequelize seed:generate --name users-to-spots
 
 
 ## Tuesday SCRUM
