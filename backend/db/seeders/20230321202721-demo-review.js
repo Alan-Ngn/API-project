@@ -50,14 +50,30 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
+    // for (let reviewInfo of reviews) {
+    //   const rentee = await User.findOne({
+    //     where: { firstName: reviewInfo.renter.split(' ')[0], lastName: reviewInfo.renter.split(' ')[1] }
+    //   });
+    //   const spot = await Spot.findAll({
+    //     where: { name: reviewInfo.spots.map(ele => ele.name)}
+    //   });
+    //   await rentee.removeSpots(spot)
+    // }
     for (let reviewInfo of reviews) {
       const rentee = await User.findOne({
         where: { firstName: reviewInfo.renter.split(' ')[0], lastName: reviewInfo.renter.split(' ')[1] }
       });
-      const spot = await Spot.findAll({
-        where: { name: reviewInfo.spots.map(ele => ele.name)}
-      });
-      await rentee.removeSpots(spot)
+      for (let spotInfo of reviewInfo.spots){
+        const spot = await Spot.findOne({
+          where: { name: spotInfo.name }
+        });
+        await Review.destroy({ where:
+        { spotId: spot.id,
+          userId: rentee.id,
+          review: spotInfo.review,
+          stars: spotInfo.stars}
+        })
+      }
     }
   }
 };
