@@ -57,8 +57,7 @@ module.exports = {
         where: { firstName: spotInfo.owner.split(' ')[0], lastName: spotInfo.owner.split(' ')[1] }
       });
       await Spot.create({
-        // ownerId: foundSpotOwner.id,
-        ownerId: 1,
+        ownerId: foundSpotOwner.id,
         address,
         city,
         state,
