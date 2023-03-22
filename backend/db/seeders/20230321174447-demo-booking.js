@@ -39,8 +39,10 @@ module.exports = {
           where: { name: spotInfo.name }
         });
         await Booking.create({
-          spotId: spot.id,
-          userId: rentee.id,
+          // spotId: spot.id,
+          spotId: 1,
+          // userId: rentee.id,
+          userId: 1,
           startDate: spotInfo.startDate,
           endDate: spotInfo.endDate
         })
