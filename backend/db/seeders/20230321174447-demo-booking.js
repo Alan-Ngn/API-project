@@ -67,11 +67,11 @@ module.exports = {
         const spot = await Spot.findOne({
           where: { name: spotInfo.name }
         });
-        await Booking.destroy({
-          spotId: spot.id,
+        await Booking.destroy({ where:
+        { spotId: spot.id,
           userId: rentee.id,
           startDate: spotInfo.startDate,
-          endDate: spotInfo.endDate
+          endDate: spotInfo.endDate}
         })
       }
     }
