@@ -59,18 +59,26 @@ module.exports = {
     //   });
     //   await rentee.removeSpots(spot)
     // }
+    // for (let renteeInfo of bookings) {
+    //   const rentee = await User.findOne({
+    //     where: { firstName: renteeInfo.renter.split(' ')[0], lastName: renteeInfo.renter.split(' ')[1] }
+    //   });
+    //   for (let spotInfo of renteeInfo.spots){
+    //     const spot = await Spot.findOne({
+    //       where: { name: spotInfo.name }
+    //     });
+    //     await Booking.destroy({ where:
+    //     { spotId: spot.id,
+    //       userId: rentee.id,
+    //       startDate: spotInfo.startDate,
+    //       endDate: spotInfo.endDate}
+    //     })
+    //   }
+    // }
     for (let renteeInfo of bookings) {
-      const rentee = await User.findOne({
-        where: { firstName: renteeInfo.renter.split(' ')[0], lastName: renteeInfo.renter.split(' ')[1] }
-      });
       for (let spotInfo of renteeInfo.spots){
-        const spot = await Spot.findOne({
-          where: { name: spotInfo.name }
-        });
         await Booking.destroy({ where:
-        { spotId: spot.id,
-          userId: rentee.id,
-          startDate: spotInfo.startDate,
+        { startDate: spotInfo.startDate,
           endDate: spotInfo.endDate}
         })
       }
