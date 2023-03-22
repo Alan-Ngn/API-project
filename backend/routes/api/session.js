@@ -72,7 +72,7 @@ router.delete(
   );
 
 // Restore session user
-// Require Authentication: true
+
 router.get(
   '/',
   (req, res) => {

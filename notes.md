@@ -26,3 +26,12 @@
     - Make seeders for associations and start doing GET routes
   - What obstacles or impediments prevent me from making progress?
     - Lack of experience with seeders on join tables. Looking at examples from assessment
+
+
+## Wednesday SCRUM
+  - What did I accomplish yesterday?
+    - I made dyanmic seeders and started the first route
+  - What do I hope to accomplish today?
+    - Finish my routes for spots
+  - What obstacles or impediments prevent me from making progress?
+    - I've only tested in localhost and not render.
