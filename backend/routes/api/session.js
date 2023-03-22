@@ -22,6 +22,7 @@ const validateLogin = [
 ];
 
 // Log in
+// Require Authentication: false
 router.post(
   '/',
   validateLogin,
@@ -71,6 +72,7 @@ router.delete(
   );
 
 // Restore session user
+// Require Authentication: true
 router.get(
   '/',
   (req, res) => {
