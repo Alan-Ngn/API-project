@@ -12,9 +12,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     const findAllSpots = await Spot.findAll()
-    return res.json({
-        Spots: findAllSpots
-    })
+    return res.json(findAllSpots)
 })
 
 module.exports = router;
