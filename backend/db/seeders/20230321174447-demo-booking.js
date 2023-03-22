@@ -50,14 +50,30 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Bookings';
+    // for (let renteeInfo of bookings) {
+    //   const rentee = await User.findOne({
+    //     where: { firstName: renteeInfo.renter.split(' ')[0], lastName: renteeInfo.renter.split(' ')[1] }
+    //   });
+    //   const spot = await Spot.findAll({
+    //     where: { name: renteeInfo.spots.map(ele => ele.name)}
+    //   });
+    //   await rentee.removeSpots(spot)
+    // }
     for (let renteeInfo of bookings) {
       const rentee = await User.findOne({
         where: { firstName: renteeInfo.renter.split(' ')[0], lastName: renteeInfo.renter.split(' ')[1] }
       });
-      const spot = await Spot.findAll({
-        where: { name: renteeInfo.spots.map(ele => ele.name)}
-      });
-      await rentee.removeSpots(spot)
+      for (let spotInfo of renteeInfo.spots){
+        const spot = await Spot.findOne({
+          where: { name: spotInfo.name }
+        });
+        await Booking.destroy({
+          spotId: spot.id,
+          userId: rentee.id,
+          startDate: spotInfo.startDate,
+          endDate: spotInfo.endDate
+        })
+      }
     }
   }
 };
