@@ -45,7 +45,8 @@ router.get('/', async (req, res, next) => {
 
 
 
-    return res.json(payload)
+    return res.json({
+        Spots: payload})
 })
 
 
