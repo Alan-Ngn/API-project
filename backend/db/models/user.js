@@ -20,6 +20,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         otherKey: 'spotId'
       })
+
+      User.hasMany(
+        models.Review, {
+          foreignKey: 'userId'
+        }
+      )
+
+      User.hasMany(
+        models.Booking, {
+          foreignKey: 'userId'
+        }
+      )
     }
   };
 
