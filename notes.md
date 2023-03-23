@@ -35,3 +35,12 @@
     - Finish my routes for spots
   - What obstacles or impediments prevent me from making progress?
     - I've only tested in localhost and not render.
+
+
+## Thursday SCRUM
+  - What did I accomplish yesterday?
+    - all my tables work on render and i finish the first spot GET route
+  - What do I hope to accomplish today?
+    - See if my route works on Render
+  - What obstacles or impediments prevent me from making progress?
+    - routes and render
