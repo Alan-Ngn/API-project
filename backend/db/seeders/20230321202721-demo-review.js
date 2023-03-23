@@ -62,7 +62,7 @@ module.exports = {
     for (let reviewInfo of reviews) {
       for (let spotInfo of reviewInfo.spots){
         await Review.destroy({ where:
-        { name: spotInfo.name}
+        { review: spotInfo.review}
         })
       }
     }
