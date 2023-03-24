@@ -137,7 +137,7 @@ router.post('/', async (req, res, next) => {
     if(!price) errors.price = "Price per day is required"
 
     if(Object.keys(errors).length !==0) {
-        return res.json({
+        return res.status(400).json({
             message: "Bad Request",
             errors: errors
         })
