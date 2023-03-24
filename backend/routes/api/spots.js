@@ -2,7 +2,7 @@ const express = require('express');
 // const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, sequelize } = require('../../db/models');
+const { User, Spot, SpotImage, Booking, Review, ReviewImage, sequelize } = require('../../db/models');
 
 // const { check } = require('express-validator');
 // const { handleValidationErrors } = require('../../utils/validation');
@@ -226,5 +226,126 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     res.json({
         message: "Successfully deleted"
     })
+})
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const spotByPk = await Spot.findByPk(req.params.spotId)
+    if(!spotByPk) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+    const allReviewsBySpot = await spotByPk.getReviews()
+    const payload = []
+
+    for (let i = 0; i < allReviewsBySpot.length; i++) {
+        const review = allReviewsBySpot[i];
+
+        const reviewUser = await review.getUser({
+            attributes: ['id', 'firstName', 'lastName']
+        })
+        const reviewImage = await review.getReviewImages({
+            attributes: ['id', 'url']
+        })
+
+        const reviewData = review.toJSON()
+        reviewData.User = reviewUser
+        reviewData.ReviewImages = reviewImage
+        payload.push(reviewData)
+    }
+    res.json({
+        Reviews: payload
+    })
+})
+
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    const  { review, stars } =  req.body
+    let currentReviewer = req.user
+    const currentReview = await currentReviewer.getReviews({
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+    const spotValidation = await Spot.findByPk(req.params.spotId)
+    if(!spotValidation) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    if(currentReview.length){
+        return res.status(403).json({
+            message: "User already has a review for this spot"
+        })
+    }
+
+    const reviewSpot = await Review.create({
+        spotId: parseInt(req.params.spotId),
+        userId: req.user.id,
+        review,
+        stars
+    })
+
+    res.json(reviewSpot)
+})
+
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+    const spotById = await Spot.findByPk(req.params.spotId)
+    if(!spotById) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+    const bookingsBySpotId = await spotById.getBookings()
+
+    const payload = []
+    for (let i = 0; i < bookingsBySpotId.length; i++) {
+        const booking = bookingsBySpotId[i];
+        const bookingRenter = await booking.getUser({
+            attributes: ['id', 'firstName', 'lastName']
+        })
+
+        if(spotById.ownerId === req.user.id){
+
+            const ownerData = {}
+            ownerData.User = bookingRenter.toJSON()
+            ownerData.id = booking.id
+            ownerData.spotId = booking.spotId
+            ownerData.userId = booking.userId
+            ownerData.startDate = booking.startDate
+            ownerData.endDate = booking.endDate
+            ownerData.createdAt = booking.createdAt
+            ownerData.updatedAt = booking.updatedAt
+
+            payload.push(ownerData)
+
+        } else {
+            const renterData = {}
+            renterData.spotId = booking.spotId
+            renterData.startDate = booking.startDate
+            renterData.endDate = booking.endDate
+
+            payload.push(renterData)
+        }
+
+    }
+
+
+
+    return res.json({
+        Bookings: payload
+    })
+})
+
+
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { startDate, endDate } = req.body
+    const spotById = await Spot.findByPk(req.params.spotId)
+    if(!spotById) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
 })
 module.exports = router;
