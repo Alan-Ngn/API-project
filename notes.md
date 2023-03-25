@@ -44,3 +44,15 @@
     - See if my route works on Render
   - What obstacles or impediments prevent me from making progress?
     - routes and render
+
+## Friday SCRUM
+  - What did I accomplish yesterday?
+    - did Spots, Review and half of booking routes
+  - What do I hope to accomplish today?
+    - add validation errors
+  - What obstacles or impediments prevent me from making progress?
+    - validation errors and render
+    - if i do my validations in my routes do i need to do them in my model?
+
+kanban?
+deadline to have everything checked? partial

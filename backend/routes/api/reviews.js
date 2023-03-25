@@ -14,7 +14,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     let owner = req.user
     // console.log(owner,'TELTJELKTJEKLTJKLSTKLESJ:TLSJKL')
-    const currentUserReviews = await owner.getReviews()
+    const currentUserReviews = await owner.getReviews({
+        attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+    })
     for (let i = 0; i < currentUserReviews.length; i++) {
         const review = currentUserReviews[i];
 
@@ -85,7 +87,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 })
 
 router.put('/:reviewId', requireAuth, async (req, res, next) => {
-    const { review, url } = req.body
+    const errors = {}
+    const { review, stars } = req.body
+    if(!review) errors.review = "Review text is required"
+    if(!stars || !Number.isInteger(stars) || stars < 1 || stars > 5 ) errors.stars = "Stars must be an integer from 1 to 5"
     let currentReviewer = req.user
     const reviewer = await currentReviewer.getReviews({
         where: {
@@ -97,9 +102,20 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
             message: "Review couldn't be found"
         })
     }
-    const reviewById = await Review.findByPk(req.params.reviewId)
+
+    if(Object.keys(errors).length !==0) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: errors
+        })
+    }
+
+    const reviewById = await Review.findByPk(req.params.reviewId,
+        {
+            attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+        })
     const updateReview = await reviewById.update({
-        review, url
+        review, stars
     })
     res.json(updateReview)
 })
