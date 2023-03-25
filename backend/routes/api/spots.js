@@ -191,10 +191,14 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
         }
     })
     if(spotById.length){
-        await SpotImage.create({
+        const newSpotImage = await SpotImage.create({
             spotId: spotById[0].id, url, preview
         })
-
+        res.json({
+            id: newSpotImage.id,
+            url,
+            preview
+        })
     } else {
         return res.status(404).json(
             {
@@ -204,11 +208,12 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
     }
 
     // const test = await SpotImage.findByPk()
-    res.json({
-        id: parseInt(req.params.spotId),
-        url,
-        preview
-    })
+    // res.json(
+    //     // id: parseInt(req.params.spotId),
+    //     // url,
+    //     // preview
+    //     newSpotImage
+    // )
 
 })
 
