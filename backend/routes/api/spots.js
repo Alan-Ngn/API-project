@@ -7,14 +7,105 @@ const e = require('express');
 
 // const { check } = require('express-validator');
 // const { handleValidationErrors } = require('../../utils/validation');
-
+const { Op } = require('sequelize');
 const router = express.Router();
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
+    let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, size, page } = req.query;
+    const errors = {}
+    const where = {}
+    if(page && (isNaN(page) || parseInt(page) < 1 || parseInt(page) > 10)) errors.page = "Page must be greater than or equal to 1"
+    if(size && (isNaN(size) || parseInt(size) < 1 || parseInt(size) > 20)) errors.size = "Size must be greater than or equal to 1"
+    page = parseInt(page)
+    size = parseInt(size)
+
+    if(!page) page = 1;
+    if(!size) size = 20;
+    const offset = size * (page - 1)
+
+    let pagination = {}
+
+
+
+    if(maxLat && minLat && !isNaN(maxLat) && !isNaN(minLat)) {
+        where.Lat = {
+            [Op.between]: [minLat, maxLat]
+        }
+    } else if(maxLat && !isNaN(maxLat)){
+        where.Lat = {
+            [Op.lte]: maxLat
+        }
+    } else if(minLat && !isNaN(minLat)) {
+        where.Lat = {
+            [Op.gte]: minLat
+        }
+    }
+    if(maxLat && isNaN(maxLat)){
+        errors.maxLat = "Maximum latitude is invalid"
+    }
+    if(minLat && isNaN(minLat)){
+        errors.minLat = "Minimum latitude is invalid"
+    }
+
+
+
+    if(maxLng && minLng && !isNaN(maxLng) && !isNaN(minLng)) {
+        where.Lng = {
+            [Op.between]: [minLng, maxLng]
+        }
+    } else if(maxLng && !isNaN(maxLng)){
+        where.Lng = {
+            [Op.lte]: maxLng
+        }
+    } else if(minLng && !isNaN(minLng)) {
+        where.Lng = {
+            [Op.gte]: minLng
+        }
+    }
+    if(minLng && isNaN(minLng)){
+        errors.minLng = "Minimum longitude is invalid"
+    }
+    if(maxLng && isNaN(maxLng)){
+        errors.maxLng = "Maximum longitude is invalid"
+    }
+
+
+
+    if(minPrice && maxPrice && !isNaN(minPrice) && minPrice >=0  && !isNaN(maxPrice) && maxPrice >=0){
+        where.price = {
+            [Op.between]: [minPrice, maxPrice]
+        }
+    } else if(minPrice && !isNaN(minPrice) && minPrice >=0){
+        where.price = {
+            [Op.gte]: minPrice
+        }
+    } else if(maxPrice && !isNaN(maxPrice) && maxPrice >=0){
+        where.price = {
+            [Op.lte]: maxPrice
+        }
+    }
+    if(minPrice && (isNaN(minPrice) || minPrice < 0)) errors.minPrice = "Minimum price must be greater than or equal to 0"
+    if(maxPrice && (isNaN(maxPrice) || maxPrice < 0)) errors.maxPrice = "Maximum price must be greater than or equal to 0"
+
+    if(Object.keys(errors).length !==0) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: errors
+        })
+    }
+
+    if(page>=1 && size >=1){
+        pagination.limit = size;
+        pagination.offset = offset
+      }
+
     const payload = [];
 
-    const allSpots = await Spot.findAll()
+    const allSpots = await Spot.findAll({
+        where,
+        ...pagination
+    })
 
     for (let i = 0; i < allSpots.length; i++) {
         const spot = allSpots[i];
@@ -44,7 +135,10 @@ router.get('/', async (req, res, next) => {
         payload.push(spotData)
     }
     return res.json({
-        Spots: payload})
+        Spots: payload,
+        page: page,
+        size: size
+    })
 })
 
 // Get all Spots owned by the Current User

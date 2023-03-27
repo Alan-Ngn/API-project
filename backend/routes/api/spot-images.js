@@ -20,7 +20,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
                 id: req.params.imageId
             }
         })
-        console.log(findImage)
+        // console.log(findImage)
         if(findImage.length){
             await findImage[0].destroy()
             counter +=1

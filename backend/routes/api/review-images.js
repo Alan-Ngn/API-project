@@ -8,4 +8,31 @@ const { User, Spot, SpotImage, Booking, Review, ReviewImage, sequelize } = requi
 // const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
+
+router.delete('/:imageId', requireAuth, async (req, res, next) => {
+    let currentUser = req.user
+    const currentReview = await currentUser.getReviews()
+    let counter = 0
+    for (let i = 0; i < currentReview.length; i++) {
+        const review = currentReview[i];
+        const findReviewImages = await review.getReviewImages({
+            where: {
+                id: req.params.imageId
+            }
+        })
+        if(findReviewImages.length) {
+            await findReviewImages[0].destroy()
+            counter += 1
+        }
+    }
+    if(counter === 0){
+        return res.status(404).json({
+            message: "Review Image couldn't be found"
+        })
+    }
+    console.log(counter)
+    res.json({
+        message: "Successfully deleted"
+    })
+})
 module.exports = router;
