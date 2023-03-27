@@ -127,8 +127,7 @@ router.get('/', async (req, res, next) => {
         // }
         )
         const spotData = spot.toJSON();
-        let x = spotReviews[0].avgRating.toFixed(1)
-        spotData.avgRating = x
+        spotData.avgRating = Math.round(spotReviews[0].avgRating *10 )/10
         if(spotImage[0]){
             spotData.previewImage = spotImage[0].url
         }
