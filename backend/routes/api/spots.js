@@ -96,6 +96,7 @@ router.get('/', async (req, res, next) => {
     if(minPrice && (isNaN(minPrice) || minPrice < 0)) errors.minPrice = "Minimum price must be greater than or equal to 0"
     if(maxPrice && (isNaN(maxPrice) || maxPrice < 0)) errors.maxPrice = "Maximum price must be greater than or equal to 0"
 
+    
     if(Object.keys(errors).length !==0) {
         return res.status(400).json({
             message: "Bad Request",
