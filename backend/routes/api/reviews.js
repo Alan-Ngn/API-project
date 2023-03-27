@@ -57,10 +57,18 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             id: req.params.reviewId
         }
     })
-    if(!reviewer.length) {
+    const reviewByPk = await Review.findByPk(req.params.reviewId)
+    if(!reviewByPk){
         return res.status(404).json({
             message: "Review couldn't be found"
         })
+    }
+    if(!reviewer.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
 
     const reviewImageCount = await ReviewImage.count({
@@ -97,10 +105,24 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
             id: req.params.reviewId
         }
     })
-    if(!reviewer.length) {
+
+    const reviewById = await Review.findByPk(req.params.reviewId,
+        {
+            attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
+        })
+    if(!reviewById){
         return res.status(404).json({
             message: "Review couldn't be found"
         })
+    }
+
+
+    if(!reviewer.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
 
     if(Object.keys(errors).length !==0) {
@@ -110,10 +132,6 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
         })
     }
 
-    const reviewById = await Review.findByPk(req.params.reviewId,
-        {
-            attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
-        })
     const updateReview = await reviewById.update({
         review, stars
     })
@@ -122,18 +140,28 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
 
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     let currentReviewer = req.user
+
     const reviewer = await currentReviewer.getReviews({
         where: {
             id: req.params.reviewId
         }
     })
-    if(!reviewer.length) {
+
+    const reviewById = await Review.findByPk(req.params.reviewId)
+    if(!reviewById){
         return res.status(404).json({
             message: "Review couldn't be found"
         })
     }
+    if(!reviewer.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
+    }
 
-    const reviewById = await Review.findByPk(req.params.reviewId)
+
     await reviewById.destroy()
 
     res.json({

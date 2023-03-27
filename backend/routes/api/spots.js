@@ -279,24 +279,32 @@ router.post('/', requireAuth, async (req, res, next) => {
 router.post('/:spotId/images',requireAuth, async (req, res, next) => {
     let owner = req.user
     const { url, preview } = req.body
+    const missingSpot = await Spot.findByPk(req.params.spotId)
     const spotById  = await owner.getSpots({
         where: {
             id: req.params.spotId
         }
     })
+    if(!missingSpot) {
+        return res.status(404).json(
+            {
+                message: "Spot couldn't be found"
+              }
+        )
+    }
     if(spotById.length){
         const newSpotImage = await SpotImage.create({
             spotId: spotById[0].id, url, preview
         })
-        res.json({
+        return res.json({
             id: newSpotImage.id,
             url,
             preview
         })
     } else {
-        return res.status(404).json(
+        return res.status(403).json(
             {
-                message: "Spot couldn't be found"
+                message: "Forbidden"
               }
         )
     }
@@ -311,7 +319,7 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
 })
 
-/
+
 
 router.put('/:spotId', requireAuth, async (req, res, next) => {
     const errors = {}
@@ -337,10 +345,17 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     })
     const spotById  = await Spot.findByPk(req.params.spotId)
 
-    if(!currentOwner.length){
+    if(!spotById) {
         return res.status(404).json(
             {
                 message: "Spot couldn't be found"
+              }
+        )
+    }
+    if(!currentOwner.length){
+        return res.status(403).json(
+            {
+                message: "Forbidden"
               }
         )
 
@@ -385,13 +400,19 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     })
 
     const spotById  = await Spot.findByPk(req.params.spotId)
-
-    if(currentOwner.length){
-        await spotById.destroy()
-    } else {
+    if(!spotById) {
         return res.status(404).json(
             {
                 message: "Spot couldn't be found"
+              }
+        )
+    }
+    if(currentOwner.length){
+        await spotById.destroy()
+    } else {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
               }
         )
     }
@@ -533,21 +554,23 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             id: req.params.spotId
         }
     })
-    console.log(ownerSpot, 'owner booked?')
-    // const spotById = await Spot.findByPk(req.params.spotId)
-    if(ownerSpot.length) {
+    const spotById = await Spot.findByPk(req.params.spotId)
+    if(!spotById) {
         return res.status(404).json({
             message: "Spot couldn't be found"
         })
+    }
+    // const spotById = await Spot.findByPk(req.params.spotId)
+    if(ownerSpot.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
     const toBookEndDate = new Date(endDate)
     const toBookStartDate = new Date(startDate)
-    const spotById = await Spot.findByPk(req.params.spotId)
-    if(ownerSpot.length || !spotById) {
-        return res.status(404).json({
-            message: "Spot couldn't be found"
-        })
-    }
+
     console.log(spotById,'spot?', req.params.spotId)
     const allBookingsBySpot = await spotById.getBookings()
     console.log('test')

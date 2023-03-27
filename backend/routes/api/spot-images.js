@@ -12,6 +12,13 @@ const router = express.Router();
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
     let owner = req.user
     const currentSpot  = await owner.getSpots()
+    const imageByPk = await SpotImage.findByPk(req.params.imageId)
+
+    if(!imageByPk){
+        return res.status(404).json({
+            message: "Spot Image couldn't be found"
+        })
+    }
     let counter = 0
     for (let i = 0; i < currentSpot.length; i++) {
         const spot = currentSpot[i];
@@ -29,9 +36,11 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
 
     }
     if(counter === 0) {
-        return res.status(404).json({
-            message: "Spot Image couldn't be found"
-        })
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
     res.json({
         message: "Successfully deleted"

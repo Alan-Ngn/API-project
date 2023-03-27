@@ -49,11 +49,19 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             id: req.params.bookingId
         }
     })
+    const bookingById = await Booking.findByPk(req.params.bookingId)
 
-    if(!ownerBooked.length) {
+    if(!bookingById) {
         return res.status(404).json({
             message: "Booking couldn't be found"
         })
+    }
+    if(!ownerBooked.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
 
 
@@ -105,7 +113,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             errors: conflictErrors
         })
     }
-    const bookingById = await Booking.findByPk(req.params.bookingId)
+
     const updateBooking = await bookingById.update({
         startDate, endDate
     })
@@ -120,11 +128,18 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             id: req.params.bookingId
         }
     })
-
-    if(!ownerBooked.length) {
+    const bookingById = await Booking.findByPk(req.params.bookingId)
+    if(!bookingById) {
         return res.status(404).json({
             message: "Booking couldn't be found"
         })
+    }
+    if(!ownerBooked.length) {
+        return res.status(403).json(
+            {
+                message: "Forbidden"
+              }
+        )
     }
     const today = Date.now()
 
@@ -135,7 +150,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             message: "Bookings that have been started can't be deleted"
         })
     }
-    const bookingById = await Booking.findByPk(req.params.bookingId)
+
     await bookingById.destroy()
     res.json({
         message: "Successfully deleted"
