@@ -231,7 +231,7 @@ router.get('/:spotId', async (req, res, next) => {
     console.log(spotImage)
     const spotData = spotById.toJSON();
     spotData.numReviews = spotReviews[0].numReviews
-    spotData.avgRating = spotReviews[0].avgRating
+    spotData.avgRating = Math.round(spotReviews[0].avgRating *10 )/10
     if(spotImage[0]){
         spotData.SpotImages = spotImage
     }
