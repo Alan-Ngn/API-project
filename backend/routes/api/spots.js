@@ -280,7 +280,21 @@ router.post('/', requireAuth, async (req, res, next) => {
     //     }
     // })
 
-    res.status(201).json(createSpot)
+    res.status(201).json({
+        id: createSpot.id,
+        ownerId: createSpot.ownerId,
+        address: createSpot.address,
+        city: createSpot.city,
+        state: createSpot.state,
+        country: createSpot.country,
+        lat: createSpot.lat,
+        lng: createSpot.lng,
+        name: createSpot.name,
+        description: createSpot.description,
+        price: createSpot.price,
+        createdAt: createSpot.createdAt,
+        updatedAt: createSpot.updatedAt,
+    })
 })
 
 router.post('/:spotId/images',requireAuth, async (req, res, next) => {
@@ -507,7 +521,16 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         stars
     })
 
-    res.status(201).json(reviewSpot)
+    res.status(201).json({
+        id: reviewSpot.id,
+        userId: reviewSpot.userId,
+        spotId: reviewSpot.spotId,
+        review: reviewSpot.review,
+        stars: reviewSpot.stars,
+        createdAt: reviewSpot.createdAt,
+        updatedAt: reviewSpot.updatedAt,
+
+    })
 })
 
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
