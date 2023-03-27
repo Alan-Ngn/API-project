@@ -118,14 +118,16 @@ router.get('/', async (req, res, next) => {
                 raw: true
             }
         );
-        const spotImage = await spot.getSpotImages({
-            where: {
-                preview: true
-            },
-            raw: true
-        })
+        const spotImage = await spot.getSpotImages(
+        //     {
+        //     where: {
+        //         preview: true
+        //     },
+        //     raw: true
+        // }
+        )
         const spotData = spot.toJSON();
-        spotData.avgRating = spotReviews[0].avgRating
+        spotData.avgRating = spotReviews[0].avgRating.toFixed(1)
         if(spotImage[0]){
             spotData.previewImage = spotImage[0].url
         }
@@ -161,14 +163,16 @@ router.get('/current', requireAuth ,async (req, res, next) => {
                 raw: true
             }
         );
-        const spotImage = await spot.getSpotImages({
-            where: {
-                preview: true
-            },
-            raw: true
-        })
+        const spotImage = await spot.getSpotImages(
+        //     {
+        //     where: {
+        //         preview: true
+        //     },
+        //     raw: true
+        // }
+        )
         const spotData = spot.toJSON();
-        spotData.avgRating = spotReviews[0].avgRating
+        spotData.avgRating = spotReviews[0].avgRating.toFixed(1)
         if(spotImage[0]){
             spotData.previewImage = spotImage[0].url
         }
@@ -230,6 +234,9 @@ router.get('/:spotId', async (req, res, next) => {
     spotData.avgRating = spotReviews[0].avgRating
     if(spotImage[0]){
         spotData.SpotImages = spotImage
+    }
+    if(!spotImage[0]){
+        spotData.SpotImages = null
     }
     spotData.Owner = spotOwner
 
@@ -445,7 +452,14 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         const reviewData = review.toJSON()
         reviewData.User = reviewUser
-        reviewData.ReviewImages = reviewImage
+        console.log(reviewImage)
+        if(!reviewImage.length){
+            reviewData.ReviewImages = null
+        }
+        if(reviewImage.length){
+            reviewData.ReviewImages = reviewImage
+        }
+
         payload.push(reviewData)
     }
     res.json({
