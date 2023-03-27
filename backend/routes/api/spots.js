@@ -41,11 +41,15 @@ router.get('/', async (req, res, next) => {
             [Op.gte]: minLat
         }
     }
-    if(maxLat && isNaN(maxLat)){
+    if(maxLat && (isNaN(maxLat) || maxLat >90 || maxLat< -90)){
         errors.maxLat = "Maximum latitude is invalid"
     }
-    if(minLat && isNaN(minLat)){
+    if(minLat && (isNaN(minLat) || minLat < -90 || minLat >90)){
         errors.minLat = "Minimum latitude is invalid"
+    }
+    if(minLat && maxLat && (maxLat < minLat)){
+        errors.minLat = "Minimum latitude is invalid"
+        errors.maxLat = "Maximum latitude is invalid"
     }
 
 
@@ -63,13 +67,17 @@ router.get('/', async (req, res, next) => {
             [Op.gte]: minLng
         }
     }
-    if(minLng && isNaN(minLng)){
+
+    if(minLng && (isNaN(minLng) || minLng > 180 || minLng < -180)){
         errors.minLng = "Minimum longitude is invalid"
     }
-    if(maxLng && isNaN(maxLng)){
+    if(maxLng && (isNaN(maxLng) || maxLng > 180 || maxLng <-180)){
         errors.maxLng = "Maximum longitude is invalid"
     }
-
+    if(minLng && maxLng && (maxLng < minLng)){
+        errors.minLng = "Minimum longitude is invalid"
+        errors.maxLng = "Maximum longitude is invalid"
+    }
 
 
     if(minPrice && maxPrice && !isNaN(minPrice) && minPrice >=0  && !isNaN(maxPrice) && maxPrice >=0){
@@ -649,6 +657,14 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const createBooking = await Booking.create({
         spotId: parseInt(req.params.spotId), userId: req.user.id, startDate, endDate
     })
-    return res.json(createBooking)
+    return res.json({
+        id: createBooking.id,
+        spotId: createBooking.spotId,
+        userId: createBooking.userId,
+        startDate: createBooking.startDate,
+        endDate: createBooking.endDate,
+        createdAt: createBooking.createdAt,
+        updatedAt: createBooking.updatedAt
+    })
 })
 module.exports = router;

@@ -37,9 +37,18 @@ router.get('/current', requireAuth, async (req, res, next) => {
         if(reviewSpotImage[0]){
             reviewSpotPreview.previewImage = reviewSpotImage[0].url
         }
+        if(!reviewSpotImage[0]){
+            reviewSpotPreview.previewImage = null
+        }
         reviewData.User = userData
         reviewData.Spot = reviewSpotPreview;
-        reviewData.ReviewImages = reviewImage;
+        // reviewData.ReviewImages = reviewImage;
+        if(reviewImage.length){
+            reviewData.ReviewImages = reviewImage;
+        }
+        if(!reviewImage.length){
+            reviewData.ReviewImages = null;
+        }
         payload.push(reviewData)
     }
 
