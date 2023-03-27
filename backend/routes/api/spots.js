@@ -29,15 +29,15 @@ router.get('/', async (req, res, next) => {
 
 
     if(maxLat && minLat && !isNaN(maxLat) && !isNaN(minLat)) {
-        where.Lat = {
+        where.lat = {
             [Op.between]: [minLat, maxLat]
         }
     } else if(maxLat && !isNaN(maxLat)){
-        where.Lat = {
+        where.lat = {
             [Op.lte]: maxLat
         }
     } else if(minLat && !isNaN(minLat)) {
-        where.Lat = {
+        where.lat = {
             [Op.gte]: minLat
         }
     }
@@ -51,15 +51,15 @@ router.get('/', async (req, res, next) => {
 
 
     if(maxLng && minLng && !isNaN(maxLng) && !isNaN(minLng)) {
-        where.Lng = {
+        where.lng = {
             [Op.between]: [minLng, maxLng]
         }
     } else if(maxLng && !isNaN(maxLng)){
-        where.Lng = {
+        where.lng = {
             [Op.lte]: maxLng
         }
     } else if(minLng && !isNaN(minLng)) {
-        where.Lng = {
+        where.lng = {
             [Op.gte]: minLng
         }
     }
