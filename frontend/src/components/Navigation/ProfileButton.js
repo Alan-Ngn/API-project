@@ -37,7 +37,7 @@ function ProfileButton({ user }) {
     <>
       <button onClick={openMenu}>
         <div style={{ color: "blue", fontSize: "100px" }}>
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
         </div>
         </button>
       <ul className={ulClassName} ref={ulRef}>
