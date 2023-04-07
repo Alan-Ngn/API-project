@@ -47,11 +47,13 @@ router.post(
     }
 
     const safeUser = {
+      createdAt: user.createdAt,
+      email: user.email,
       id: user.id,
+      updatedAt: user.updatedAt,
+      username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.email,
-      username: user.username,
     };
 
     await setTokenCookie(res, safeUser);
