@@ -12,20 +12,53 @@ const { Spot, SpotImage } = require('../models')
 const spotImages = [
   {
     name: 'Costco Wholesale',
-    url: 'Costco Placeholder',
+    url: 'https://1.bp.blogspot.com/-2QiH7jXnSDk/X2HE03oTgCI/AAAAAAACRjA/szA0ThB0PjcKoMWQZ2j51ZGWUUXSXWIPACLcBGAsYHQ/s1600/Costco%2Bexterior%2Bcostco.jpg',
     preview: true
   },
   {
     name: 'Space Needle',
-    url: 'Space Needle Placeholder',
-    preview: false
+    url: 'https://www.spaceneedle.com/assets/_1200x630_crop_center-center_82_none/az190903-0590.jpg?mtime=1574371859',
+    preview: true
   },
   {
     name: 'Prince Street Pizza',
-    url: 'Prince Street Pizza Placeholder',
+    url: 'https://princestreetpizzaandpub.com/images/princestreetbuilding.png',
+    preview: true
+  },
+  {
+    name: 'Island House',
+    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    preview: true
+  },
+  {
+    name: 'Island House',
+    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
     preview: false
-
-  }
+  },
+  {
+    name: 'Island House',
+    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    preview: false
+  },
+  {
+    name: 'Island House',
+    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    preview: false
+  },
+  {
+    name: 'Island House',
+    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    preview: false
+  },
+  {
+    name: 'Wood House',
+    url: 'https://images.unsplash.com/photo-1525906336592-11c866dd1d4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHBpbGV8ZW58MHx8MHx8&w=1000&q=80',
+    preview: true
+  },  {
+    name: 'Wood House',
+    url: 'https://images.unsplash.com/photo-1525906336592-11c866dd1d4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHBpbGV8ZW58MHx8MHx8&w=1000&q=80',
+    preview: false
+  },
 ];
 
 module.exports = {
