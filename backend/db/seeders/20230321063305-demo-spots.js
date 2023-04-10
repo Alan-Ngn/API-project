@@ -45,7 +45,31 @@ const spots = [
     name: 'Prince Street Pizza',
     description: 'Everyday carry-out fixture dispensing square pies & Neapolitan-style pizzas with creative toppings.',
     price: 39.00
-  }
+  },
+  {
+    owner: 'Thomas King',
+    address: '7776 8th Ave NW',
+    city: 'Lake',
+    state: 'MA',
+    country: 'USA',
+    lat: 66.5516,
+    lng: -123.0518,
+    name: 'Island House',
+    description: 'Super safe house on a rock. Boat not included',
+    price: 300
+  },
+  {
+    owner: 'Thomas King',
+    address: '1801 10th Ave NW',
+    city: 'Wood',
+    state: 'PA',
+    country: 'USA',
+    lat: 63.5516,
+    lng: -126.0518,
+    name: 'Wood House',
+    description: 'Make your own house. Tools not included',
+    price: 1000
+  },
 ];
 
 module.exports = {
