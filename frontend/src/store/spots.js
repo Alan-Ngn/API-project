@@ -21,6 +21,10 @@ export const loadSpotsThunk = () => async(dispatch) => {
     }
 }
 
+export const loadOneSpotThunk = (spotId) => async(dispatch) => {
+    const response = await csrfFetch('/api/spots/:spotId')
+}
+
 
 const spotsReducer = (state = {}, action) => {
     let newState;

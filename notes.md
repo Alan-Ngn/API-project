@@ -56,3 +56,12 @@
 
 kanban?
 deadline to have everything checked? partial
+
+## Monday SCRUM
+  - What did I accomplish yesterday?
+    - showed all spots
+  - What do I hope to accomplish today?
+    - i want to finish all spot CRUDs
+  - What obstacles or impediments prevent me from making progress?
+    - validation errors and render
+    - if i do my validations in my routes do i need to do them in my model?

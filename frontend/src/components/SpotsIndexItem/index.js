@@ -5,11 +5,20 @@ const SpotIndexItem = ({ spot }) => {
     const dispatch = useDispatch()
 
     return (
-
+        <Link to={`/spots/${spot.id}`}>
+            <img src={spot.previewImage} alt={spot.name}/>
             <div>
-                <Link to={`/spots/${spot.id}`}>Spot Test</Link>
+                <div>
+                    {`${spot.city}, ${spot.state}`}
+                </div>
+                <div>
+                    {`${spot.avgRating}`}
+                </div>
             </div>
-
+            <div>
+                {`$${spot.price} night`}
+            </div>
+        </Link>
     )
 }
 
