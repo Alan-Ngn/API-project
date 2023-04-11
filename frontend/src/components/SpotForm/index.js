@@ -21,10 +21,11 @@ const SpotForm  = () => {
     const [optImgThree, setOptImgThree] = useState('')
     const [optImgFour, setOptImgFour] = useState('')
     const [err, setErr] = useState({})
+    const [submit, setSubmit] = useState(false)
 
-    const handleSubmit = async(e) => {
-        const errors = {}
-        e.preventDefault();
+    let spot = {}
+    let errors = {}
+    useEffect(()=> {
         let imgArr = []
         const previewObj = {}
         if(!previewImage) {
@@ -71,7 +72,7 @@ const SpotForm  = () => {
         }
 
 
-        const spot = {country, address, city, state, lat, lng, description, name, price, imgArr}
+        spot = {country, address, city, state, lat, lng, description, name, price, imgArr}
         console.log(spot)
         if(!country) errors.country = 'Country is required'
         if(!address) errors.address = 'Address is required'
@@ -82,14 +83,37 @@ const SpotForm  = () => {
         if(description.length < 30) errors.description = 'Description needs a minimum of 30 characters'
         if(!name) errors.name = 'Name is required'
         if(!price) errors.price = 'Price is required'
-        setErr(errors)
+
         console.log('what errors do i have',errors)
-        if(!Object.values(errors).length>0){
-            const newSpot =await dispatch(createSpotThunk(spot))
-            console.log(newSpot,'tets')
-            history.push(`/spots/${newSpot.id}`)
+        // setErr(errors)
+        if(Object.values(errors).length>0){
+            setSubmit(true)
+        } else {
+            setSubmit(false)
         }
+        console.log('testing errors out',Object.values(errors).length)
+    },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
+
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        if(!Object.values(errors).length>0){
+                const newSpot =await dispatch(createSpotThunk(spot))
+                console.log(newSpot,'tets')
+                history.push(`/spots/${newSpot.id}`)
+        }
+        setErr(errors)
+        // console.log('what are my err state',Object.values(err).length,err)
+        // console.log(err.country)
+
+
     }
+    // console.log('chechking err state outside of handle submit',err)
+    // if(Object.values(err).length>0){
+    //     setSubmit(true)
+    // } else {
+    //     setSubmit(false)
+    // }
     return (
         // <div> SpotForm</div>
         <form onSubmit={handleSubmit}>
@@ -272,7 +296,7 @@ const SpotForm  = () => {
 
             <button
                 type="submit"
-                disabled={Object.values(err).length>0}
+                disabled={submit}
             >
                 Create Spot
             </button>
