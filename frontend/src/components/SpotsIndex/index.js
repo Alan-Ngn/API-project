@@ -12,7 +12,7 @@ const SpotsIndex = () => {
         dispatch(loadSpotsThunk())
     },[dispatch])
 
-    if(!spots.length) return null;
+    if(getSpots.SpotImages) return null;
 
     return (
         <section>
