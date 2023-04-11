@@ -257,13 +257,15 @@ router.post('/', requireAuth, async (req, res, next) => {
     if(!name || name.length >=50) errors.name = "Name must be less than 50 characters"
     if(!description) errors.description = "Description is required"
     if(!price) errors.price = "Price per day is required"
-
+    console.log('from the back end', req.user.id, errors)
     if(Object.keys(errors).length !==0) {
         return res.status(400).json({
             message: "Bad Request",
             errors: errors
         })
     }
+
+
     // try {
         const createSpot = await Spot.create({
             ownerId: req.user.id, address, city, state, country, lat, lng, name, description, price
