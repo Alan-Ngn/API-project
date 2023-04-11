@@ -2,15 +2,20 @@ import SpotForm from "../SpotForm"
 
 const CreateSpotForm = () => {
     const spot = {
+        country: "",
         address: "",
         city: "",
         state: "",
-        country: "",
         lat: "",
         lng: "",
-        name: "",
         description: "",
-        price: ""
+        name: "",
+        price: "",
+        previewImage: "",
+        optImgOne: "",
+        optImgTwo: "",
+        optImgThree: "",
+        optImgFour: ""
     }
     return (
         <SpotForm spot={spot}/>

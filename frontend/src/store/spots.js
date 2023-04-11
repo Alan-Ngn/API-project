@@ -18,6 +18,7 @@ export const loadOneSpot = (spot) =>{
     }
 }
 
+
 export const createSpot = (spot) => {
     return {
         type: CREATE_SPOT,
@@ -36,6 +37,17 @@ export const loadSpotsThunk = () => async(dispatch) => {
         return false
     }
 }
+
+export const loadCurrentSpotsThunk = () => async(dispatch) =>{
+    const response = await csrfFetch("/api/spots/current")
+    if(response.ok){
+        const data = await response.json()
+        dispatch(loadSpots(data))
+    } else {
+        return false
+    }
+}
+
 
 export const loadOneSpotThunk = (spotId) => async(dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
