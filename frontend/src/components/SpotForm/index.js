@@ -24,6 +24,7 @@ const SpotForm  = ({input, formType}) => {
     const [valErr, setValErr] = useState({})
     const [submit, setSubmit] = useState(true)
     const [spotPayload, setSpotPayload] = useState({})
+    const [spotImgPayload, setSpotImgPayload] = useState([])
     let spot = {}
     let errors = {}
     useEffect(()=> {
@@ -73,8 +74,9 @@ const SpotForm  = ({input, formType}) => {
         }
 
 
-        spot = {country, address, city, state, lat, lng, description, name, price, imgArr}
+        spot = {country, address, city, state, lat, lng, description, name, price}
         setSpotPayload(spot)
+        setSpotImgPayload(imgArr)
         console.log('whats in the spot obj', spot)
         if(!country) errors.country = 'Country is required'
         if(!address) errors.address = 'Address is required'
@@ -104,12 +106,13 @@ const SpotForm  = ({input, formType}) => {
         e.preventDefault();
         if(!Object.values(valErr).length>0 && formType === 'Create a new Spot'){
 
-                const newSpot =await dispatch(createSpotThunk(spotPayload))
+                const newSpot =await dispatch(createSpotThunk(spotPayload, spotImgPayload))
                 console.log(newSpot,'tets')
                 history.push(`/spots/${newSpot.id}`)
         }
         if (!Object.values(valErr).length>0 && formType === 'Update your Spot') {
                 console.log('inside handlesubmit update', spotPayload)
+                
                 // console.log(spot)
                 const newSpot = await dispatch(updateSpotThunk(spotPayload, spotId))
                 // console.log(newSpot,'tets')

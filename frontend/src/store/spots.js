@@ -76,11 +76,11 @@ export const loadOneSpotThunk = (spotId) => async(dispatch) => {
     }
 }
 
-export const createSpotThunk = (spot) => async(dispatch) => {
+export const createSpotThunk = (spot, spotImg) => async(dispatch) => {
 
-    const spotImages = [...spot.imgArr]
-    console.log('inside createSpotThunk',spotImages)
-    delete spot.imgArr;
+    // const spotImages = [...spot.imgArr]
+    console.log('inside createSpotThunk',spotImg)
+    // delete spot.imgArr;
     spot.lat = Number(spot.lat)
     spot.lng = Number(spot.lng)
     console.log('createSpot spot', spot)
@@ -96,9 +96,9 @@ export const createSpotThunk = (spot) => async(dispatch) => {
 
     if(response.ok){
         const data = await response.json()
-        if(spotImages.length > 0) {}
-        for (let i = 0; i < spotImages.length; i++) {
-            const element = spotImages[i];
+        if(spotImg.length > 0) {}
+        for (let i = 0; i < spotImg.length; i++) {
+            const element = spotImg[i];
             await csrfFetch(`/api/spots/${data.id}/images`, {
                 method: 'POST',
                 headers: {
