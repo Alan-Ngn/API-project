@@ -1,24 +1,60 @@
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
+import OpenModalDeleteButton from "../DeleteSpot/OpenModalDeleteButton";
+import DeleteSpotModal from "../DeleteSpotModal";
 
-const SpotIndexItem = ({ spot }) => {
-    const dispatch = useDispatch()
 
+const SpotIndexItem = ({ spot, user, type }) => {
+
+    const history = useHistory()
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
+
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    // const closeMenu = () => setShowMenu(false);
     return (
-        <Link to={`/spots/${spot.id}`}>
-            <img src={spot.previewImage} alt={spot.name}/>
-            <div>
+        <div>
+            <Link to={`/spots/${spot.id}`}>
+                <img src={spot.previewImage} alt={spot.name}/>
                 <div>
-                    {`${spot.city}, ${spot.state}`}
+                    <div>
+                        {`${spot.city}, ${spot.state}`}
+                    </div>
+                    <div>
+                        {`${spot.avgRating}`}
+                    </div>
                 </div>
                 <div>
-                    {`${spot.avgRating}`}
+                    {`$${spot.price} night`}
                 </div>
-            </div>
-            <div>
-                {`$${spot.price} night`}
-            </div>
-        </Link>
+            </Link>
+            {user && type && (
+                <div>
+                    <button spot={spot} onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
+                    <OpenModalDeleteButton //click a button generated from OpenModalDeleteButton
+                        itemText="Delete"
+
+                        modalComponent={<DeleteSpotModal spot={spot}/>} //onclick it will open the delete comfirmation modal
+                        // onItemClick={closeMenu}
+                    />
+                        {/* <button>Delete</button> */}
+                </div>
+            )}
+        </div>
     )
 }
 

@@ -1,19 +1,24 @@
 import SpotForm from "../SpotForm"
 
 const CreateSpotForm = () => {
-    const spot = {
+    const input = {
+        country: "",
         address: "",
         city: "",
         state: "",
-        country: "",
         lat: "",
         lng: "",
-        name: "",
         description: "",
-        price: ""
+        name: "",
+        price: "",
+        previewImage: "",
+        optImgOne: "",
+        optImgTwo: "",
+        optImgThree: "",
+        optImgFour: ""
     }
     return (
-        <SpotForm spot={spot}/>
+        <SpotForm input={input} formType="Create a new Spot"/>
     )
 }
 

@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react"
-import { createSpotThunk } from "../../store/spots"
+import { createSpotThunk, updateSpotThunk } from "../../store/spots"
 import { useDispatch } from "react-redux"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 
-const SpotForm  = () => {
+const SpotForm  = ({input, formType}) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [country, setCountry] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
-    const [description, setDescription] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [optImgOne, setOptImgOne] = useState('')
-    const [optImgTwo, setOptImgTwo] = useState('')
-    const [optImgThree, setOptImgThree] = useState('')
-    const [optImgFour, setOptImgFour] = useState('')
+    const [country, setCountry] = useState(input.country)
+    const [address, setAddress] = useState(input.address)
+    const [city, setCity] = useState(input.city)
+    const [state, setState] = useState(input.state)
+    const [lat, setLat] = useState(input.lat)
+    const [lng, setLng] = useState(input.lng)
+    const [description, setDescription] = useState(input.description)
+    const [name, setName] = useState(input.name)
+    const [price, setPrice] = useState(input.price)
+    const [previewImage, setPreviewImage] = useState(input.previewImage)
+    const [optImgOne, setOptImgOne] = useState(input.optImgOne)
+    const [optImgTwo, setOptImgTwo] = useState(input.optImgTwo)
+    const [optImgThree, setOptImgThree] = useState(input.optImgThree)
+    const [optImgFour, setOptImgFour] = useState(input.optImgFour)
     const [err, setErr] = useState({})
-    const [submit, setSubmit] = useState(false)
-
+    const [valErr, setValErr] = useState({})
+    const [submit, setSubmit] = useState(true)
+    const [spotPayload, setSpotPayload] = useState({})
+    const [spotImgPayload, setSpotImgPayload] = useState([])
     let spot = {}
     let errors = {}
     useEffect(()=> {
@@ -72,8 +74,10 @@ const SpotForm  = () => {
         }
 
 
-        spot = {country, address, city, state, lat, lng, description, name, price, imgArr}
-        console.log(spot)
+        spot = {country, address, city, state, lat, lng, description, name, price}
+        setSpotPayload(spot)
+        setSpotImgPayload(imgArr)
+        console.log('whats in the spot obj', spot)
         if(!country) errors.country = 'Country is required'
         if(!address) errors.address = 'Address is required'
         if(!city) errors.city = 'City is required'
@@ -86,23 +90,35 @@ const SpotForm  = () => {
 
         console.log('what errors do i have',errors)
         // setErr(errors)
-        if(Object.values(errors).length>0){
-            setSubmit(true)
-        } else {
-            setSubmit(false)
-        }
-        console.log('testing errors out',Object.values(errors).length)
-    },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
+        // if(Object.values(errors).length>0){
+            // } else {
+                //     setSubmit(false)
+                // }
+                setValErr(errors)
+            },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
 
+            const {spotId} = useParams()
 
     const handleSubmit = async(e) => {
+        setSubmit(false)
+        console.log('testing errors out',Object.values(valErr).length, valErr)
+        console.log('this is my formType',formType)
         e.preventDefault();
-        if(!Object.values(errors).length>0){
-                const newSpot =await dispatch(createSpotThunk(spot))
+        if(!Object.values(valErr).length>0 && formType === 'Create a new Spot'){
+
+                const newSpot =await dispatch(createSpotThunk(spotPayload, spotImgPayload))
                 console.log(newSpot,'tets')
                 history.push(`/spots/${newSpot.id}`)
         }
-        setErr(errors)
+        if (!Object.values(valErr).length>0 && formType === 'Update your Spot') {
+                console.log('inside handlesubmit update', spotPayload)
+                
+                // console.log(spot)
+                const newSpot = await dispatch(updateSpotThunk(spotPayload, spotId))
+                // console.log(newSpot,'tets')
+                history.push(`/spots/${newSpot.id}`)
+        }
+        setErr(valErr)
         // console.log('what are my err state',Object.values(err).length,err)
         // console.log(err.country)
 
@@ -296,9 +312,14 @@ const SpotForm  = () => {
 
             <button
                 type="submit"
-                disabled={submit}
+                // disabled={submit}
             >
-                Create Spot
+                {formType==='Update your Spot' && (
+                    'Update'
+                )}
+                {formType==='Create a new Spot' && (
+                    'Create'
+                )}
             </button>
         </form>
     )

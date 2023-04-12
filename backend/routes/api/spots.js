@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
     const offset = size * (page - 1)
 
     let pagination = {}
-
+    console.log('backend- all spots')
 
 
     if(maxLat && minLat && !isNaN(maxLat) && !isNaN(minLat)) {
@@ -189,7 +189,7 @@ router.get('/current', requireAuth ,async (req, res, next) => {
 // Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     const spotById = await Spot.findByPk(req.params.spotId)
-    // console.log(spotById)
+    console.log('backend- spot details')
     if(spotById === null) {
         return res.status(404).json({
             message: "Spot couldn't be found"
@@ -359,7 +359,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     if(!description) errors.description = "Description is required"
     if(!price) errors.price = "Price per day is required"
 
-
+    console.log('from the back end', req.user.id, errors)
 
     const currentOwner  = await owner.getSpots({
         where: {
@@ -455,7 +455,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
     })
     const payload = []
-
+    console.log('backend- spot reviews')
     for (let i = 0; i < allReviewsBySpot.length; i++) {
         const review = allReviewsBySpot[i];
 
@@ -536,7 +536,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 })
 
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
-
+    console.log('backend-  spot boookings')
     const spotById = await Spot.findByPk(req.params.spotId)
     if(!spotById) {
         return res.status(404).json({
