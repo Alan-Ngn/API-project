@@ -21,6 +21,7 @@ const ManageSpots = () => {
             {currentSpots.map((spots) => (
                 <SpotIndexItem
                 spot={spots}
+                type={'ManageSpot'}
                 user={sessionUser}
                 key={spots.id}
                 />

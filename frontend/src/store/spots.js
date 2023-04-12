@@ -4,6 +4,7 @@ const LOAD_SPOTS = "spots/LOAD_SPOTS"
 const LOAD_SPOT = "spots/LOAD_SPOT"
 const CREATE_SPOT = 'spots/CREATE_SPOT'
 const UPDATE_SPOT = 'spots/UPDATE_SPOT'
+const DELETE_SPOT = "spots/DELETE_SPOT"
 
 export const loadSpots = (spots) => {
     return {
@@ -33,6 +34,14 @@ export const updateSpot = (spot) => {
         spot
     }
 }
+
+export const deleteSpot = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        spotId
+    }
+}
+
 export const loadSpotsThunk = () => async(dispatch) => {
     const response = await csrfFetch("/api/spots")
     console.log('loadSpotsThunk started')
@@ -125,6 +134,21 @@ export const updateSpotThunk = (spot, spotId) => async(dispatch) => {
         return await response.json()
     }
 }
+
+export const deleteSpotThunk = (spotId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`,{
+        method: "DELETE"
+    })
+    if(response.ok){
+        const data = await response.json()
+        dispatch(deleteSpot(spotId))
+        return data
+    } else {
+        return false
+    }
+}
+
+
 const spotsReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
@@ -139,10 +163,14 @@ const spotsReducer = (state = {}, action) => {
           console.log('one spot reducer')
           newState = {...action.spot}
           return newState
-        case CREATE_SPOT:
-            newState = {}
-            console.log(action.spot)
-            // newState[action.spot]
+        // case CREATE_SPOT:
+        //     newState = {}
+        //     console.log(action.spot)
+        //     // newState[action.spot]
+        case DELETE_SPOT:
+            newState = {...state}
+            delete newState[action.spotId]
+            return newState
         default:
             return state;
     }

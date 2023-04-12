@@ -21,7 +21,8 @@ const SpotForm  = ({input, formType}) => {
     const [optImgThree, setOptImgThree] = useState(input.optImgThree)
     const [optImgFour, setOptImgFour] = useState(input.optImgFour)
     const [err, setErr] = useState({})
-    const [submit, setSubmit] = useState(false)
+    const [valErr, setValErr] = useState({})
+    const [submit, setSubmit] = useState(true)
     const [spotPayload, setSpotPayload] = useState({})
     let spot = {}
     let errors = {}
@@ -87,33 +88,34 @@ const SpotForm  = ({input, formType}) => {
 
         console.log('what errors do i have',errors)
         // setErr(errors)
-        if(Object.values(errors).length>0){
-            setSubmit(true)
-        } else {
-            setSubmit(false)
-        }
-        console.log('testing errors out',Object.values(errors).length)
-    },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
+        // if(Object.values(errors).length>0){
+            // } else {
+                //     setSubmit(false)
+                // }
+                setValErr(errors)
+            },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
 
-    const {spotId} = useParams()
+            const {spotId} = useParams()
 
     const handleSubmit = async(e) => {
+        setSubmit(false)
+        console.log('testing errors out',Object.values(valErr).length, valErr)
         console.log('this is my formType',formType)
         e.preventDefault();
-        if(!Object.values(errors).length>0 && formType === 'Create a new Spot'){
+        if(!Object.values(valErr).length>0 && formType === 'Create a new Spot'){
 
                 const newSpot =await dispatch(createSpotThunk(spotPayload))
                 console.log(newSpot,'tets')
                 history.push(`/spots/${newSpot.id}`)
         }
-        if (!Object.values(errors).length>0 && formType === 'Update your Spot') {
+        if (!Object.values(valErr).length>0 && formType === 'Update your Spot') {
                 console.log('inside handlesubmit update', spotPayload)
                 // console.log(spot)
                 const newSpot = await dispatch(updateSpotThunk(spotPayload, spotId))
                 // console.log(newSpot,'tets')
                 history.push(`/spots/${newSpot.id}`)
         }
-        setErr(errors)
+        setErr(valErr)
         // console.log('what are my err state',Object.values(err).length,err)
         // console.log(err.country)
 
@@ -307,7 +309,7 @@ const SpotForm  = ({input, formType}) => {
 
             <button
                 type="submit"
-                disabled={submit}
+                // disabled={submit}
             >
                 {formType==='Update your Spot' && (
                     'Update'
