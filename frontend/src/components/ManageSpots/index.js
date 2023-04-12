@@ -12,7 +12,7 @@ const ManageSpots = () => {
         dispatch(loadCurrentSpotsThunk())
     },[dispatch])
     console.log('this is my current spots',currentSpots)
-    console.log(currentSpots.filter(spot => spot.ownerId !== sessionUser.id))
+    // console.log(currentSpots.filter(spot => spot.ownerId !== sessionUser.id))
     if(getSpots.SpotImages) return null;
     if(currentSpots.filter(spot => spot.ownerId !== sessionUser.id).length >0) return null
 

@@ -5,21 +5,22 @@ import { loadSpotsThunk } from '../../store/spots';
 const SpotsIndex = () => {
     const dispatch = useDispatch()
     console.log('inside SpotsIndex')
-    const sessionUserId = useSelector(state => state.session.user.id);
+    const sessionUser = useSelector(state => state.session.user);
     const getSpots = useSelector(state => state.spots)
     console.log('getSpots->', getSpots)
     const spots = Object.values(getSpots)
     useEffect(() => {
         dispatch(loadSpotsThunk())
     },[dispatch])
-
+    console.log(sessionUser)
     if(getSpots.SpotImages) return null;
-    if(spots.filter(spot => spot.ownerId === sessionUserId).length === spots.length) return null
+    if(sessionUser && spots.filter(spot => spot.ownerId === sessionUser.id).length === spots.length) return null
     return (
         <section>
             {spots.map((spots) => (
                 <SpotIndexItem
                 spot={spots}
+                user={sessionUser}
                 key={spots.id}
                 />
             ))}

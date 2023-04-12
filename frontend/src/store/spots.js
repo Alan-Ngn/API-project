@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = "spots/LOAD_SPOTS"
 const LOAD_SPOT = "spots/LOAD_SPOT"
 const CREATE_SPOT = 'spots/CREATE_SPOT'
+const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 
 export const loadSpots = (spots) => {
     return {
@@ -26,6 +27,12 @@ export const createSpot = (spot) => {
     }
 }
 
+export const updateSpot = (spot) => {
+    return {
+        type: UPDATE_SPOT,
+        spot
+    }
+}
 export const loadSpotsThunk = () => async(dispatch) => {
     const response = await csrfFetch("/api/spots")
     console.log('loadSpotsThunk started')
@@ -80,7 +87,7 @@ export const createSpotThunk = (spot) => async(dispatch) => {
 
     if(response.ok){
         const data = await response.json()
-
+        if(spotImages.length > 0) {}
         for (let i = 0; i < spotImages.length; i++) {
             const element = spotImages[i];
             await csrfFetch(`/api/spots/${data.id}/images`, {
@@ -92,6 +99,27 @@ export const createSpotThunk = (spot) => async(dispatch) => {
             })
         }
         // dispatch(createSpot(data))
+        return data
+    } else {
+        return await response.json()
+    }
+}
+
+export const updateSpotThunk = (spot, spotId) => async(dispatch) => {
+    console.log('inside update spot thunk',spot)
+    console.log('spot Id', Number(spotId))
+    delete spot.imgArr;
+    spot.lat = Number(spot.lat)
+    spot.lng = Number(spot.lng)
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": 'application/json'
+          },
+        body: JSON.stringify(spot)
+    })
+    if (response.ok){
+        const data = await response.json()
         return data
     } else {
         return await response.json()

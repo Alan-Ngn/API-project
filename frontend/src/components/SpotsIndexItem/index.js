@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 const SpotIndexItem = ({ spot, user }) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    console.log('is user working',user)
     return (
         <div>
             <Link to={`/spots/${spot.id}`}>

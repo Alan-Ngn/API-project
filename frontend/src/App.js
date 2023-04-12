@@ -8,6 +8,7 @@ import SpotById from "./components/SpotById";
 import SpotForm from "./components/SpotForm";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpotForm from "./components/UpdateSpotForm";
+import CreateSpotForm from "./components/CreateSpotForm";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,7 +21,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
         <Route exact path='/' component={SpotsIndex}/>
-        <Route path='/spots/new' component={SpotForm}/>
+        <Route path='/spots/new' component={CreateSpotForm}/>
         <Route path='/spots/current' component={ManageSpots}/>
         <Route path='/spots/:spotId/edit' component={UpdateSpotForm}/>
         <Route path='/spots/:spotId' component={SpotById}/>
