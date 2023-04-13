@@ -3,7 +3,8 @@ import StarRatingInput from "./StarRatingInput"
 import { useModal } from "../../context/Modal"
 import { useEffect, useState } from "react"
 import './StarRating.css'
-const PostReviewModal = ({spot}) => {
+import { createSpotReviewThunk } from "../../store/reviews"
+const PostReviewModal = ({spot, user}) => {
     const dispatch = useDispatch()
 
     const [review, setReview] = useState('')
@@ -11,13 +12,18 @@ const PostReviewModal = ({spot}) => {
     const [submit, setSubmit] = useState(true)
     const { closeModal } = useModal()
     const [rating, setRating] = useState(0);
+    const reviewObj = {}
     useEffect(()=>{
-        if(review.length > 10){
+        if(review.length > 10 && rating > 0){
             setSubmit(false)
         } else {
             setSubmit(true)
         }
-    },[review])
+        reviewObj.review = review
+        reviewObj.stars = rating
+        setReviewPayload(reviewObj)
+        console.log('my payload',reviewObj)
+    },[review, rating])
 
 
     const onChange = (number) => {
@@ -26,9 +32,9 @@ const PostReviewModal = ({spot}) => {
       console.log(rating)
     const onClick = (e) => {
         e.preventDefault()
-        console.log('spot id to delete',spot.id)
-        // dispatch(deleteSpotThunk(spot.id)).then(closeModal)
-        console.log('clicked delete spot')
+        console.log('spot id to create review',spot.id)
+        dispatch(createSpotReviewThunk(reviewPayload,spot.id, user.firstName)).then(closeModal)
+
     }
 
     return (
@@ -41,7 +47,7 @@ const PostReviewModal = ({spot}) => {
                     value={review}
                     onChange={e => setReview(e.target.value)}
                 />
-                <StarRatingInput disabled={false} onChange={onChange} rating={rating} />
+                <StarRatingInput onChange={onChange} rating={rating} />
                 <button disabled={submit} onClick={onClick}>Submit your Review</button>
             </form>
         </>

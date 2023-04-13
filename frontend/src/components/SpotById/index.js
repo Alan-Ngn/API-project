@@ -49,7 +49,7 @@ const SpotById = () => {
             <div>
                 {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                     <OpenModalPostReviewButton
-                        modalComponent={<PostReviewModal spot={spots}/>}
+                        modalComponent={<PostReviewModal spot={spots} user={user}/>}
                     />
                 )}
                 {reviewArr.map(review =>
