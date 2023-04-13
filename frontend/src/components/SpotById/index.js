@@ -1,3 +1,5 @@
+import DeleteReviewModal from "../DeleteReview";
+import OpenModalDeleteReviewButton from "../DeleteReview/OpenModalDeleteReviewButton";
 import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
 
@@ -58,6 +60,11 @@ const SpotById = () => {
                     <h3>{review.User.firstName}</h3>
                     <h4>{review.createdAt}</h4>
                     <p>{review.review}</p>
+                    {(user && user.id === review.User.id) && (
+                        <OpenModalDeleteReviewButton
+                            modalComponent={<DeleteReviewModal review={review}/>}
+                        />
+                    )}
                 </div>
 
                     )}
