@@ -1,0 +1,8 @@
+.rating-input .filled {
+    color: goldenrod
+  }
+
+.rating-input {
+    display: flex;
+    margin-right: 4px;
+ }

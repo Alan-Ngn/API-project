@@ -1,3 +1,6 @@
+import PostReviewModal from "../PostReview";
+import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
+
 const { loadOneSpotThunk } = require("../../store/spots");
 
 const { useEffect } = require("react");
@@ -10,18 +13,23 @@ const { loadSpotReviewsThunk } = require("../../store/reviews");
 const SpotById = () => {
     const dispatch = useDispatch()
     const { spotId } = useParams();
-    // const review = useSelector(state => state.reviews)
     // console.log('SpotById spot', spots)
-    // console.log('SpotByID review', review)
-
+    const user = useSelector(state => state.session.user);
+    // console.log('current user',user)
     const spots = useSelector(state => state.spots)
+    const reviews = useSelector(state => state.reviews)
+    const reviewArr = Object.values(reviews)
+    console.log('SpotByID review', reviewArr)
+    // console.log('testing arrays', reviewArr.map(review => review.userId).includes(user.id))
     useEffect(()=>{
         console.log('inside the useEffect')
         dispatch(loadOneSpotThunk(spotId))
-        // dispatch(loadSpotReviewsThunk(spotId))
+        dispatch(loadSpotReviewsThunk(spotId))
+
     },[dispatch])
     console.log('this is my spots',spots)
     if(!spots.SpotImages)return null
+    if(!reviews) return null
     console.log('did this work?')
 
     // if(!Object.values(spots).length)  return null;
@@ -33,10 +41,26 @@ const SpotById = () => {
             <h1>{spots.name}</h1>
             <p>{`${spots.city}, ${spots.state}, ${spots.country}`}</p>
             <div>
+                <img src={spots.SpotImages[0].url}></img>
                 {spots.SpotImages.slice(1).map(spotImage =>
                     <img src={spotImage.url}/>
                 )}
-                <img src={spots.SpotImages[0].url}></img>
+            </div>
+            <div>
+                {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+                    <OpenModalPostReviewButton
+                        modalComponent={<PostReviewModal spot={spots}/>}
+                    />
+                )}
+                {reviewArr.map(review =>
+                <div>
+
+                    <h3>{review.User.firstName}</h3>
+                    <h4>{review.createdAt}</h4>
+                    <p>{review.review}</p>
+                </div>
+
+                    )}
             </div>
         </div>
     )
