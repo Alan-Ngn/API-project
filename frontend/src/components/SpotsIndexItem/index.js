@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import OpenModalDeleteButton from "../DeleteSpot/OpenModalDeleteButton";
 import DeleteSpotModal from "../DeleteSpotModal";
-
-
+import '../../index.css'
+import './SpotIndexItem.css'
+// import "./LoginForm.css";
 const SpotIndexItem = ({ spot, user, type }) => {
 
     const history = useHistory()
@@ -27,9 +28,11 @@ const SpotIndexItem = ({ spot, user, type }) => {
 
     // const closeMenu = () => setShowMenu(false);
     return (
-        <div>
+        <div className="spotItem" img-tooltip={spot.name}>
             <Link to={`/spots/${spot.id}`}>
-                <img src={spot.previewImage} alt={spot.name}/>
+                <div className="spotImg" img-tooltip={spot.name}>
+                    <img src={spot.previewImage} alt={spot.name} img-tooltip={spot.name}/>
+                </div>
                 <div>
                     <div>
                         {`${spot.city}, ${spot.state}`}

@@ -2,6 +2,7 @@ import SpotIndexItem from '../SpotsIndexItem';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSpotsThunk } from '../../store/spots';
+import './SpotIndex.css'
 const SpotsIndex = () => {
     const dispatch = useDispatch()
     console.log('inside SpotsIndex')
@@ -16,7 +17,7 @@ const SpotsIndex = () => {
     if(getSpots.SpotImages) return null;
     if(sessionUser && spots.filter(spot => spot.ownerId === sessionUser.id).length === spots.length) return null
     return (
-        <section>
+        <section className="spotIndexItems">
             {spots.map((spots) => (
                 <SpotIndexItem
                 spot={spots}

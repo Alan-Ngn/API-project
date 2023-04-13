@@ -1,0 +1,21 @@
+.spotItem {
+    width: 240px;
+    padding: 6px;
+}
+img {
+    width: 240px;
+    height: 200px;
+}
+
+.spotImg:hover::before{
+
+    content: attr(img-tooltip);
+    position: absolute;
+
+    transform: translateX(50%) translateY(100%);
+    background-color: grey;
+    color: lightgrey;
+    /* font-size: 100px; */
+    /* visibility: hidden; */
+    /* position:relative; */
+}

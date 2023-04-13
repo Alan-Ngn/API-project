@@ -1,0 +1,6 @@
+.spotIndexItems{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly, left;
+    max-width: 1024px;
+}
