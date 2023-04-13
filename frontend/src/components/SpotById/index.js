@@ -48,7 +48,8 @@ const SpotById = () => {
                     <img src={spotImage.url}/>
                 )}
             </div>
-            <div>{spots.avgRating}</div>
+            <i className="fa-solid fa-star"></i>
+            <div>{`${spots.avgRating} ${spots.numReviews} Reviews`}</div>
             <div>
                 {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                     <OpenModalPostReviewButton
