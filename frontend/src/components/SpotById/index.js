@@ -48,6 +48,7 @@ const SpotById = () => {
                     <img src={spotImage.url}/>
                 )}
             </div>
+            <div>{spots.avgRating}</div>
             <div>
                 {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                     <OpenModalPostReviewButton
@@ -62,7 +63,7 @@ const SpotById = () => {
                     <p>{review.review}</p>
                     {(user && user.id === review.User.id) && (
                         <OpenModalDeleteReviewButton
-                            modalComponent={<DeleteReviewModal review={review}/>}
+                            modalComponent={<DeleteReviewModal spot={spots} review={review}/>}
                         />
                     )}
                 </div>

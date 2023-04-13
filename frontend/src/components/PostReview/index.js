@@ -3,7 +3,8 @@ import StarRatingInput from "./StarRatingInput"
 import { useModal } from "../../context/Modal"
 import { useEffect, useState } from "react"
 import './StarRating.css'
-import { createSpotReviewThunk } from "../../store/reviews"
+import { createSpotReviewThunk, loadSpotReviewsThunk } from "../../store/reviews"
+
 const PostReviewModal = ({spot, user}) => {
     const dispatch = useDispatch()
 
@@ -33,8 +34,9 @@ const PostReviewModal = ({spot, user}) => {
     const onClick = (e) => {
         e.preventDefault()
         console.log('spot id to create review',spot.id)
-        dispatch(createSpotReviewThunk(reviewPayload,spot.id, user.firstName)).then(closeModal)
-
+        // dispatch(createSpotReviewThunk(reviewPayload,spot.id, user.firstName)).then(closeModal)
+        // dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(dispatch(loadSpotReviewsThunk(spot.id))).then(closeModal)
+        dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(closeModal)
     }
 
     return (

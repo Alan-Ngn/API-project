@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { loadOneSpotThunk } from "./spots";
 
 const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
 const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
@@ -46,25 +47,24 @@ export const createSpotReviewThunk = (review, spotId, userFirstName) => async(di
     })
     if(response.ok){
         const data = await response.json()
-        const User = {}
-        User.firstName = userFirstName
-        const payload ={...data, User}
+        // dispatch(createSpotReview(data))
+        dispatch(loadSpotReviewsThunk(spotId))
+        dispatch(loadOneSpotThunk(spotId))
 
 
-        dispatch(createSpotReview(payload))
-        return data
     } else {
         return await response.json()
     }
 }
 
-export const deleteSpotReviewThunk = (reviewId) => async(dispatch) =>{
+export const deleteSpotReviewThunk = (reviewId, spotId) => async(dispatch) =>{
     const response = await csrfFetch(`/api/reviews/${reviewId}`,{
         method: "DELETE"
     })
     if(response.ok){
         const data = await response.json()
         dispatch(deleteSpotReview(reviewId))
+        dispatch(loadOneSpotThunk(spotId))
         return data
     } else {
         return false
