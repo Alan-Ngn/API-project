@@ -2,7 +2,7 @@ import DeleteReviewModal from "../DeleteReview";
 import OpenModalDeleteReviewButton from "../DeleteReview/OpenModalDeleteReviewButton";
 import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
-
+import './SpotById.css'
 const { loadOneSpotThunk } = require("../../store/spots");
 
 const { useEffect } = require("react");
@@ -42,11 +42,13 @@ const SpotById = () => {
         <div>
             <h1>{spots.name}</h1>
             <p>{`${spots.city}, ${spots.state}, ${spots.country}`}</p>
-            <div>
-                <img src={spots.SpotImages[0].url}></img>
-                {spots.SpotImages.slice(1).map(spotImage =>
-                    <img src={spotImage.url}/>
-                )}
+            <div className="spotByIdImg">
+                <img className="spotByIdLarge" src={spots.SpotImages[0].url}></img>
+                <div className="spotByIdSmall">
+                    {spots.SpotImages.slice(1).map(spotImage =>
+                        <img className="singleSpotByIdSmall" src={spotImage.url}/>
+                    )}
+                </div>
             </div>
             <i className="fa-solid fa-star"></i>
             <div>{`${spots.avgRating} ${spots.numReviews} Reviews`}</div>
@@ -58,7 +60,6 @@ const SpotById = () => {
                 )}
                 {reviewArr.map(review =>
                 <div>
-
                     <h3>{review.User.firstName}</h3>
                     <h4>{review.createdAt}</h4>
                     <p>{review.review}</p>

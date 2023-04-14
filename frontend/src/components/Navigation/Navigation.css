@@ -1,3 +1,15 @@
 .hidden {
     display:none
 }
+nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-width: 1px;
+    padding: 10px
+}
+
+.profile-dropdown {
+    border: solid;
+    border-width: 1px;
+}

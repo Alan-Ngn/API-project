@@ -1,0 +1,19 @@
+.spotByIdImg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 900px;
+}
+
+.spotByIdLarge {
+    width:400px;
+    height: 400px;
+    padding: 5px
+}
+.singleSpotByIdSmall {
+    width:200px;
+    height: 200px;
+    padding: 5px;
+}
+.spotByIdSmall {
+    height: 400px
+}

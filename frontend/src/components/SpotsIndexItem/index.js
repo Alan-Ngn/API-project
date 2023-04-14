@@ -29,16 +29,16 @@ const SpotIndexItem = ({ spot, user, type }) => {
     // const closeMenu = () => setShowMenu(false);
     return (
         <div className="spotItem" img-tooltip={spot.name}>
-            <Link to={`/spots/${spot.id}`}>
+            <Link to={`/spots/${spot.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <div className="spotImg" img-tooltip={spot.name}>
-                    <img src={spot.previewImage} alt={spot.name} img-tooltip={spot.name}/>
+                    <img className="spotIndexImg" src={spot.previewImage} alt={spot.name} img-tooltip={spot.name}/>
                 </div>
-                <div>
+                <div className="cityStateRating">
                     <div>
                         {`${spot.city}, ${spot.state}`}
                     </div>
                     <div>
-                        {`${spot.avgRating}`}
+                        {spot.avgRating > 0 ? spot.avgRating.toFixed(1) : 'New'}
                     </div>
                 </div>
                 <div>
