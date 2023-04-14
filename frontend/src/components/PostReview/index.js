@@ -13,6 +13,7 @@ const PostReviewModal = ({spot, user}) => {
     const [submit, setSubmit] = useState(true)
     const { closeModal } = useModal()
     const [rating, setRating] = useState(0);
+    const [backendErr, setBackendErr] = useState({})
     const reviewObj = {}
     useEffect(()=>{
         if(review.length > 10 && rating > 0){
@@ -31,17 +32,26 @@ const PostReviewModal = ({spot, user}) => {
         setRating(parseInt(number));
       };
       console.log(rating)
-    const onClick = (e) => {
+    const onClick = async(e) => {
         e.preventDefault()
         console.log('spot id to create review',spot.id)
         // dispatch(createSpotReviewThunk(reviewPayload,spot.id, user.firstName)).then(closeModal)
         // dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(dispatch(loadSpotReviewsThunk(spot.id))).then(closeModal)
-        dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(closeModal)
+        const backendError = await dispatch(createSpotReviewThunk(reviewPayload,spot.id))
+        console.log('testing response frontend for backend',backendError.errors.review)
+        setBackendErr(backendError.errors)
+        console.log('object or array',Object.values(backendError).length)
+        if(!Object.values(backendError).length>0){
+            console.log('close modal?')
+
+        }
     }
 
     return (
         <>
             <h1>How was your stay?</h1>
+            <div>{backendErr.review}</div>
+            <div>{backendErr.stars}</div>
             <form>
                 <textarea
                     id="review"

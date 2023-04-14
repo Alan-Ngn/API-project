@@ -12,4 +12,12 @@ nav {
 .profile-dropdown {
     border: solid;
     border-width: 1px;
+    position:absolute;
+    background-color: white;
+
+}
+.manageSpots {
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
 }
