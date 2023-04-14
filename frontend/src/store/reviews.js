@@ -53,7 +53,7 @@ export const createSpotReviewThunk = (review, spotId, userFirstName) => async(di
         console.log('testing response ok')
         const data = await response.json()
         // dispatch(createSpotReview(data))
-
+        console.log(data)
         dispatch(loadSpotReviewsThunk(spotId))
         dispatch(loadOneSpotThunk(spotId))
 
