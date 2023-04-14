@@ -43,6 +43,7 @@ const PostReviewModal = ({spot, user}) => {
         console.log('object or array',Object.values(backendError).length)
         if(!Object.values(backendError).length>0){
             console.log('close modal?')
+            
 
         }
     }
