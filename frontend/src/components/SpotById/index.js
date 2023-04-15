@@ -84,7 +84,7 @@ const SpotById = () => {
                 {sortedArr.map(review =>
                 <div>
                     <h3>{review.User.firstName}</h3>
-                    <h4>{review.createdAt}</h4>
+                    <h4>{`${Date(review.createdAt).split(' ')[1]} ${Date(review.createdAt).split(' ')[3]}`}</h4>
                     <p>{review.review}</p>
                     {(user && user.id === review.User.id) && (
                         <OpenModalDeleteReviewButton
