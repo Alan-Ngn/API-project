@@ -64,9 +64,9 @@ const SpotById = () => {
                 </div>
                 <div className="pricing-reservation">
                     <div className="price-rating">
-                        <div>{`$${spots.price.toFixed(2)} night`}</div>
+                        <div>{`$${spots.price} night`}</div>
                         {/* {spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} */}
-                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
                     </div>
                     <button className="reserve" onClick={()=>{
                         alert("Feature Coming Soon...");
@@ -74,7 +74,7 @@ const SpotById = () => {
                 </div>
             </div>
 
-            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
             <div>
             {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                 <div>Be the first to post a review!</div>
