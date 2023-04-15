@@ -38,7 +38,7 @@ const SpotIndexItem = ({ spot, user, type }) => {
                         {`${spot.city}, ${spot.state}`}
                     </div>
                     <div>
-                        {spot.avgRating > 0 ? spot.avgRating.toFixed(1) : 'New'}
+                    <i className="fa-solid fa-star"></i>{spot.avgRating > 0 ? spot.avgRating.toFixed(1) : 'New'}
                     </div>
                 </div>
                 <div>
