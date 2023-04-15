@@ -23,7 +23,7 @@ const SpotForm  = ({input, formType}) => {
     const [optImgFour, setOptImgFour] = useState(input.optImgFour)
     const [err, setErr] = useState({})
     const [valErr, setValErr] = useState({})
-    const [submit, setSubmit] = useState(true)
+    const [submit, setSubmit] = useState('true')
     const [spotPayload, setSpotPayload] = useState({})
     const [spotImgPayload, setSpotImgPayload] = useState([])
     let spot = {}
@@ -91,13 +91,19 @@ const SpotForm  = ({input, formType}) => {
 
         console.log('what errors do i have',errors)
         // setErr(errors)
+        if(country || address || city || state || lat || lng || description || name || price || previewImage){
+            setSubmit(false)
+
+        } else {
+            setSubmit(true)
+        }
         // if(Object.values(errors).length>0){
             // } else {
                 //     setSubmit(false)
                 // }
                 setValErr(errors)
             },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
-
+            console.log('submit test',submit)
             const {spotId} = useParams()
 
     const handleSubmit = async(e) => {
@@ -347,8 +353,11 @@ in search results.
 
             <button
                 type="submit"
-                // disabled={submit}
+                disabled={submit}
+
+
             >
+
                 {formType==='Update your Spot' && (
                     'Update'
                 )}
