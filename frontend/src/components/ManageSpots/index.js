@@ -2,7 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadCurrentSpotsThunk } from "../../store/spots"
 import SpotIndexItem from "../SpotsIndexItem"
+import { Link, useHistory } from "react-router-dom"
 const ManageSpots = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const getSpots = useSelector(state => state.spots)
     const sessionUser = useSelector(state => state.session.user);
@@ -18,6 +20,9 @@ const ManageSpots = () => {
 
     return (
         <section>
+            <h1>Manage Spots</h1>
+            {currentSpots.length ===0 && (
+            <button onClick={()=> history.push(`/spots/new`)}>Create a New Spot</button>)}
             {currentSpots.map((spots) => (
                 <SpotIndexItem
                 spot={spots}

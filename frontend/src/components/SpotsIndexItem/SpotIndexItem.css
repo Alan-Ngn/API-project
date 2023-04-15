@@ -1,8 +1,10 @@
 .spotItem {
+    /* flex-basis: 25%; */
     width: 240px;
     padding: 6px;
+
 }
-img {
+.spotIndexImg {
     width: 240px;
     height: 200px;
 }
@@ -18,4 +20,14 @@ img {
     /* font-size: 100px; */
     /* visibility: hidden; */
     /* position:relative; */
+}
+
+.cityStateRating {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+Link {
+    text-decoration: none;
 }

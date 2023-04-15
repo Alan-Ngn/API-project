@@ -44,16 +44,23 @@ export const createSpotReviewThunk = (review, spotId, userFirstName) => async(di
             "Content-Type": 'application/json'
           },
         body: JSON.stringify(review)
+    }).catch(async(err) => {
+        // console.log('inside thunk err', await err.json())
+        return await err.json()
     })
+    console.log('what is my response', response)
     if(response.ok){
+        console.log('testing response ok')
         const data = await response.json()
         // dispatch(createSpotReview(data))
+        console.log(data)
         dispatch(loadSpotReviewsThunk(spotId))
         dispatch(loadOneSpotThunk(spotId))
 
-
+        return data
     } else {
-        return await response.json()
+       console.log('testing response not ok')
+        return response
     }
 }
 

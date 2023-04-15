@@ -1,3 +1,23 @@
 .hidden {
     display:none
 }
+nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-width: 1px;
+    padding: 10px
+}
+
+.profile-dropdown {
+    border: solid;
+    border-width: 1px;
+    position:absolute;
+    background-color: white;
+
+}
+.manageSpots {
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+}

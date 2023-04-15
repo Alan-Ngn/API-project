@@ -2,7 +2,7 @@ import DeleteReviewModal from "../DeleteReview";
 import OpenModalDeleteReviewButton from "../DeleteReview/OpenModalDeleteReviewButton";
 import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
-
+import './SpotById.css'
 const { loadOneSpotThunk } = require("../../store/spots");
 
 const { useEffect } = require("react");
@@ -21,6 +21,13 @@ const SpotById = () => {
     const spots = useSelector(state => state.spots)
     const reviews = useSelector(state => state.reviews)
     const reviewArr = Object.values(reviews)
+    const sortedArr = reviewArr.sort((a,b)=> {
+        a = new Date(a.createdAt)
+        b = new Date(b.createdAt)
+        return b-a
+    })
+
+    console.log('sorting the review Arr', sortedArr)
     console.log('SpotByID review', reviewArr)
     // console.log('testing arrays', reviewArr.map(review => review.userId).includes(user.id))
     useEffect(()=>{
@@ -39,28 +46,48 @@ const SpotById = () => {
     // console.log('spotImage check',spots.SpotImages[0].url)
     return (
 
-        <div>
+        <div className="spotDetails">
             <h1>{spots.name}</h1>
             <p>{`${spots.city}, ${spots.state}, ${spots.country}`}</p>
-            <div>
-                <img src={spots.SpotImages[0].url}></img>
-                {spots.SpotImages.slice(1).map(spotImage =>
-                    <img src={spotImage.url}/>
-                )}
+            <div className="spotByIdImg">
+                <img className="spotByIdLarge" src={spots.SpotImages[0].url}></img>
+                <div className="spotByIdSmall">
+                    {spots.SpotImages.slice(1).map(spotImage =>
+                        <img className="singleSpotByIdSmall" src={spotImage.url}/>
+                    )}
+                </div>
             </div>
-            <i className="fa-solid fa-star"></i>
-            <div>{`${spots.avgRating} ${spots.numReviews} Reviews`}</div>
+            <div className="mid-section">
+                <div>
+                    <h1>{`Hosted by ${spots.Owner.firstName} ${spots.Owner.lastName}`}</h1>
+                    <p>{spots.description}</p>
+                </div>
+                <div className="pricing-reservation">
+                    <div className="price-rating">
+                        <div>{`$${spots.price.toFixed(2)} night`}</div>
+                        {/* {spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} */}
+                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+                    </div>
+                    <button className="reserve" onClick={()=>{
+                        alert("Feature Coming Soon...");
+                    }}>Reserve</button>
+                </div>
+            </div>
+
+            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} ${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
             <div>
+            {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+                <div>Be the first to post a review!</div>
+            )}
                 {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                     <OpenModalPostReviewButton
                         modalComponent={<PostReviewModal spot={spots} user={user}/>}
                     />
                 )}
-                {reviewArr.map(review =>
+                {sortedArr.map(review =>
                 <div>
-
                     <h3>{review.User.firstName}</h3>
-                    <h4>{review.createdAt}</h4>
+                    <h4>{`${Date(review.createdAt).split(' ')[1]} ${Date(review.createdAt).split(' ')[3]}`}</h4>
                     <p>{review.review}</p>
                     {(user && user.id === review.User.id) && (
                         <OpenModalDeleteReviewButton

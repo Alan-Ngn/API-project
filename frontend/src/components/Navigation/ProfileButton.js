@@ -45,22 +45,24 @@ function ProfileButton({ user }) {
   return (
     <>
       {user && (
-        <Link to={`/spots/new`}>Create New Spot</Link>
+        <Link style={{ textDecoration: 'none', color: 'green' }} to={`/spots/new`}>Create New Spot</Link>
       )}
       <button onClick={openMenu}>
-        <div style={{ color: "blue", fontSize: "100px" }}>
+        <div style={{ color: "blue", fontSize: "25px" }}>
           <i className="fa-solid fa-user"></i>
         </div>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{`Hello ${user.firstName}`}</li>
-            <li>{user.email}</li>
-            <Link to={'/spots/current'}>Manage Spots</Link>
-            <li>
+            <div>{`Hello ${user.firstName}`}</div>
+            <div>{user.email}</div>
+            <div className="manageSpots">
+              <Link to={'/spots/current'}>Manage Spots</Link>
+            </div>
+            <div>
               <button onClick={logout}>Log Out</button>
-            </li>
+            </div>
           </>
         ) : (
           <>
@@ -76,7 +78,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }
