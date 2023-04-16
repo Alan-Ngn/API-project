@@ -31,13 +31,14 @@ function LoginFormModal() {
       .then(closeModal)
   }
   return (
-    <>
+    <div className="modal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Username or Email
           <input
             type="text"
+            placeholder="Username or Email"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
@@ -58,7 +59,7 @@ function LoginFormModal() {
         <button disabled={credential.length<4 || password.length<6} type="submit">Log In</button>
       </form>
       <button onClick={onClick}>Demo User</button>
-    </>
+    </div>
   );
 }
 

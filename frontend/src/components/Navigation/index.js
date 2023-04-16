@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-
+// import '../../index.css'
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
@@ -12,8 +12,9 @@ function Navigation({ isLoaded }){
       <div>
 
         <NavLink style={{ textDecoration: 'none', color: 'red' }} exact to="/">
-         <i className="fa-brands fa-airbnb fa-rotate-180"></i>
-          AlanBnB</NavLink>
+          <i className="fa-brands fa-airbnb fa-rotate-180"></i>
+          <h1>AlanBnB</h1>
+        </NavLink>
       </div>
       {isLoaded && (
         <div>

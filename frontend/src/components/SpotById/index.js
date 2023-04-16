@@ -3,6 +3,7 @@ import OpenModalDeleteReviewButton from "../DeleteReview/OpenModalDeleteReviewBu
 import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
 import './SpotById.css'
+import '../../index.css'
 const { loadOneSpotThunk } = require("../../store/spots");
 
 const { useEffect } = require("react");
@@ -16,6 +17,8 @@ const SpotById = () => {
     const dispatch = useDispatch()
     const { spotId } = useParams();
     // console.log('SpotById spot', spots)
+    const shortMon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const user = useSelector(state => state.session.user);
     // console.log('current user',user)
     const spots = useSelector(state => state.spots)
@@ -65,8 +68,7 @@ const SpotById = () => {
                 <div className="pricing-reservation">
                     <div className="price-rating">
                         <div>{`$${spots.price} night`}</div>
-                        {/* {spots.avgRating > 0 ? spots.avgRating.toFixed(1) : 'New'} */}
-                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}<i className="fa-solid fa-circle"></i>{`${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}{`${spots.numReviews === 0 ? '' : '·'}${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
                     </div>
                     <button className="reserve" onClick={()=>{
                         alert("Feature Coming Soon...");
@@ -74,7 +76,7 @@ const SpotById = () => {
                 </div>
             </div>
 
-            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}<i className="fa-solid fa-circle"></i>{`${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}{`${spots.numReviews === 0 ? '' : '·'}${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
             <div>
             {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
                 <div>Be the first to post a review!</div>
@@ -87,7 +89,7 @@ const SpotById = () => {
                 {sortedArr.map(review =>
                 <div>
                     <h3>{review.User.firstName}</h3>
-                    <h4>{`${Date(review.createdAt).split(' ')[1]} ${Date(review.createdAt).split(' ')[3]}`}</h4>
+                    <h4>{`${month[shortMon.indexOf(Date(review.createdAt).split(' ')[1])]} ${Date(review.createdAt).split(' ')[3]}`}</h4>
                     <p>{review.review}</p>
                     {(user && user.id === review.User.id) && (
                         <OpenModalDeleteReviewButton

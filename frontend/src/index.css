@@ -1,2 +1,27 @@
 /* TODO Add site wide styles */
+h1 {
+    font-size: 24pt;
+    font-weight: bold;
+}
+h2 {
+    font-size: 18pt;
+    font-weight: bold;
+}
 
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+button {
+    font-size:medium;
+    cursor:pointer;
+    background-color: #FF5A5F;
+    border-color: #000000;
+    color: #FFFFFF;
+
+}
+
+.modal {
+    display: grid;
+    grid-template-columns: 1fr
+}

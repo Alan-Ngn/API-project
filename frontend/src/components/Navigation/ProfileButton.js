@@ -5,7 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { Link, useHistory } from "react-router-dom";
-
+import './Navigation.css';
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -47,15 +47,15 @@ function ProfileButton({ user }) {
       {user && (
         <Link style={{ textDecoration: 'none', color: 'green' }} to={`/spots/new`}>Create New Spot</Link>
       )}
-      <button onClick={openMenu}>
-        <div style={{ color: "blue", fontSize: "25px" }}>
+      <button className="profile-user" onClick={openMenu}>
+        <div style={{fontSize: "25px" }}>
           <i className="fa-solid fa-user"></i>
         </div>
       </button>
       <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <div>{`Hello ${user.firstName}`}</div>
+            <div>{`Hello, ${user.firstName}`}</div>
             <div>{user.email}</div>
             <div className="manageSpots">
               <Link to={'/spots/current'}>Manage Spots</Link>
