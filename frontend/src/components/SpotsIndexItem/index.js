@@ -38,7 +38,7 @@ const SpotIndexItem = ({ spot, user, type }) => {
                         {`${spot.city}, ${spot.state}`}
                     </div>
                     <div>
-                    <i className="fa-solid fa-star"></i>{spot.avgRating > 0 ? Math.round(spot.avgRating *10)/10 : 'New'}
+                    <i className="fa-solid fa-star"></i>{spot.avgRating > 0 ? Number(spot.avgRating).toFixed(1) : 'New'}
                     </div>
                 </div>
                 <div>
@@ -62,3 +62,4 @@ const SpotIndexItem = ({ spot, user, type }) => {
 }
 
 export default SpotIndexItem
+//
