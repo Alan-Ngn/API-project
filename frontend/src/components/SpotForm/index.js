@@ -139,7 +139,7 @@ const SpotForm  = ({input, formType}) => {
     // }
     return (
         // <div> SpotForm</div>
-        <form onSubmit={handleSubmit}>
+        <form className="create-update-form" onSubmit={handleSubmit}>
             <h1>{formType==='Update your Spot' ? 'Update your Spot' : 'Create a new Spot'}</h1>
             <div>
                 <h2>Where's your place located?</h2>
@@ -176,14 +176,15 @@ const SpotForm  = ({input, formType}) => {
                         onChange={e => setAddress(e.target.value)}
                     />
                 </div>
+                <div className="city-state-label">
+                    <label htmlFor="city">City</label>
+                    <label htmlFor="state">State</label>
+                </div>
                 <div className="city-state">
                     <div>
-                        <div>
-                            <label htmlFor="city">City</label>
                             {err.city && (
                                 <p className="errors">{err.city}</p>
                             )}
-                        </div>
                         <input
                             name="city"
                             id="city"
@@ -193,27 +194,27 @@ const SpotForm  = ({input, formType}) => {
                             onChange={e => setCity(e.target.value)}
                         />
                     </div>
-                    <div>,</div>
+                    <div className="comma">,</div>
                     <div>
-                        <div>
-                            <label htmlFor="state">State</label>
                             {err.state && (
                                 <p className="errors">{err.state}</p>
                             )}
-                        </div>
                         <input
                             name="state"
                             id="state"
                             type="text"
-                            placeholder="STATE"
+                            placeholder="State"
                             value={state}
                             onChange={e => setState(e.target.value)}
                         />
                     </div>
                 </div>
+                <div className="lat-lng-label">
+                        <label htmlFor="lat">Latitude</label>
+                        <label htmlFor="lng">Longitude</label>
+                </div>
                 <div className="lat-lng">
                     <div>
-                        <label htmlFor="lat">Latitude</label>
                         {err.lat && (
                                 <p className="errors">{err.lat}</p>
                             )}
@@ -226,9 +227,8 @@ const SpotForm  = ({input, formType}) => {
                             onChange={e => setLat(e.target.value)}
                         />
                     </div>
-                    <div>,</div>
+                    <div className="comma">,</div>
                     <div>
-                        <label htmlFor="lng">Longitude</label>
                         {err.lng && (
                                 <p className="errors">{err.lng}</p>
                             )}
@@ -243,7 +243,7 @@ const SpotForm  = ({input, formType}) => {
                     </div>
                 </div>
             </div>
-            <h1>Describe your place to guests</h1>
+            <h2 className="form-border">Describe your place to guests</h2>
             <div>
                 <label htmlFor="description">Mention the best features of your space, any special amentities like
 fast wif or parking, and what you love about the neighborhood.</label>
@@ -260,7 +260,7 @@ fast wif or parking, and what you love about the neighborhood.</label>
                 />
             </div>
             <div>
-                <h1>Create a title for your spot</h1>
+                <h2 className="form-border">Create a title for your spot</h2>
                 <label htmlFor="name">Catch guests' attention with a spot title that highlights what makes
 your place special.</label>
                 {err.name && (
@@ -275,7 +275,7 @@ your place special.</label>
                     onChange={e => setName(e.target.value)}
                 />
             </div>
-            <h1>Set a base price for your spot</h1>
+            <h2 className="form-border">Set a base price for your spot</h2>
             <div>
                 <label htmlFor="price">Competitive pricing can help your listing stand out and rank higher
 in search results.
@@ -292,7 +292,7 @@ in search results.
                     onChange={e => setPrice(e.target.value)}
                 />
             </div>
-            <h1>Liven up your spot with photos</h1>
+            <h2 className="form-border">Liven up your spot with photos</h2>
             <div>
                 <label htmlFor="previewImage">Submit a link to at least one photo to publish your spot.</label>
                 <input
@@ -340,7 +340,7 @@ in search results.
                     onChange={e => setOptImgThree(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="form-border-bot">
                 <input
                     name="optImgFour"
                     id="optImgFour"

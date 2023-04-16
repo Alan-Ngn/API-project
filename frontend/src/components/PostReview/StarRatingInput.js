@@ -78,6 +78,7 @@ return (
     >
       <i className="fa-solid fa-star"></i>
     </div>
+    Stars
   </div>
 );
 };

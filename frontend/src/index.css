@@ -21,7 +21,38 @@ button {
 
 }
 
-.modal {
+/* .modal {
     display: grid;
-    grid-template-columns: 1fr
+    grid-template-columns: 1fr;
+
+} */
+.modal form {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-self: center;
+    width:80%;
+    grid-gap: 10px;
+
+}
+.modal{
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    /* justify-self: center; */
+    /* width:80% */
+    margin: 20px
+    /* justify-content: center; */
+
+}
+
+.modal form textarea,
+.modal form input {
+    background-color:#E8F0FE;
+}
+img{
+    border-radius: 10px;
+}
+
+button:disabled {
+    background-color: #999999;
 }

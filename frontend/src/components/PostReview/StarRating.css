@@ -5,4 +5,5 @@
 .rating-input {
     display: flex;
     margin-right: 4px;
+    justify-content: center;
  }

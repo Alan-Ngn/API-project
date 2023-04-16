@@ -19,19 +19,21 @@ const ManageSpots = () => {
     if(currentSpots.filter(spot => spot.ownerId !== sessionUser.id).length >0) return null
 
     return (
-        <section>
+        <>
             <h1>Manage Spots</h1>
-            {currentSpots.length ===0 && (
-            <button onClick={()=> history.push(`/spots/new`)}>Create a New Spot</button>)}
-            {currentSpots.map((spots) => (
-                <SpotIndexItem
-                spot={spots}
-                type={'ManageSpot'}
-                user={sessionUser}
-                key={spots.id}
-                />
-            ))}
-        </section>
+            <section className="spotIndexItems">
+                {currentSpots.length ===0 && (
+                <button onClick={()=> history.push(`/spots/new`)}>Create a New Spot</button>)}
+                {currentSpots.map((spots) => (
+                    <SpotIndexItem
+                    spot={spots}
+                    type={'ManageSpot'}
+                    user={sessionUser}
+                    key={spots.id}
+                    />
+                ))}
+            </section>
+        </>
     )
 
 }

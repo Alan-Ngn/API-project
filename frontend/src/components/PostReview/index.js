@@ -55,7 +55,7 @@ const PostReviewModal = ({spot, user}) => {
     }
 
     return (
-        <>
+        <div className="modal">
             <h1>How was your stay?</h1>
             <div>{backendErr.review}</div>
             <div>{backendErr.stars}</div>
@@ -69,7 +69,7 @@ const PostReviewModal = ({spot, user}) => {
                 <StarRatingInput onChange={onChange} rating={rating} />
                 <button disabled={submit}>Submit your Review</button>
             </form>
-        </>
+        </div>
     )
 }
 

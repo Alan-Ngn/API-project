@@ -8,7 +8,7 @@ const OpenModalDeleteButton = ({modalComponent, itemText, onItemClick, onModalCl
         if(onItemClick) onItemClick()
     }
     return (
-        <button onClick={onClick}>{itemText}</button>
+        <button className="no-button" onClick={onClick}>{itemText}</button>
     )
 }
  export default OpenModalDeleteButton

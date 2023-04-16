@@ -15,12 +15,12 @@ const DeleteSpotModal = ({spot}) => {
         closeModal()
     }
     return (
-        <>
+        <div className="modal">
             <h1>Comfirm Delete</h1>
             <p>Are you sure you want to remove this spot from the listings?</p>
             <button onClick={YesOnClick}>Yes (Delete Spot)</button>
-            <button onClick={NoOnClick}>No (Keep Spot)</button>
-        </>
+            <button className="no-button" onClick={NoOnClick}>No (Keep Spot)</button>
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ const OpenModalDeleteReviewButton = ({modalComponent, onItemClick, onModalClose}
         if(onItemClick) onItemClick()
     }
     return (
-        <button onClick={onClick}>Delete</button>
+        <button className="no-button" onClick={onClick}>Delete</button>
     )
 }
  export default OpenModalDeleteReviewButton

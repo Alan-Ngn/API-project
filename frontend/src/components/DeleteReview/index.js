@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal"
 import { deleteSpotReviewThunk } from "../../store/reviews"
+import './DeleteReview.css'
 const DeleteReviewModal = ({review, spot}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
@@ -15,12 +16,12 @@ const DeleteReviewModal = ({review, spot}) => {
         closeModal()
     }
     return (
-        <>
+        <div className="modal">
             <h1>Comfirm Delete</h1>
             <p>Are you sure you want to delete this review?</p>
             <button onClick={YesOnClick}>Yes (Delete Review)</button>
-            <button onClick={NoOnClick}>No (Keep Review)</button>
-        </>
+            <button className="no-button" onClick={NoOnClick}>No (Keep Review)</button>
+        </div>
     )
 }
 
