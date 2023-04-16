@@ -48,9 +48,11 @@ function ProfileButton({ user }) {
         <Link style={{ textDecoration: 'none', color: 'green' }} to={`/spots/new`}>Create New Spot</Link>
       )}
       <button className="profile-user" onClick={openMenu}>
-        <div style={{fontSize: "25px" }}>
+        {/* <div
+        style={{fontSize: "25px" }}
+        > */}
           <i className="fa-solid fa-user"></i>
-        </div>
+        {/* </div> */}
       </button>
       <div className={ulClassName} ref={ulRef}>
         {user ? (

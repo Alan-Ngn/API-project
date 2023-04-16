@@ -11,13 +11,13 @@ function Navigation({ isLoaded }){
     <nav>
       <div>
 
-        <NavLink style={{ textDecoration: 'none', color: 'red' }} exact to="/">
+        <NavLink className={'test'} style={{ textDecoration: 'none', color: 'red' }} exact to="/">
           <i className="fa-brands fa-airbnb fa-rotate-180"></i>
           <h1>AlanBnB</h1>
         </NavLink>
       </div>
       {isLoaded && (
-        <div>
+        <div className='profile-button-user-icon'>
           <ProfileButton user={sessionUser} />
         </div>
       )}
