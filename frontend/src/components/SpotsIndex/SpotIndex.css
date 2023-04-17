@@ -3,6 +3,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly, left;
     max-width: 1024px;
-
-    /* gap: 5px; */
+    position:relative;
+    margin: 9px;
 }

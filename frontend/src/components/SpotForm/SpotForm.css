@@ -1,5 +1,6 @@
 .errors{
     color:red;
+    margin:0px
 }
 
 .create-update-form {
@@ -36,21 +37,32 @@
 .city-state {
     display: flex;
 }
-.lat-lng-label,
+
 .city-state-label {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+}
+
+.lat-lng-label {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
 }
+
 .comma {
     text-align: center;
     width: 5px;
 }
-.lat-lng input,
-.city-state input{
-    width: 210px
+.lat-lng input{
+    width: 200px
 }
-
+#state {
+    width: 140px;
+}
+#city {
+    width: 250px
+}
 .form-border{
     border-top: solid;
     border-width: 1px;

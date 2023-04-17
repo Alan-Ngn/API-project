@@ -14,8 +14,8 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-
   const handleSubmit = (e) => {
+    console.log( 'checking out errors')
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors({});
@@ -32,6 +32,7 @@ function SignupFormModal() {
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
+            console.log(data)
             setErrors(data.errors);
           }
         });
@@ -45,22 +46,14 @@ function SignupFormModal() {
     <div className="modal">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        {errors.email && <p>{errors.email}</p>}
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        {errors.username && <p>{errors.username}</p>}
+        {errors.firstName && <p className="errors">{errors.firstName}</p>}
+        {errors.lastName && <p className="errors">{errors.lastName}</p>}
+        {errors.email && <p className="errors">{errors.email}</p>}
+        {errors.username && <p className="errors">{errors.username}</p>}
+        {errors.password && <p className="errors">{errors.password}</p>}
+        {errors.confirmPassword && (
+          <p className="errors">{errors.confirmPassword}</p>
+        )}
           <input
             type="text"
             placeholder="First Name"
@@ -68,7 +61,6 @@ function SignupFormModal() {
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        {errors.firstName && <p>{errors.firstName}</p>}
           <input
             type="text"
             placeholder="Last Name"
@@ -76,7 +68,20 @@ function SignupFormModal() {
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        {errors.lastName && <p>{errors.lastName}</p>}
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <input
             type="password"
             placeholder="Password"
@@ -85,7 +90,6 @@ function SignupFormModal() {
             required
           />
 
-        {errors.password && <p>{errors.password}</p>}
           <input
             type="password"
             placeholder="Confirm Password"
@@ -93,9 +97,6 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        {errors.confirmPassword && (
-          <p>{errors.confirmPassword}</p>
-        )}
         <button disabled={!email || username.length <4 || !firstName || !lastName || password.length < 6 || !confirmPassword} type="submit">Sign Up</button>
       </form>
     </div>

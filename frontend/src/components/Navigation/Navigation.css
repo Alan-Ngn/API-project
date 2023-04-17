@@ -25,6 +25,7 @@ nav {
     flex-direction: column;
     align-items: center;
     box-shadow: 2px 2px 5px #778899;
+    z-index: 1
 }
 .hidden {
     display:none
@@ -69,4 +70,9 @@ nav {
     text-align: center;
     justify-self: center;
     margin-bottom: 35%;
+}
+
+.manage-button {
+    text-decoration: none;
+    color: black;
 }

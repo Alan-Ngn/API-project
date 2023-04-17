@@ -147,9 +147,6 @@ const SpotForm  = ({input, formType}) => {
                 <div className="location">
                     <div>
                         <label htmlFor="country">Country</label>
-                        {err.country && (
-                            <p className="errors">{err.country}</p>
-                        )}
                     </div>
                     <input
                         name="country"
@@ -158,14 +155,14 @@ const SpotForm  = ({input, formType}) => {
                         placeholder="Country"
                         value={country}
                         onChange={e => setCountry(e.target.value)}
-                    />
+                        />
+                        {err.country && (
+                            <p className="errors">{err.country}</p>
+                        )}
                 </div>
                 <div>
                     <div>
                         <label htmlFor="address">Street Address</label>
-                        {err.address && (
-                            <p className="errors">{err.address}</p>
-                        )}
                     </div>
                     <input
                         name="address"
@@ -174,7 +171,10 @@ const SpotForm  = ({input, formType}) => {
                         placeholder="Address"
                         value={address}
                         onChange={e => setAddress(e.target.value)}
-                    />
+                        />
+                        {err.address && (
+                            <p className="errors">{err.address}</p>
+                        )}
                 </div>
                 <div className="city-state-label">
                     <label htmlFor="city">City</label>
@@ -182,9 +182,6 @@ const SpotForm  = ({input, formType}) => {
                 </div>
                 <div className="city-state">
                     <div>
-                            {err.city && (
-                                <p className="errors">{err.city}</p>
-                            )}
                         <input
                             name="city"
                             id="city"
@@ -192,21 +189,24 @@ const SpotForm  = ({input, formType}) => {
                             placeholder="City"
                             value={city}
                             onChange={e => setCity(e.target.value)}
-                        />
+                            />
+                            {err.city && (
+                                <p className="errors">{err.city}</p>
+                            )}
                     </div>
                     <div className="comma">,</div>
                     <div>
-                            {err.state && (
-                                <p className="errors">{err.state}</p>
-                            )}
                         <input
                             name="state"
                             id="state"
                             type="text"
-                            placeholder="State"
+                            placeholder="STATE"
                             value={state}
                             onChange={e => setState(e.target.value)}
-                        />
+                            />
+                            {err.state && (
+                                <p className="errors">{err.state}</p>
+                            )}
                     </div>
                 </div>
                 <div className="lat-lng-label">
@@ -215,9 +215,6 @@ const SpotForm  = ({input, formType}) => {
                 </div>
                 <div className="lat-lng">
                     <div>
-                        {err.lat && (
-                                <p className="errors">{err.lat}</p>
-                            )}
                         <input
                             name="lat"
                             id="lat"
@@ -225,13 +222,13 @@ const SpotForm  = ({input, formType}) => {
                             placeholder="Latitude"
                             value={lat}
                             onChange={e => setLat(e.target.value)}
-                        />
+                            />
+                            {err.lat && (
+                                    <p className="errors">{err.lat}</p>
+                                )}
                     </div>
                     <div className="comma">,</div>
                     <div>
-                        {err.lng && (
-                                <p className="errors">{err.lng}</p>
-                            )}
                         <input
                             name="lng"
                             id="lng"
@@ -239,17 +236,17 @@ const SpotForm  = ({input, formType}) => {
                             placeholder="Longitude"
                             value={lng}
                             onChange={e => setLng(e.target.value)}
-                        />
+                            />
+                            {err.lng && (
+                                    <p className="errors">{err.lng}</p>
+                                )}
                     </div>
                 </div>
             </div>
             <h2 className="form-border">Describe your place to guests</h2>
             <div>
                 <label htmlFor="description">Mention the best features of your space, any special amentities like
-fast wif or parking, and what you love about the neighborhood.</label>
-                {err.description && (
-                                <p className="errors">{err.description}</p>
-                            )}
+fast wifi or parking, and what you love about the neighborhood.</label>
                 <textarea
                     name="description"
                     id="description"
@@ -257,15 +254,15 @@ fast wif or parking, and what you love about the neighborhood.</label>
                     placeholder="Please write at least 30 characters"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
-                />
+                    />
+                    {err.description && (
+                                    <p className="errors">{err.description}</p>
+                                )}
             </div>
             <div>
                 <h2 className="form-border">Create a title for your spot</h2>
                 <label htmlFor="name">Catch guests' attention with a spot title that highlights what makes
 your place special.</label>
-                {err.name && (
-                                <p className="errors">{err.name}</p>
-                            )}
                 <input
                     name="name"
                     id="name"
@@ -273,16 +270,16 @@ your place special.</label>
                     placeholder="Name of your spot"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                />
+                    />
+                    {err.name && (
+                                    <p className="errors">{err.name}</p>
+                                )}
             </div>
             <h2 className="form-border">Set a base price for your spot</h2>
             <div>
                 <label htmlFor="price">Competitive pricing can help your listing stand out and rank higher
 in search results.
 </label>
-                {err.price && (
-                                <p className="errors">{err.price}</p>
-                            )}
                 <input
                     name="price"
                     id="price"
@@ -290,7 +287,10 @@ in search results.
                     placeholder="Price per night (USD)"
                     value={price}
                     onChange={e => setPrice(e.target.value)}
-                />
+                    />
+                    {err.price && (
+                                    <p className="errors">{err.price}</p>
+                                )}
             </div>
             <h2 className="form-border">Liven up your spot with photos</h2>
             <div>
@@ -329,6 +329,9 @@ in search results.
                     value={optImgTwo}
                     onChange={e => setOptImgTwo(e.target.value)}
                 />
+                {err.optImgTwo && (
+                    <p className="errors">{err.optImgTwo}</p>
+                )}
             </div>
             <div>
                 <input
@@ -339,6 +342,9 @@ in search results.
                     value={optImgThree}
                     onChange={e => setOptImgThree(e.target.value)}
                 />
+                {err.optImgThree && (
+                    <p className="errors">{err.optImgThree}</p>
+                )}
             </div>
             <div className="form-border-bot">
                 <input
@@ -349,6 +355,9 @@ in search results.
                     value={optImgFour}
                     onChange={e => setOptImgFour(e.target.value)}
                 />
+                {err.optImgFour && (
+                    <p className="errors">{err.optImgFour}</p>
+                )}
             </div>
 
             <button
@@ -359,10 +368,10 @@ in search results.
             >
 
                 {formType==='Update your Spot' && (
-                    'Update'
+                    'Update your Spot'
                 )}
                 {formType==='Create a new Spot' && (
-                    'Create'
+                    'Create Spot'
                 )}
             </button>
         </form>

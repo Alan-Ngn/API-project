@@ -61,14 +61,29 @@ const SpotById = () => {
                 </div>
             </div>
             <div className="mid-section">
-                <div>
+                <div className="summary">
                     <h1>{`Hosted by ${spots.Owner.firstName} ${spots.Owner.lastName}`}</h1>
                     <p>{spots.description}</p>
                 </div>
                 <div className="pricing-reservation">
                     <div className="price-rating">
-                        <div>{`$${spots.price} night`}</div>
-                        <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}{`${spots.numReviews === 0 ? '' : '·'}${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+                        <div className="price-night">
+                            <h2>{`$${spots.price}`}</h2>
+                            <h3>night</h3>
+                            {/* {`$${spots.price} night`} */}
+                        </div>
+                        <div className="rating-count">
+                            <div>
+                                <i className="fa-solid fa-star"></i>
+                                {` ${spots.avgRating > 0 ? Number(spots.avgRating).toFixed(1) : 'New'}`}
+                            </div>
+                            <div>
+                                {`${spots.numReviews === 0 ? '' : '·'}`}
+                            </div>
+                            <div>
+                                {`${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}
+                            </div>
+                        </div>
                     </div>
                     <button className="reserve" onClick={()=>{
                         alert("Feature Coming Soon...");
@@ -76,9 +91,20 @@ const SpotById = () => {
                 </div>
             </div>
 
-            <div><i className="fa-solid fa-star"></i>{`${spots.avgRating > 0 ? Math.round(spots.avgRating*10)/10 : 'New'}`}{`${spots.numReviews === 0 ? '' : '·'}${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}</div>
+            <div className="rating-count-second">
+                <div>
+                    <i className="fa-solid fa-star"></i>
+                    {` ${spots.avgRating > 0 ? Number(spots.avgRating).toFixed(1) : 'New'}`}
+                </div>
+                <div>
+                    {`${spots.numReviews === 0 ? '' : '·'}`}
+                </div>
+                <div>
+                    {`${spots.numReviews === 0 ? '' : spots.numReviews} ${spots.numReviews > 1 ? 'Reviews' : spots.numReviews === 0 ? '' : 'Review'}`}
+                </div>
+            </div>
             <div>
-            {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+            {(user && user.id !== spots.ownerId && reviewArr.length === 0) && (
                 <div>Be the first to post a review!</div>
             )}
                 {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
@@ -87,7 +113,7 @@ const SpotById = () => {
                     />
                 )}
                 {sortedArr.map(review =>
-                <div>
+                <div className="individual-review">
                     <h3>{review.User.firstName}</h3>
                     <h4>{`${month[shortMon.indexOf(Date(review.createdAt).split(' ')[1])]} ${Date(review.createdAt).split(' ')[3]}`}</h4>
                     <p>{review.review}</p>

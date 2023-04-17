@@ -47,7 +47,7 @@ const SpotIndexItem = ({ spot, user, type }) => {
             </Link>
             {user && type && (
                 <div>
-                    <button spot={spot} onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
+                    <button className="update-spot-button" spot={spot} onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
                     <OpenModalDeleteButton //click a button generated from OpenModalDeleteButton
                         itemText="Delete"
 

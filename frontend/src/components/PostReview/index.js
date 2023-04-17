@@ -16,7 +16,7 @@ const PostReviewModal = ({spot, user}) => {
     const [backendErr, setBackendErr] = useState({})
     const reviewObj = {}
     useEffect(()=>{
-        if(review.length > 10 && rating > 0){
+        if(review.length >= 10 && rating > 0){
             setSubmit(false)
         } else {
             setSubmit(true)
@@ -57,8 +57,8 @@ const PostReviewModal = ({spot, user}) => {
     return (
         <div className="modal">
             <h1>How was your stay?</h1>
-            <div>{backendErr.review}</div>
-            <div>{backendErr.stars}</div>
+            <p className="errors">{backendErr.review}</p>
+            <p className="errors">{backendErr.stars}</p>
             <form onSubmit={onClick}>
                 <textarea
                     id="review"

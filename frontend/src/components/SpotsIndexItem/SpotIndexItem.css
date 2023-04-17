@@ -1,26 +1,34 @@
 .spotItem {
     /* flex-basis: 25%; */
-    width: 240px;
+    width: 235px;
     padding: 6px;
 
 }
 .spotIndexImg {
-    width: 240px;
+    width: 235px;
     height: 200px;
 
 }
 
-.spotImg:hover::before{
+.spotImg:hover::after{
 
     content: attr(img-tooltip);
     position: absolute;
 
-    transform: translateX(50%) translateY(100%);
-    background-color: grey;
-    color: lightgrey;
+    transform: translateX(-110%) translateY(50%);
+
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+    min-width: auto;
+    /* text-align:center; */
+
     /* font-size: 100px; */
     /* visibility: hidden; */
-    /* position:relative; */
+    /* position:fixed */
 }
 
 .cityStateRating {
@@ -31,4 +39,8 @@
 
 Link {
     text-decoration: none;
+}
+
+.update-spot-button{
+    background-color: #999999;
 }

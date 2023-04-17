@@ -8,7 +8,7 @@ const OpenModalPostReviewButton = ({modalComponent, itemText, onItemClick, onMod
         if(onItemClick) onItemClick()
     }
     return (
-        <button onClick={onClick}>Post your Review</button>
+        <button className="post-review-button" onClick={onClick}>Post your Review</button>
     )
 }
 

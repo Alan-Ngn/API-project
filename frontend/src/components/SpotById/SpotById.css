@@ -1,5 +1,7 @@
 .spotDetails {
     align-self: center;
+    margin-left: 40px;
+    margin-right: 40px
 }
 .spotByIdImg {
     display: grid;
@@ -50,29 +52,88 @@ img{
     display:flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: solid;
+    border-width: 1px;
 }
 .pricing-reservation{
     border:solid;
     border-width:1px;
     border-radius: 3px;
-    height:70px;
-    width:500px;
+    height:100px;
+    min-width:400px;
     /* text-align: center; */
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 
+
+
 }
 .price-rating {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    /* flex-direction: row; */
+    justify-content: space-between;
     /* gap: 5px; */
+    width:80%;
+    align-items: flex-end;
+
 }
 .reserve {
     width: 50%;
 
 }
+.rating-count {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%
+}
 
+.individual-review p {
+    overflow-wrap: break-word;
+}
 
+.price-night {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    margin:0px;
+    /* gap: 5px; */
+    width:30%;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5px;
+
+}
+.price-night h3,
+.price-night h2{
+    margin: 0px
+}
+.rating-count-second {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.individual-review h3,
+.individual-review h4,
+.individual-review p {
+    margin:5px;
+
+}
+
+.individual-review {
+    padding: 10px
+}
+
+.individual-review h4 {
+    color: darkgrey
+}
+
+.post-review-button {
+    background-color: darkgray;
+}
