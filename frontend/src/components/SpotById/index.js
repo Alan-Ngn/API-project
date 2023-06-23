@@ -4,7 +4,9 @@ import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
 import './SpotById.css'
 import '../../index.css'
-import BookingForm from "./Booking";
+
+import OpenCalendarModalButton from "../Booking/BookingModal";
+import BookingForm from "../Booking";
 const { loadOneSpotThunk } = require("../../store/spots");
 
 const { useEffect } = require("react");
@@ -86,7 +88,11 @@ const SpotById = () => {
                             </div>
                         </div>
                     </div>
-                    <BookingForm />
+                    {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+                    <OpenCalendarModalButton
+                        modalComponent={<BookingForm spot={spots} user={user}/>}
+                    />
+                    )}
                     <button className="reserve" onClick={()=>{
                         alert("Feature Coming Soon...");
                     }}>Reserve</button>

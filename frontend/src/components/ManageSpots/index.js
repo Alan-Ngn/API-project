@@ -23,7 +23,7 @@ const ManageSpots = () => {
             <h1>Manage Spots</h1>
             <section className="spotIndexItems">
                 {currentSpots.length ===0 && (
-                <button onClick={()=> history.push(`/spots/new`)}>Create a New Spot</button>)}
+                <button className="default-button" onClick={()=> history.push(`/spots/new`)}>Create a New Spot</button>)}
                 {currentSpots.map((spots) => (
                     <SpotIndexItem
                     spot={spots}
