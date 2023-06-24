@@ -7,20 +7,18 @@ import { Redirect, useHistory } from "react-router-dom";
 import Calendar from 'react-calendar'
 // import 'react-calendar/dist/Calendar.css';
 import './Calendar.css'
-import { loadBookingBySpotThunk } from "../../store/bookings";
+import { createBookingThunk, loadBookingBySpotThunk } from "../../store/bookings";
 
 function BookingForm({spot}) {
 	const dispatch = useDispatch();
 	const history = useHistory()
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
+	// const [startDate, setStartDate] = useState("");
+	// const [endDate, setEndDate] = useState("");
 	const [errors, setErrors] = useState([]);
+    const [bookingPayload, setBookingPayload] = useState({})
     const disabledDates = useSelector(state => state.bookings)
-    console.log(disabledDates,'BOOOKED')
-    disabledDates.forEach(element => {
-        console.log(element.getDate())
-    });
 	// const { closeModal } = useModal();
+    let booking = {}
     const date = new Date()
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -41,9 +39,14 @@ function BookingForm({spot}) {
     //   }
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+        booking.startDate = value[0]
+        booking.endDate = value[1]
+        console.log(booking)
+        const data = await dispatch(createBookingThunk(booking, spot.id))
+        
+
         // console.log(month.toString().padStart(2,'0'))
-        console.log(value[0].getDate())
-        console.log(spot.id)
+
 		// if (password === confirmPassword) {
 
 		// 	const data = await dispatch(signUp(username, email, password, firstName, lastName, admin));
