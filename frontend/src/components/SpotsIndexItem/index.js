@@ -53,7 +53,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
                 </div>
             </Link>
             {type==='ManageBookings' && (
-                <div>{`${booking.startDate} to ${booking.endDate}`}</div>
+                <div>{`${new Date(booking.startDate)} to ${new Date(booking.endDate)}`}</div>
                 )}
             {user && type && type !=='ManageBookings' &&(
                 <div>
