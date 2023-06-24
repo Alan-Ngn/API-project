@@ -9,14 +9,14 @@ import Calendar from 'react-calendar'
 import './Calendar.css'
 import { createBookingThunk, loadBookingBySpotThunk } from "../../store/bookings";
 
-function BookingForm({spot}) {
+function BookingForm({spot, bookedStartDate, bookedEndDate, type}) {
 	const dispatch = useDispatch();
 	const history = useHistory()
 	// const [startDate, setStartDate] = useState("");
 	// const [endDate, setEndDate] = useState("");
 	const [errors, setErrors] = useState([]);
     const [bookingPayload, setBookingPayload] = useState({})
-    const disabledDates = useSelector(state => state.bookings)
+    let disabledDates = useSelector(state => state.bookings)
 	// const { closeModal } = useModal();
     let booking = {}
     const date = new Date()
@@ -27,6 +27,12 @@ function BookingForm({spot}) {
     // let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
 
+    if (type==='update-booking') {
+        console.log(new Date(bookedStartDate) < new Date(bookedEndDate),'booked start date')
+        const updateDates = disabledDates.filter(date => new Date(bookedStartDate) < new Date(date) && new Date(bookedEndDate) < new Date(date))
+        console.log(updateDates,'did it filter out the dates?')
+        disabledDates = updateDates
+    }
     // const tileDisabled= ()=> {
 
     // }
@@ -43,7 +49,7 @@ function BookingForm({spot}) {
         booking.endDate = value[1]
         console.log(booking)
         const data = await dispatch(createBookingThunk(booking, spot.id))
-        
+
 
         // console.log(month.toString().padStart(2,'0'))
 

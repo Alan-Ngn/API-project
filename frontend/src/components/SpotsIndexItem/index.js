@@ -70,7 +70,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
             {type==='ManageBookings' && (
                 <div>
                     <OpenCalendarModalButton
-                        modalComponent={<BookingForm spot={spot} user={user}/>}
+                        modalComponent={<BookingForm spot={spot} user={user} bookedStartDate={booking.startDate} bookedEndDate={booking.endDate} type='update-booking'/>}
                     />
                     <button onClick={handleDelete}>Delete</button>
                 </div>
