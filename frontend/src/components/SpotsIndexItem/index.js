@@ -52,6 +52,9 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
                     {`$${spot.price} night`}
                 </div>
             </Link>
+            {type==='ManageBookings' && (
+                <div>{`${booking.startDate} to ${booking.endDate}`}</div>
+                )}
             {user && type && type !=='ManageBookings' &&(
                 <div>
                     <button className="update-spot-button" spot={spot} onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
