@@ -1,30 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 // import { useModal } from "../../context/Modal";
 // import { signUp } from "../../store/session";
 // import "./SignupForm.css";
 import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
+import './Calendar.css'
+import { loadBookingBySpotThunk } from "../../store/bookings";
 
-function BookingForm() {
+function BookingForm({spot}) {
 	const dispatch = useDispatch();
 	const history = useHistory()
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
 	const [errors, setErrors] = useState([]);
+    const disabledDates = useSelector(state => state.bookings)
+    console.log(disabledDates,'BOOOKED')
+    disabledDates.forEach(element => {
+        console.log(element.getDate())
+    });
 	// const { closeModal } = useModal();
     const date = new Date()
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     const [value, onChange] = useState(new Date());
+    // let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
 
+    // const tileDisabled= ()=> {
+
+    // }
+    // tileDisabled={(date, view) =>
+    //     (view === 'month') && // Block day tiles only
+    //     disabledDates.some(disabledDate =>
+    //       date.getFullYear() === disabledDate.getFullYear() &&
+    //       date.getMonth() === disabledDate.getMonth() &&
+    //       date.getDate() === disabledDate.getDate()
+    //   }
 	const handleSubmit = async (e) => {
 		e.preventDefault();
         // console.log(month.toString().padStart(2,'0'))
-        console.log(value)
+        console.log(value[0].getDate())
+        console.log(spot.id)
 		// if (password === confirmPassword) {
 
 		// 	const data = await dispatch(signUp(username, email, password, firstName, lastName, admin));
@@ -45,11 +64,20 @@ function BookingForm() {
 	// 	e.preventDefault()
 	// 	history.push(`/login`)
 	//   }
+    useEffect(() => {
+        dispatch(loadBookingBySpotThunk(spot.id))
+    },[dispatch])
 
 	return (
         <div>
 
-            <Calendar onChange={onChange} value={value} selectRange={true}/>
+            <Calendar onChange={onChange} value={value} selectRange={true} minDate={date} tileDisabled={({date, view}) =>
+                    (view === 'month') && // Block day tiles only
+                    disabledDates.some(disabledDate =>
+                      date.getFullYear() === disabledDate.getFullYear() &&
+                      date.getMonth() === disabledDate.getMonth() &&
+                      date.getDate() === disabledDate.getDate()
+                    )}/>
             <button className="default-button" onClick={handleSubmit}>RESERVE</button>
         </div>
         // <form className="sign-up-form" onSubmit={handleSubmit}>
