@@ -34,12 +34,15 @@ export const createBookingThunk = (booking, spotId) => async(dispatch) => {
             "Content-Type": 'application/json'
           },
         body: JSON.stringify(booking)
+    }).catch(async(err) => {
+        console.log('inside thunk err')
+        return await err.json()
     })
+    console.log(response,'RESPONSE CREATE BOOK')
     if(response.ok){
-        const data = await response.json()
-        return data
+        console.log('it worked???')
     } else {
-        return false
+        return response
     }
 }
 
@@ -56,6 +59,24 @@ export const deleteBookingThunk = (bookingId) => async(dispatch) => {
     }
 }
 
+export const updateBookingThunk = (booking, bookingId) =>  async(dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": 'application/json'
+          },
+        body: JSON.stringify(booking)
+    }).catch(async(err) => {
+        console.log('inside thunk err')
+        return await err.json()
+    })
+    if(response.ok){
+        dispatch(loadCurrentBookedSpotsThunk())
+    } else {
+        console.log(response,'test')
+        return response
+    }
+}
 const bookingsReducer = (state = [], action) => {
     let newState;
     switch (action.type) {

@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 // import { useModal } from "../../context/Modal";
+import { useModal } from "../../context/Modal";
 // import { signUp } from "../../store/session";
 // import "./SignupForm.css";
 import Calendar from 'react-calendar'
 // import 'react-calendar/dist/Calendar.css';
 import './Calendar.css'
-import { createBookingThunk, loadBookingBySpotThunk } from "../../store/bookings";
+import { createBookingThunk, loadBookingBySpotThunk, updateBookingThunk } from "../../store/bookings";
 
-function BookingForm({spot, bookedStartDate, bookedEndDate, type}) {
+function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
 	const dispatch = useDispatch();
 	const history = useHistory()
 	// const [startDate, setStartDate] = useState("");
 	// const [endDate, setEndDate] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState('');
     const [bookingPayload, setBookingPayload] = useState({})
     let disabledDates = useSelector(state => state.bookings)
-	// const { closeModal } = useModal();
+	const { closeModal } = useModal();
     let booking = {}
     const date = new Date()
     let day = date.getDate();
@@ -43,13 +44,30 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, type}) {
     //       date.getMonth() === disabledDate.getMonth() &&
     //       date.getDate() === disabledDate.getDate()
     //   }
+    // console.log(errors,' creating errors')
 	const handleSubmit = async (e) => {
+        setErrors('')
 		e.preventDefault();
         booking.startDate = value[0]
         booking.endDate = value[1]
         console.log(booking)
-        const data = await dispatch(createBookingThunk(booking, spot.id))
+        if(type==='update-booking'){
+            const data = await dispatch(updateBookingThunk(booking, bookingId))
+			if (data) {
+				setErrors(data.message);
+                console.log(errors,' update creating errors')
+			} else {
+				closeModal();
+			}
+        } else {
+            const data = await dispatch(createBookingThunk(booking, spot.id))
+            if (data) {
+				setErrors(data.message);
 
+			} else {
+				closeModal();
+			}
+        }
 
         // console.log(month.toString().padStart(2,'0'))
 
@@ -67,6 +85,7 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, type}) {
 		// 		"Password fields must match",
 		// 	]);
 		// }
+        console.log(errors,' creating errors')
 	};
 
 	// const handleRedirect = (e) => {
@@ -79,7 +98,7 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, type}) {
 
 	return (
         <div>
-
+            {errors && <div>{errors}</div>}
             <Calendar onChange={onChange} value={value} selectRange={true} minDate={date} tileDisabled={({date, view}) =>
                     (view === 'month') && // Block day tiles only
                     disabledDates.some(disabledDate =>

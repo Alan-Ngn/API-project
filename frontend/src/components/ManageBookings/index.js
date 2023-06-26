@@ -13,11 +13,11 @@ const ManageBookings = () => {
         console.log('inside Manage Spots')
         dispatch(loadCurrentBookedSpotsThunk())
     },[dispatch])
-    console.log('this is my current spots',getSpots)
+    console.log('this is my current spots',currentSpots)
     // console.log(currentSpots.filter(spot => spot.ownerId !== sessionUser.id))
+    if(currentSpots.length ===0 || !currentSpots[0].startDate ) return null
     if(getSpots.SpotImages) return null;
     // if(currentSpots.filter(spot => spot.ownerId !== sessionUser.id).length >0) return null
-    if(!currentSpots[0].startDate) return null
 
     return (
         <>

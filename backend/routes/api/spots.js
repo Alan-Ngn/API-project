@@ -612,7 +612,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     console.log(spotById,'spot?', req.params.spotId)
     const allBookingsBySpot = await spotById.getBookings()
-    console.log('test')
+    console.log('test post backend for bookings')
 
     const conflictErrors = {}
     for (let i = 0; i < allBookingsBySpot.length; i++) {
@@ -630,6 +630,11 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
             conflictErrors.endDate = "End date conflicts with an existing booking"
         }
+        if(toBookStartDate.getTime() <= bookingStartDate.getTime() && toBookEndDate.getTime() >= bookingStartDate.getTime()){
+
+            conflictErrors.startDate = "Conflicts with an existing booking"
+        }
+
     }
 
     const errors = {}
@@ -647,7 +652,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             errors: conflictErrors
         })
     }
-
+    console.log(conflictErrors)
     const createBooking = await Booking.create({
         spotId: parseInt(req.params.spotId), userId: req.user.id, startDate, endDate
     })
