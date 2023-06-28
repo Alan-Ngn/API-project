@@ -96,7 +96,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         const bookingStartDate = new Date(booking.startDate)
         const bookingEndDate = new Date(booking.endDate)
 
-        console.log(bookingEndDate.getTime())
+        console.log(bookingEndDate, bookingStartDate)
         if(toBookStartDate.getTime() <= bookingEndDate.getTime() && toBookStartDate.getTime() >= bookingStartDate.getTime()){
 
             conflictErrors.startDate = "Start date conflicts with an existing booking"

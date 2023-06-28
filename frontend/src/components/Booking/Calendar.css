@@ -141,3 +141,43 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+
+
+.calendar-reservation {
+  display: flex;
+  flex-direction: row;
+  /* gap: 80px; */
+  width:  350px;
+  padding: 0px;
+  align-items: left;
+}
+.calendar-reservation:hover {
+  cursor: pointer;
+}
+.calendar-check-in, .calendar-check-out{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  align-items: start;
+  padding: 5px;
+  padding-left: 20px;
+}
+
+.calendar-check-in {
+  border-right: 1px solid black
+}
+
+.calendar-button {
+  padding: 0px;
+  margin: 0px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.calender-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}

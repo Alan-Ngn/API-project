@@ -11,8 +11,8 @@ export default function CalendarProvider( { children } ){
     const [value, onChange] = useState(new Date());
     // let date = `${year}-${month.toString().padStart(2,'0')}-${day}`;
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
-    const [startDate, setStartDate] = useState(date)
-    const [endDate, setEndDate] = useState(date)
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
 
 
     return (

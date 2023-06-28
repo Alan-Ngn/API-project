@@ -12,7 +12,7 @@ h2 {
     font-family: 'Roboto', sans-serif;
 }
 
-.default-button, .post-review-button {
+.default-button, .post-review-button, .reserve {
     font-size:medium;
     cursor:pointer;
     background-color: #FF5A5F;

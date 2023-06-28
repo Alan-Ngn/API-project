@@ -14,7 +14,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-
+    const today = new Date()
 
     useEffect(() => {
         if (!showMenu) return;
@@ -30,6 +30,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const handleDelete = async(e) => {
+        console.log(new Date(booking.startDate) > today)
         e.preventDefault()
         dispatch(deleteBookingThunk(booking.id))
     }
@@ -53,7 +54,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
                 </div>
             </Link>
             {type==='ManageBookings' && (
-                <div>{`${new Date(booking.startDate)} to ${new Date(booking.endDate)}`}</div>
+                <div>{`${new Date(booking.startDate).toLocaleDateString()} to ${new Date(booking.endDate).toLocaleDateString()}`}</div>
                 )}
             {user && type && type !=='ManageBookings' &&(
                 <div>
@@ -67,7 +68,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
                         {/* <button>Delete</button> */}
                 </div>
             )}
-            {type==='ManageBookings' && (
+            {type==='ManageBookings' && new Date(booking.startDate) > today && (
                 <div>
                     <OpenCalendarModalButton
                         itemText='update'

@@ -1,8 +1,8 @@
 .spotIndexItems{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly, left;
-    max-width: 1024px;
+    justify-content: space-evenly;
+    /* max-width: 1024px; */
     position:relative;
     margin: 9px;
 }

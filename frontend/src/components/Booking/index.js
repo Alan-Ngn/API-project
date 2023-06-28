@@ -31,8 +31,8 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
 
     if (type==='update-booking') {
-        console.log(new Date(bookedStartDate) < new Date(bookedEndDate),'booked start date')
-        const updateDates = disabledDates.filter(date => new Date(bookedStartDate) < new Date(date) && new Date(bookedEndDate) < new Date(date))
+        console.log(disabledDates)
+        const updateDates = disabledDates.filter(date => new Date(bookedStartDate) > date || new Date(bookedEndDate) < date)
         console.log(updateDates,'did it filter out the dates?')
         disabledDates = updateDates
     }
@@ -59,9 +59,9 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
 			// } else {
 			// 	closeModal();
 			// }
-            e.preventDefault();
-            setStartDate(value[0])
-            setEndDate(value[1])
+            // e.preventDefault();
+            // setStartDate(value[0])
+            // setEndDate(value[1])
             closeModal();
         }
 
@@ -73,9 +73,9 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
     },[dispatch])
 
 	return (
-        <div>
+        <div className="calendar-modal">
             {errors && <div>{errors}</div>}
-            <Calendar onChange={onChange} value={value} selectRange={true} minDate={date} tileDisabled={({date, view}) =>
+            <Calendar onChange={onChange} value={value} selectRange={true} minDate={date}  tileDisabled={({date, view}) =>
                     (view === 'month') && // Block day tiles only
                     disabledDates.some(disabledDate =>
                       date.getFullYear() === disabledDate.getFullYear() &&

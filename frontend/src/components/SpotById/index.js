@@ -45,8 +45,9 @@ const SpotById = () => {
         booking.startDate = startDate
         booking.endDate = endDate
         const data = await dispatch(createBookingThunk(booking, spotId))
+        console.log('HOW DO MY ERRORS LOOK LIKE', data)
         if (data) {
-            setErrors(data.message);
+            setErrors(data.errors.endDate);
         } else {
             setStartDate(new Date())
             setEndDate(new Date())
@@ -113,9 +114,19 @@ const SpotById = () => {
                     </div>
                     {errors && <div>{errors}</div>}
                     {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
-                    <OpenCalendarModalButton
-                        modalComponent={<BookingForm spot={spots} user={user}/>}
-                    />
+                    <div className="calender-pricing">
+
+                        <OpenCalendarModalButton
+                            modalComponent={<BookingForm spot={spots} user={user}/>}
+                        />
+                            {startDate !=='' && endDate !=='' && Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1 !== -1 &&
+                            <div className="pricing-total">
+
+                            <div>{`$${spots.price} X ${Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1} nights`}</div>
+                            <div>{`$${spots.price * (Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1)}`}</div>
+                        </div>
+                            }
+                    </div>
                     )}
                     <button className="reserve" onClick={handleSubmit}>Reserve</button>
                 </div>
