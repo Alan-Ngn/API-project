@@ -67,7 +67,7 @@ const PostReviewModal = ({spot, user}) => {
                     onChange={e => setReview(e.target.value)}
                 />
                 <StarRatingInput onChange={onChange} rating={rating} />
-                <button disabled={submit}>Submit your Review</button>
+                <button className="default-button" disabled={submit}>Submit your Review</button>
             </form>
         </div>
     )

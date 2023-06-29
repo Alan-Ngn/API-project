@@ -612,7 +612,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     console.log(spotById,'spot?', req.params.spotId)
     const allBookingsBySpot = await spotById.getBookings()
-    console.log('test')
+    console.log('test post backend for bookings')
 
     const conflictErrors = {}
     for (let i = 0; i < allBookingsBySpot.length; i++) {
@@ -630,10 +630,19 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
             conflictErrors.endDate = "End date conflicts with an existing booking"
         }
+        if(toBookStartDate.getTime() <= bookingStartDate.getTime() && toBookEndDate.getTime() >= bookingStartDate.getTime()){
+
+            conflictErrors.startDate = "Conflicts with an existing booking"
+        }
+        if(toBookStartDate.getTime() === toBookEndDate.getTime()){
+
+            conflictErrors.startDate = "Start date conflicts with an existing booking"
+        }
+
     }
 
     const errors = {}
-    if(!endDate || !startDate || toBookEndDate.getTime() <= toBookStartDate.getTime()) errors.endDate = "endDate cannot be on or before startDate"
+    if(!endDate || !startDate || toBookEndDate.getTime() <= toBookStartDate.getTime()) errors.endDate = "Please select at least two different dates"
     if(Object.keys(errors).length !==0) {
         return res.status(400).json({
             message: "Bad Request",
@@ -647,7 +656,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             errors: conflictErrors
         })
     }
-
+    console.log(conflictErrors)
     const createBooking = await Booking.create({
         spotId: parseInt(req.params.spotId), userId: req.user.id, startDate, endDate
     })

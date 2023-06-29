@@ -11,6 +11,8 @@ import App from "./App";
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
+import CalendarProvider from "./context/Calendar";
+import SearchProvider from "./context/Search";
 
 const store = configureStore();
 
@@ -27,6 +29,8 @@ if (process.env.NODE_ENV !== "production") {
 // HTML elements on top of the all the other HTML elements:
 function Root() {
   return (
+    <SearchProvider>
+    <CalendarProvider>
     <ModalProvider>
       <Provider store={store}>
         <BrowserRouter>
@@ -35,6 +39,8 @@ function Root() {
         </BrowserRouter>
       </Provider>
     </ModalProvider>
+    </CalendarProvider>
+    </SearchProvider>
   );
 }
 

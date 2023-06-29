@@ -4,13 +4,17 @@ import OpenModalDeleteButton from "../DeleteSpot/OpenModalDeleteButton";
 import DeleteSpotModal from "../DeleteSpotModal";
 import '../../index.css'
 import './SpotIndexItem.css'
+import OpenCalendarModalButton from "../Booking/BookingModal";
+import BookingForm from "../Booking";
+import { deleteBookingThunk } from "../../store/bookings";
+import { useDispatch } from "react-redux";
 // import "./LoginForm.css";
-const SpotIndexItem = ({ spot, user, type }) => {
-
+const SpotIndexItem = ({ spot, user, type, booking }) => {
+    const dispatch = useDispatch()
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-
+    const today = new Date()
 
     useEffect(() => {
         if (!showMenu) return;
@@ -25,7 +29,11 @@ const SpotIndexItem = ({ spot, user, type }) => {
 
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
-
+    const handleDelete = async(e) => {
+        console.log(new Date(booking.startDate) > today)
+        e.preventDefault()
+        dispatch(deleteBookingThunk(booking.id))
+    }
     // const closeMenu = () => setShowMenu(false);
     return (
         <div className="spotItem" img-tooltip={spot.name}>
@@ -45,7 +53,10 @@ const SpotIndexItem = ({ spot, user, type }) => {
                     {`$${spot.price} night`}
                 </div>
             </Link>
-            {user && type && (
+            {type==='ManageBookings' && (
+                <div>{`${new Date(booking.startDate).toLocaleDateString()} to ${new Date(booking.endDate).toLocaleDateString()}`}</div>
+                )}
+            {user && type && type !=='ManageBookings' &&(
                 <div>
                     <button className="update-spot-button" spot={spot} onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
                     <OpenModalDeleteButton //click a button generated from OpenModalDeleteButton
@@ -57,9 +68,17 @@ const SpotIndexItem = ({ spot, user, type }) => {
                         {/* <button>Delete</button> */}
                 </div>
             )}
+            {type==='ManageBookings' && new Date(booking.startDate) > today && (
+                <div>
+                    <OpenCalendarModalButton
+                        itemText='update'
+                        modalComponent={<BookingForm spot={spot} user={user} bookedStartDate={booking.startDate} bookedEndDate={booking.endDate} bookingId={booking.id} type='update-booking'/>}
+                    />
+                    <button onClick={handleDelete}>Delete</button>
+                </div>
+            )}
         </div>
     )
 }
 
 export default SpotIndexItem
-//

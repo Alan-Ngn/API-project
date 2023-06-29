@@ -9,6 +9,7 @@ import SpotForm from "./components/SpotForm";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpotForm from "./components/UpdateSpotForm";
 import CreateSpotForm from "./components/CreateSpotForm";
+import ManageBookings from "./components/ManageBookings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,6 +26,7 @@ function App() {
         <Route path='/spots/current' component={ManageSpots}/>
         <Route path='/spots/:spotId/edit' component={UpdateSpotForm}/>
         <Route path='/spots/:spotId' component={SpotById}/>
+        <Route path='/bookings/current' component={ManageBookings}/>
         </Switch>}
     </>
   );

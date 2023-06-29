@@ -361,6 +361,7 @@ in search results.
             </div>
 
             <button
+                className="default-button"
                 type="submit"
                 disabled={submit}
 

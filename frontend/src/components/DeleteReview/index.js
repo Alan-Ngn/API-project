@@ -19,7 +19,7 @@ const DeleteReviewModal = ({review, spot}) => {
         <div className="modal">
             <h1>Comfirm Delete</h1>
             <p>Are you sure you want to delete this review?</p>
-            <button onClick={YesOnClick}>Yes (Delete Review)</button>
+            <button className="default-button" onClick={YesOnClick}>Yes (Delete Review)</button>
             <button className="no-button" onClick={NoOnClick}>No (Keep Review)</button>
         </div>
     )

@@ -51,8 +51,8 @@ function LoginFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <button disabled={credential.length<4 || password.length<6} type="submit">Log In</button>
-      <button onClick={onClick}>Demo User</button>
+        <button className="default-button" disabled={credential.length<4 || password.length<6} type="submit">Log In</button>
+      <button className="default-button" onClick={onClick}>Demo User</button>
       </form>
     </div>
   );

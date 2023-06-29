@@ -5,7 +5,7 @@ const LOAD_SPOT = "spots/LOAD_SPOT"
 const CREATE_SPOT = 'spots/CREATE_SPOT'
 const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 const DELETE_SPOT = "spots/DELETE_SPOT"
-
+const LOAD_BOOKED  = 'spots/LOAD_BOOKED'
 export const loadSpots = (spots) => {
     return {
         type: LOAD_SPOTS,
@@ -42,6 +42,12 @@ export const deleteSpot = (spotId) => {
     }
 }
 
+export const loadBookedSpots = (bookings) => {
+    return {
+        type: LOAD_BOOKED,
+        bookings
+    }
+}
 export const loadSpotsThunk = () => async(dispatch) => {
     const response = await csrfFetch("/api/spots")
     console.log('loadSpotsThunk started')
@@ -63,7 +69,16 @@ export const loadCurrentSpotsThunk = () => async(dispatch) =>{
         return false
     }
 }
-
+export const loadCurrentBookedSpotsThunk = () => async(dispatch) =>{
+    const response = await csrfFetch("/api/bookings/current")
+    if(response.ok){
+        console.log('we in current bookings')
+        const data = await response.json()
+        dispatch(loadBookedSpots(data))
+    } else {
+        return false
+    }
+}
 
 export const loadOneSpotThunk = (spotId) => async(dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
@@ -170,6 +185,15 @@ const spotsReducer = (state = {}, action) => {
         case DELETE_SPOT:
             newState = {...state}
             delete newState[action.spotId]
+            return newState
+
+        case LOAD_BOOKED:
+            console.log(action.bookings.Bookings)
+            newState = {}
+            action.bookings.Bookings.forEach((spot) => {
+                console.log(spot.id, spot)
+                newState[spot.id] = spot;
+              });
             return newState
         default:
             return state;

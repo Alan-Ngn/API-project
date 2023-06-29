@@ -64,6 +64,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         )
     }
 
+    const spotById = await Spot.findByPk(bookingById.dataValues.spotId)
+    const allBookingsBySpot = await spotById.getBookings()
 
     const today = Date.now()
 
@@ -84,18 +86,31 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     // const spotById = await Spot.findByPk(req.params.spotId)
     // const allBookingsBySpot = await spotById.getBookings()
 
-
+    let filterBookings = allBookingsBySpot.filter(booked => booked.startDate.getTime() !== bookingById.dataValues.startDate.getTime() && booked.endDate.getTime() !== bookingById.dataValues.endDate.getTime())
     const conflictErrors = {}
+    console.log(filterBookings,'DKLFJA;SKLDFJSAFJASL;F')
+    // console.log(allBookingsBySpot[2].startDate.getTime()=== bookingById.dataValues.startDate.getTime(), "bookings TESTETESETS")
+    for (let i = 0; i < filterBookings.length; i++) {
+        const booking = filterBookings[i];
 
+        const bookingStartDate = new Date(booking.startDate)
+        const bookingEndDate = new Date(booking.endDate)
 
-        if(toBookStartDate.getTime() <= bookedEndDate.getTime() && toBookStartDate.getTime() >= bookedStartDate.getTime()){
+        console.log(bookingEndDate, bookingStartDate)
+        if(toBookStartDate.getTime() <= bookingEndDate.getTime() && toBookStartDate.getTime() >= bookingStartDate.getTime()){
 
             conflictErrors.startDate = "Start date conflicts with an existing booking"
         }
-        if(toBookEndDate.getTime() <= bookedEndDate.getTime() && toBookEndDate.getTime() >= bookedStartDate.getTime()){
+        if(toBookEndDate.getTime() <= bookingEndDate.getTime() && toBookEndDate.getTime() >= bookingStartDate.getTime()){
 
             conflictErrors.endDate = "End date conflicts with an existing booking"
         }
+        if(toBookStartDate.getTime() <= bookingStartDate.getTime() && toBookEndDate.getTime() >= bookingStartDate.getTime()){
+
+            conflictErrors.startDate = "Conflicts with an existing booking"
+        }
+
+    }
 
 
     const errors = {}

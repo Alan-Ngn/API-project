@@ -4,9 +4,14 @@ import PostReviewModal from "../PostReview";
 import OpenModalPostReviewButton from "../PostReview/OpenModalPostReviewButton";
 import './SpotById.css'
 import '../../index.css'
+
+import OpenCalendarModalButton from "../Booking/BookingModal";
+import BookingForm from "../Booking";
+import { createBookingThunk, updateBookingThunk } from "../../store/bookings";
+import { useCalendar } from "../../context/Calendar";
 const { loadOneSpotThunk } = require("../../store/spots");
 
-const { useEffect } = require("react");
+const { useEffect, useState } = require("react");
 const { useSelector, useDispatch } = require("react-redux");
 const { useParams } = require("react-router-dom");
 const { loadSpotReviewsThunk } = require("../../store/reviews");
@@ -14,13 +19,16 @@ const { loadSpotReviewsThunk } = require("../../store/reviews");
 
 
 const SpotById = () => {
+    const {startDate, setStartDate, endDate, setEndDate} = useCalendar()
     const dispatch = useDispatch()
     const { spotId } = useParams();
+    const [errors, setErrors] = useState('');
     // console.log('SpotById spot', spots)
     const shortMon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const user = useSelector(state => state.session.user);
     // console.log('current user',user)
+    let booking = {}
     const spots = useSelector(state => state.spots)
     const reviews = useSelector(state => state.reviews)
     const reviewArr = Object.values(reviews)
@@ -29,6 +37,26 @@ const SpotById = () => {
         b = new Date(b.createdAt)
         return b-a
     })
+
+
+	const handleSubmit = async (e) => {
+        setErrors('')
+		e.preventDefault();
+        booking.startDate = startDate
+        booking.endDate = endDate
+        const data = await dispatch(createBookingThunk(booking, spotId))
+        console.log('HOW DO MY ERRORS LOOK LIKE', data)
+        if (data) {
+            setErrors(data.errors.endDate);
+        }
+        // else {
+        //     setStartDate(new Date())
+        //     setEndDate(new Date())
+        // }
+
+	};
+
+
 
     console.log('sorting the review Arr', sortedArr)
     console.log('SpotByID review', reviewArr)
@@ -85,9 +113,23 @@ const SpotById = () => {
                             </div>
                         </div>
                     </div>
-                    <button className="reserve" onClick={()=>{
-                        alert("Feature Coming Soon...");
-                    }}>Reserve</button>
+                    {errors && <div>{errors}</div>}
+                    {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+                    <div className="calender-pricing">
+
+                        <OpenCalendarModalButton
+                            modalComponent={<BookingForm spot={spots} user={user}/>}
+                        />
+                            {startDate !=='' && endDate !=='' && Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1 !== -1 &&
+                            <div className="pricing-total">
+
+                            <div>{`$${spots.price} X ${Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1} nights`}</div>
+                            <div>{`$${spots.price * (Math.round((endDate.getTime()-startDate.getTime())/(1000 * 3600 * 24))-1)}`}</div>
+                        </div>
+                            }
+                    </div>
+                    )}
+                    <button className="reserve" onClick={handleSubmit}>Reserve</button>
                 </div>
             </div>
 
