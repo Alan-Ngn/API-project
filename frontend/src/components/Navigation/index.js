@@ -24,7 +24,8 @@ function Navigation({ isLoaded }){
       <div>
 
         <NavLink className={'test'} style={{ textDecoration: 'none', color: 'red' }} exact to="/">
-          <i className="fa-brands fa-airbnb fa-rotate-180"></i>
+          {/* <i className="fa-brands fa-airbnb fa-rotate-180"></i> */}
+          <img className='dirtbnb' src='dirtbnb.png'/>
           <h1>EarthBnB</h1>
         </NavLink>
       </div>
