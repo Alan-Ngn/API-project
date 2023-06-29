@@ -8,28 +8,28 @@ import { useLocation } from "react-router-dom";
 
 const SpotsIndex = () => {
     const dispatch = useDispatch()
-    const {search, setSearch} = useSearch()
-    const [spotsArr, setSpotsArr] = useState([])
+    const {search, setSearch, spotsArr, setSpotsArr} = useSearch()
+    // const [spotsArr, setSpotsArr] = useState([])
     console.log('inside SpotsIndex')
     const sessionUser = useSelector(state => state.session.user);
     const getSpots = useSelector(state => state.spots)
     const spots = Object.values(getSpots)
-    console.log('getSpots->', spots)
+    console.log('getSpots->', getSpots)
     const location = useLocation()
 
+    // useEffect(()=>{
+    //     console.log(spots,'spot checking!!!!!')
+    //     if(spots && !getSpots.SpotImages){
+
+    //         let filteredSearch = spots.filter(spot => spot.name.toLowerCase().includes(search))
+    //         setSpotsArr(filteredSearch)
+    //         console.log(filteredSearch)
+    //     }
+    //   },[search])
     useEffect(() => {
-        setSearch('')
+        setSpotsArr('')
         dispatch(loadSpotsThunk())
     },[dispatch])
-    useEffect(()=>{
-        console.log(spots,'spot checking!!!!!')
-        if(!spots && !getSpots.SpotImages){
-
-            let filteredSearch = spots.filter(spot => spot.name.toLowerCase().includes(search))
-            setSpotsArr(filteredSearch)
-            console.log(filteredSearch)
-        }
-      },[search])
     console.log(sessionUser)
 
     if(getSpots.SpotImages) return null;
@@ -37,7 +37,7 @@ const SpotsIndex = () => {
 
     return (
         <>
-        {search ?
+        {spotsArr ?
         (
         <section className="spotIndexItems">
             {spotsArr.map((spots) => (

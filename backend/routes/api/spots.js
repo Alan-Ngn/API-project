@@ -642,7 +642,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 
     const errors = {}
-    if(!endDate || !startDate || toBookEndDate.getTime() <= toBookStartDate.getTime()) errors.endDate = "endDate cannot be on or before startDate"
+    if(!endDate || !startDate || toBookEndDate.getTime() <= toBookStartDate.getTime()) errors.endDate = "Please select at least two different dates"
     if(Object.keys(errors).length !==0) {
         return res.status(400).json({
             message: "Bad Request",

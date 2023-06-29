@@ -48,10 +48,11 @@ const SpotById = () => {
         console.log('HOW DO MY ERRORS LOOK LIKE', data)
         if (data) {
             setErrors(data.errors.endDate);
-        } else {
-            setStartDate(new Date())
-            setEndDate(new Date())
         }
+        // else {
+        //     setStartDate(new Date())
+        //     setEndDate(new Date())
+        // }
 
 	};
 

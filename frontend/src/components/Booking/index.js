@@ -26,7 +26,7 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    const [value, onChange] = useState(new Date());
+    const [value, onChange] = useState([new Date(), new Date()]);
     // let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
 
@@ -60,8 +60,9 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
 			// 	closeModal();
 			// }
             // e.preventDefault();
-            // setStartDate(value[0])
-            // setEndDate(value[1])
+            console.log(value, 'testing default value date')
+            setStartDate(value[0])
+            setEndDate(value[1])
             closeModal();
         }
 

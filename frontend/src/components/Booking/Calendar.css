@@ -181,3 +181,9 @@
   flex-direction: column;
   gap: 20px
 }
+
+.calendar-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
