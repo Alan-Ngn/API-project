@@ -59,7 +59,9 @@ nav {
 
 
 }
-
+.profile-user:hover{
+    cursor: pointer;
+}
 .test{
     /* display: grid;
     grid-template-columns: 1fr 2fr; */
