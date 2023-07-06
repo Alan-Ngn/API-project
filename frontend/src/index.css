@@ -30,17 +30,19 @@ h2 {
     display: grid;
     grid-template-columns: 1fr;
     justify-self: center;
-    width:80%;
+    width:100%;
     grid-gap: 10px;
 
 }
 .modal{
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
     text-align: center;
+    margin: 20px
     /* justify-self: center; */
     /* width:80% */
-    margin: 20px
     /* justify-content: center; */
 
 }

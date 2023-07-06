@@ -16,7 +16,7 @@ const PostReviewModal = ({spot, user}) => {
     const [backendErr, setBackendErr] = useState({})
     const reviewObj = {}
     useEffect(()=>{
-        if(review.length >= 10 && rating > 0){
+        if(review || rating > 0){
             setSubmit(false)
         } else {
             setSubmit(true)

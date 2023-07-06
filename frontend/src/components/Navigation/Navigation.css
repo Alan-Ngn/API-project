@@ -115,3 +115,7 @@ nav {
 .search-bar-button:hover {
     cursor: pointer;
 }
+
+.login-sign-up-button:hover{
+    cursor: pointer;
+}
