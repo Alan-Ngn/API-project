@@ -194,27 +194,27 @@ const spotImages = [
 
   {
     name: 'Dirt Patch #3',
-    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Dried_mud_creeks_on_the_shores_of_the_Wash_-_geograph.org.uk_-_10669.jpg',
     preview: true
   },
   {
     name: 'Dirt Patch #3',
-    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Dried_mud_creeks_on_the_shores_of_the_Wash_-_geograph.org.uk_-_10669.jpg',
     preview: false
   },
   {
     name: 'Dirt Patch #3',
-    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Dried_mud_creeks_on_the_shores_of_the_Wash_-_geograph.org.uk_-_10669.jpg',
     preview: false
   },
   {
     name: 'Dirt Patch #3',
-    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Dried_mud_creeks_on_the_shores_of_the_Wash_-_geograph.org.uk_-_10669.jpg',
     preview: false
   },
   {
     name: 'Dirt Patch #3',
-    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Dried_mud_creeks_on_the_shores_of_the_Wash_-_geograph.org.uk_-_10669.jpg',
     preview: false
   },
 
