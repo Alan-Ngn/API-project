@@ -72,7 +72,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     const bookedEndDate = new Date(ownerBooked[0].endDate)
     const bookedStartDate = new Date(ownerBooked[0].startDate)
-    console.log(ownerBooked)
+
     if(bookedEndDate.getTime() < today) {
         return res.status(403).json({
             message: "Past bookings can't be modified"
@@ -88,15 +88,15 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     let filterBookings = allBookingsBySpot.filter(booked => booked.startDate.getTime() !== bookingById.dataValues.startDate.getTime() && booked.endDate.getTime() !== bookingById.dataValues.endDate.getTime())
     const conflictErrors = {}
-    console.log(filterBookings,'DKLFJA;SKLDFJSAFJASL;F')
-    // console.log(allBookingsBySpot[2].startDate.getTime()=== bookingById.dataValues.startDate.getTime(), "bookings TESTETESETS")
+
+
     for (let i = 0; i < filterBookings.length; i++) {
         const booking = filterBookings[i];
 
         const bookingStartDate = new Date(booking.startDate)
         const bookingEndDate = new Date(booking.endDate)
 
-        console.log(bookingEndDate, bookingStartDate)
+
         if(toBookStartDate.getTime() <= bookingEndDate.getTime() && toBookStartDate.getTime() >= bookingStartDate.getTime()){
 
             conflictErrors.startDate = "Start date conflicts with an existing booking"
@@ -159,7 +159,6 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     const today = Date.now()
 
     const bookedStartDate = new Date(ownerBooked[0].startDate)
-    console.log(ownerBooked)
     if(bookedStartDate.getTime() < today) {
         return res.status(403).json({
             message: "Bookings that have been started can't be deleted"

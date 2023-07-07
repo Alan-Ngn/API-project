@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
     const offset = size * (page - 1)
 
     let pagination = {}
-    console.log('backend- all spots')
+
 
 
     if(maxLat && minLat && !isNaN(maxLat) && !isNaN(minLat)) {
@@ -149,7 +149,7 @@ router.get('/current', requireAuth ,async (req, res, next) => {
 
     const payload = [];
     let owner = req.user
-    console.log(owner)
+
     const allSpots = await owner.getSpots()
 
     for (let i = 0; i < allSpots.length; i++) {
@@ -189,7 +189,7 @@ router.get('/current', requireAuth ,async (req, res, next) => {
 // Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     const spotById = await Spot.findByPk(req.params.spotId)
-    console.log('backend- spot details')
+
     if(spotById === null) {
         return res.status(404).json({
             message: "Spot couldn't be found"
@@ -228,7 +228,7 @@ router.get('/:spotId', async (req, res, next) => {
         attributes: ['id', 'firstName', 'lastName']
     }
     )
-    console.log(spotImage)
+
     const spotData = spotById.toJSON();
     spotData.numReviews = spotReviews[0].numReviews
     spotData.avgRating = Math.round(spotReviews[0].avgRating *10 )/10
@@ -257,7 +257,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     if(!name || name.length >=50) errors.name = "Name must be less than 50 characters"
     if(!description) errors.description = "Description is required"
     if(!price) errors.price = "Price per day is required"
-    console.log('from the back end', req.user.id, errors)
+
     if(Object.keys(errors).length !==0) {
         return res.status(400).json({
             message: "Bad Request",
@@ -359,7 +359,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     if(!description) errors.description = "Description is required"
     if(!price) errors.price = "Price per day is required"
 
-    console.log('from the back end', req.user.id, errors)
+
 
     const currentOwner  = await owner.getSpots({
         where: {
@@ -455,7 +455,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
     })
     const payload = []
-    console.log('backend- spot reviews')
+
     for (let i = 0; i < allReviewsBySpot.length; i++) {
         const review = allReviewsBySpot[i];
 
@@ -468,7 +468,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         const reviewData = review.toJSON()
         reviewData.User = reviewUser
-        console.log(reviewImage)
+
         if(!reviewImage.length){
             reviewData.ReviewImages = null
         }
@@ -536,7 +536,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 })
 
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
-    console.log('backend-  spot boookings')
+
     const spotById = await Spot.findByPk(req.params.spotId)
     if(!spotById) {
         return res.status(404).json({
@@ -610,9 +610,9 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const toBookEndDate = new Date(endDate)
     const toBookStartDate = new Date(startDate)
 
-    console.log(spotById,'spot?', req.params.spotId)
+
     const allBookingsBySpot = await spotById.getBookings()
-    console.log('test post backend for bookings')
+
 
     const conflictErrors = {}
     for (let i = 0; i < allBookingsBySpot.length; i++) {
@@ -621,7 +621,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         const bookingStartDate = new Date(booking.startDate)
         const bookingEndDate = new Date(booking.endDate)
 
-        console.log(bookingEndDate.getTime())
+
         if(toBookStartDate.getTime() <= bookingEndDate.getTime() && toBookStartDate.getTime() >= bookingStartDate.getTime()){
 
             conflictErrors.startDate = "Start date conflicts with an existing booking"
@@ -656,7 +656,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             errors: conflictErrors
         })
     }
-    console.log(conflictErrors)
+
     const createBooking = await Booking.create({
         spotId: parseInt(req.params.spotId), userId: req.user.id, startDate, endDate
     })

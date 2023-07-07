@@ -78,7 +78,7 @@ const SpotForm  = ({input, formType}) => {
         spot = {country, address, city, state, lat, lng, description, name, price}
         setSpotPayload(spot)
         setSpotImgPayload(imgArr)
-        console.log('whats in the spot obj', spot)
+
         if(!country) errors.country = 'Country is required'
         if(!address) errors.address = 'Address is required'
         if(!city) errors.city = 'City is required'
@@ -90,7 +90,7 @@ const SpotForm  = ({input, formType}) => {
         if(!price) errors.price = 'Price is required'
         if(lat<-90 || lat> 90) errors.lat = 'Latitude must be between -90 and 90'
         if(lng<-90 || lng> 90) errors.lng = 'Longitude must be between -180 and 180'
-        console.log('what errors do i have',errors)
+
         // setErr(errors)
         if(country || address || city || state || lat || lng || description || name || price || previewImage){
             setSubmit(false)
@@ -104,35 +104,33 @@ const SpotForm  = ({input, formType}) => {
                 // }
                 setValErr(errors)
             },[country, address, city, state, lat, lng, description, name, price, previewImage, optImgOne, optImgTwo, optImgThree,optImgFour])
-            console.log('submit test',submit)
+
             const {spotId} = useParams()
 
     const handleSubmit = async(e) => {
         setSubmit(false)
-        console.log('testing errors out',Object.values(valErr).length, valErr)
-        console.log('this is my formType',formType)
+
         e.preventDefault();
         if(!Object.values(valErr).length>0 && formType === 'Create a new Spot'){
 
                 const newSpot =await dispatch(createSpotThunk(spotPayload, spotImgPayload))
-                console.log(newSpot,'tets')
+
                 history.push(`/spots/${newSpot.id}`)
         }
         if (!Object.values(valErr).length>0 && formType === 'Update your Spot') {
-                console.log('inside handlesubmit update', spotPayload)
 
-                // console.log(spot)
+
+
                 const newSpot = await dispatch(updateSpotThunk(spotPayload, spotId))
-                // console.log(newSpot,'tets')
+
                 history.push(`/spots/${newSpot.id}`)
         }
         setErr(valErr)
-        // console.log('what are my err state',Object.values(err).length,err)
-        // console.log(err.country)
+
 
 
     }
-    // console.log('chechking err state outside of handle submit',err)
+
     // if(Object.values(err).length>0){
     //     setSubmit(true)
     // } else {

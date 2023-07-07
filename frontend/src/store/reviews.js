@@ -37,7 +37,7 @@ export const loadSpotReviewsThunk = (spotId) => async(dispatch) => {
 }
 
 export const createSpotReviewThunk = (review, spotId, userFirstName) => async(dispatch) => {
-    console.log('inside the create review Thunk')
+
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`,{
         method: "POST",
         headers: {
@@ -45,21 +45,21 @@ export const createSpotReviewThunk = (review, spotId, userFirstName) => async(di
           },
         body: JSON.stringify(review)
     }).catch(async(err) => {
-        // console.log('inside thunk err', await err.json())
+
         return await err.json()
     })
-    console.log('what is my response', response)
+
     if(response.ok){
-        console.log('testing response ok')
+
         const data = await response.json()
         // dispatch(createSpotReview(data))
-        console.log(data)
+
         dispatch(loadSpotReviewsThunk(spotId))
         dispatch(loadOneSpotThunk(spotId))
 
         return data
     } else {
-       console.log('testing response not ok')
+
         return response
     }
 }
@@ -81,14 +81,14 @@ const reviewsReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
         const newState = {}
-        console.log('this is the reviews reducer', action.reviews)
+
         action.reviews.Reviews.forEach((review)=>{
             newState[review.id]=review;
         })
         return newState;
         }
         case CREATE_REVIEW: {
-            console.log('create Review Reducer',action.review)
+
             const newState ={...state}
             newState[action.review.id]=action.review
             return newState

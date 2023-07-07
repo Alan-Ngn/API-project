@@ -7,9 +7,9 @@ const DeleteReviewModal = ({review, spot}) => {
     const { closeModal } = useModal()
     const YesOnClick = (e) => {
         e.preventDefault()
-        console.log('review id to delete',review.id)
+
         dispatch(deleteSpotReviewThunk(review.id, spot.id)).then(closeModal)
-        console.log('clicked delete review')
+
     }
     const NoOnClick = (e) =>{
         e.preventDefault()

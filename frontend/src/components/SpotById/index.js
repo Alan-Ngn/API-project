@@ -23,11 +23,11 @@ const SpotById = () => {
     const dispatch = useDispatch()
     const { spotId } = useParams();
     const [errors, setErrors] = useState('');
-    // console.log('SpotById spot', spots)
+
     const shortMon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const user = useSelector(state => state.session.user);
-    // console.log('current user',user)
+
     let booking = {}
     const spots = useSelector(state => state.spots)
     const reviews = useSelector(state => state.reviews)
@@ -45,7 +45,7 @@ const SpotById = () => {
         booking.startDate = startDate
         booking.endDate = endDate
         const data = await dispatch(createBookingThunk(booking, spotId))
-        console.log('HOW DO MY ERRORS LOOK LIKE', data)
+
         if (data) {
             setErrors(data.errors.endDate);
         } else {
@@ -60,23 +60,21 @@ const SpotById = () => {
 
 
 
-    console.log('sorting the review Arr', sortedArr)
-    console.log('SpotByID review', reviewArr)
-    // console.log('testing arrays', reviewArr.map(review => review.userId).includes(user.id))
+
     useEffect(()=>{
-        console.log('inside the useEffect')
+
         dispatch(loadOneSpotThunk(spotId))
         dispatch(loadSpotReviewsThunk(spotId))
 
     },[dispatch])
-    console.log('this is my spots',spots)
+
     if(!spots.SpotImages)return null
     if(!reviews) return null
-    console.log('did this work?')
+
 
     // if(!Object.values(spots).length)  return null;
     // let x = spots.SpotImages[0].url
-    // console.log('spotImage check',spots.SpotImages[0].url)
+
     return (
 
         <div className="spotDetails">

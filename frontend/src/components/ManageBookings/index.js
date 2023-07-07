@@ -10,11 +10,11 @@ const ManageBookings = () => {
     const sessionUser = useSelector(state => state.session.user);
     const currentSpots = Object.values(getSpots)
     useEffect(() => {
-        console.log('inside Manage Spots')
+
         dispatch(loadCurrentBookedSpotsThunk())
     },[dispatch])
-    console.log('this is my current spots',currentSpots.filter(spot => new Date(spot.startDate) < new Date()))
-    // console.log(currentSpots.filter(spot => spot.ownerId !== sessionUser.id))
+
+
     const pastBookings =currentSpots.filter(spot => new Date(spot.endDate) < new Date())
     const upcomingBookings = currentSpots.filter(spot => new Date(spot.startDate) > new Date())
     const currentbookings = currentSpots.filter(spot => new Date(spot.startDate) <= new Date() && new Date(spot.endDate) >= new Date())

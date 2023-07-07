@@ -6,9 +6,9 @@ const DeleteSpotModal = ({spot}) => {
     const { closeModal } = useModal()
     const YesOnClick = (e) => {
         e.preventDefault()
-        console.log('spot id to delete',spot.id)
+
         dispatch(deleteSpotThunk(spot.id)).then(closeModal)
-        console.log('clicked delete spot')
+
     }
     const NoOnClick = (e) =>{
         e.preventDefault()

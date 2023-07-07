@@ -13,7 +13,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const payload = [];
 
     let owner = req.user
-    // console.log(owner,'TELTJELKTJEKLTJKLSTKLESJ:TLSJKL')
+
     const currentUserReviews = await owner.getReviews({
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt']
     })
@@ -95,7 +95,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         reviewId: req.params.reviewId,
         url
     })
-    console.log(newReviewImage.id, newReviewImage)
     res.json({
         id: newReviewImage.id,
         url: newReviewImage.url
