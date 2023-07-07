@@ -11,54 +11,526 @@ const { Spot, SpotImage } = require('../models')
 
 const spotImages = [
   {
-    name: 'Costco Wholesale',
-    url: 'https://1.bp.blogspot.com/-2QiH7jXnSDk/X2HE03oTgCI/AAAAAAACRjA/szA0ThB0PjcKoMWQZ2j51ZGWUUXSXWIPACLcBGAsYHQ/s1600/Costco%2Bexterior%2Bcostco.jpg',
+    name: 'French Dirt Plot',
+    url: 'https://www.naturesearthproducts.com/wp-content/uploads/product_images/product-3308-1655207193-100006-scaled.jpg',
     preview: true
   },
   {
-    name: 'Space Needle',
-    url: 'https://www.spaceneedle.com/assets/_1200x630_crop_center-center_82_none/az190903-0590.jpg?mtime=1574371859',
+    name: 'French Dirt Plot',
+    url: 'https://www.naturesearthproducts.com/wp-content/uploads/product_images/product-3308-1655207193-100006-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'French Dirt Plot',
+    url: 'https://www.naturesearthproducts.com/wp-content/uploads/product_images/product-3308-1655207193-100006-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'French Dirt Plot',
+    url: 'https://www.naturesearthproducts.com/wp-content/uploads/product_images/product-3308-1655207193-100006-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'French Dirt Plot',
+    url: 'https://www.naturesearthproducts.com/wp-content/uploads/product_images/product-3308-1655207193-100006-scaled.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Spanish Dirt Plot',
+    url: 'https://media.npr.org/assets/img/2022/12/02/gettyimages-1097796342-943eb8db689d4ab655679b743a5053f39627e301-s1100-c50.jpg',
     preview: true
   },
   {
-    name: 'Prince Street Pizza',
-    url: 'https://princestreetpizzaandpub.com/images/princestreetbuilding.png',
+    name: 'Spanish Dirt Plot',
+    url: 'https://media.npr.org/assets/img/2022/12/02/gettyimages-1097796342-943eb8db689d4ab655679b743a5053f39627e301-s1100-c50.jpg',
+    preview: false
+  },
+  {
+    name: 'Spanish Dirt Plot',
+    url: 'https://media.npr.org/assets/img/2022/12/02/gettyimages-1097796342-943eb8db689d4ab655679b743a5053f39627e301-s1100-c50.jpg',
+    preview: false
+  },
+  {
+    name: 'Spanish Dirt Plot',
+    url: 'https://media.npr.org/assets/img/2022/12/02/gettyimages-1097796342-943eb8db689d4ab655679b743a5053f39627e301-s1100-c50.jpg',
+    preview: false
+  },
+  {
+    name: 'Spanish Dirt Plot',
+    url: 'https://media.npr.org/assets/img/2022/12/02/gettyimages-1097796342-943eb8db689d4ab655679b743a5053f39627e301-s1100-c50.jpg',
+    preview: false
+  },
+
+  {
+    name: 'German Dirt Plot',
+    url: 'https://cdn.shopify.com/s/files/1/0569/0615/4154/files/GettyImages-687716000.jpg',
     preview: true
   },
   {
-    name: 'Island House',
-    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    name: 'German Dirt Plot',
+    url: 'https://cdn.shopify.com/s/files/1/0569/0615/4154/files/GettyImages-687716000.jpg',
+    preview: false
+  },
+  {
+    name: 'German Dirt Plot',
+    url: 'https://cdn.shopify.com/s/files/1/0569/0615/4154/files/GettyImages-687716000.jpg',
+    preview: false
+  },
+  {
+    name: 'German Dirt Plot',
+    url: 'https://cdn.shopify.com/s/files/1/0569/0615/4154/files/GettyImages-687716000.jpg',
+    preview: false
+  },
+  {
+    name: 'German Dirt Plot',
+    url: 'https://cdn.shopify.com/s/files/1/0569/0615/4154/files/GettyImages-687716000.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Polish Dirt Plot',
+    url: 'https://dirtsoilandmore.com/wp-content/uploads/sites/12/2014/02/dirt.jpg',
     preview: true
   },
   {
-    name: 'Island House',
-    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    name: 'Polish Dirt Plot',
+    url: 'https://dirtsoilandmore.com/wp-content/uploads/sites/12/2014/02/dirt.jpg',
     preview: false
   },
   {
-    name: 'Island House',
-    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    name: 'Polish Dirt Plot',
+    url: 'https://dirtsoilandmore.com/wp-content/uploads/sites/12/2014/02/dirt.jpg',
     preview: false
   },
   {
-    name: 'Island House',
-    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    name: 'Polish Dirt Plot',
+    url: 'https://dirtsoilandmore.com/wp-content/uploads/sites/12/2014/02/dirt.jpg',
     preview: false
   },
   {
-    name: 'Island House',
-    url: 'https://cdn.theatlantic.com/media/img/photo/2015/06/unusual-homes-around-the-world/h01_RTXZWGT/main_1500.jpg',
+    name: 'Polish Dirt Plot',
+    url: 'https://dirtsoilandmore.com/wp-content/uploads/sites/12/2014/02/dirt.jpg',
     preview: false
   },
+
   {
-    name: 'Wood House',
-    url: 'https://images.unsplash.com/photo-1525906336592-11c866dd1d4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHBpbGV8ZW58MHx8MHx8&w=1000&q=80',
+    name: 'English Dirt Plot',
+    url: 'https://img.freepik.com/free-photo/top-view-dark-soil-background_179666-40013.jpg',
     preview: true
-  },  {
-    name: 'Wood House',
-    url: 'https://images.unsplash.com/photo-1525906336592-11c866dd1d4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHBpbGV8ZW58MHx8MHx8&w=1000&q=80',
+  },
+  {
+    name: 'English Dirt Plot',
+    url: 'https://img.freepik.com/free-photo/top-view-dark-soil-background_179666-40013.jpg',
     preview: false
   },
+  {
+    name: 'English Dirt Plot',
+    url: 'https://img.freepik.com/free-photo/top-view-dark-soil-background_179666-40013.jpg',
+    preview: false
+  },
+  {
+    name: 'English Dirt Plot',
+    url: 'https://img.freepik.com/free-photo/top-view-dark-soil-background_179666-40013.jpg',
+    preview: false
+  },
+  {
+    name: 'English Dirt Plot',
+    url: 'https://img.freepik.com/free-photo/top-view-dark-soil-background_179666-40013.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Dirt Patch #1',
+    url: 'https://serbu.ca/wp-content/uploads/2021/05/fill-dirt1.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirt Patch #1',
+    url: 'https://serbu.ca/wp-content/uploads/2021/05/fill-dirt1.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #1',
+    url: 'https://serbu.ca/wp-content/uploads/2021/05/fill-dirt1.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #1',
+    url: 'https://serbu.ca/wp-content/uploads/2021/05/fill-dirt1.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #1',
+    url: 'https://serbu.ca/wp-content/uploads/2021/05/fill-dirt1.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Dirt Patch #2',
+    url: 'https://www.smithbrosmulch.com/wp-content/uploads/2021/02/Fill-Dirt-2.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirt Patch #2',
+    url: 'https://www.smithbrosmulch.com/wp-content/uploads/2021/02/Fill-Dirt-2.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #2',
+    url: 'https://www.smithbrosmulch.com/wp-content/uploads/2021/02/Fill-Dirt-2.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #2',
+    url: 'https://www.smithbrosmulch.com/wp-content/uploads/2021/02/Fill-Dirt-2.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #2',
+    url: 'https://www.smithbrosmulch.com/wp-content/uploads/2021/02/Fill-Dirt-2.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Dirt Patch #3',
+    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirt Patch #3',
+    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #3',
+    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #3',
+    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #3',
+    url: 'https://www.zimmermanmulch.com/wp-content/uploads/2021/01/fill-dirt2-scaled.jpg',
+    preview: false
+  },
+
+
+  {
+    name: 'Dirt Patch #4',
+    url: 'https://cdn.shoplightspeed.com/shops/629542/files/15496185/1-yard-compactable-fill-dirt.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirt Patch #4',
+    url: 'https://cdn.shoplightspeed.com/shops/629542/files/15496185/1-yard-compactable-fill-dirt.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #4',
+    url: 'https://cdn.shoplightspeed.com/shops/629542/files/15496185/1-yard-compactable-fill-dirt.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #4',
+    url: 'https://cdn.shoplightspeed.com/shops/629542/files/15496185/1-yard-compactable-fill-dirt.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #4',
+    url: 'https://cdn.shoplightspeed.com/shops/629542/files/15496185/1-yard-compactable-fill-dirt.jpg',
+    preview: false
+  },
+
+
+  {
+    name: 'Dirt Patch #5',
+    url: 'https://mountainhighmulch.com/wp-content/uploads/2021/10/fill-dirt-630x473.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirt Patch #5',
+    url: 'https://mountainhighmulch.com/wp-content/uploads/2021/10/fill-dirt-630x473.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #5',
+    url: 'https://mountainhighmulch.com/wp-content/uploads/2021/10/fill-dirt-630x473.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #5',
+    url: 'https://mountainhighmulch.com/wp-content/uploads/2021/10/fill-dirt-630x473.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirt Patch #5',
+    url: 'https://mountainhighmulch.com/wp-content/uploads/2021/10/fill-dirt-630x473.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Glorious Plot',
+    url: 'https://golf.com/wp-content/uploads/2021/08/lawn-1024x576.jpg',
+    preview: true
+  },
+  {
+    name: 'Glorious Plot',
+    url: 'https://golf.com/wp-content/uploads/2021/08/lawn-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Glorious Plot',
+    url: 'https://golf.com/wp-content/uploads/2021/08/lawn-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Glorious Plot',
+    url: 'https://golf.com/wp-content/uploads/2021/08/lawn-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Glorious Plot',
+    url: 'https://golf.com/wp-content/uploads/2021/08/lawn-1024x576.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Ant Paradise',
+    url: 'https://cdn.zmescience.com/wp-content/uploads/2020/10/245835_web-1024x576.jpg',
+    preview: true
+  },
+  {
+    name: 'Ant Paradise',
+    url: 'https://cdn.zmescience.com/wp-content/uploads/2020/10/245835_web-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Ant Paradise',
+    url: 'https://cdn.zmescience.com/wp-content/uploads/2020/10/245835_web-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Ant Paradise',
+    url: 'https://cdn.zmescience.com/wp-content/uploads/2020/10/245835_web-1024x576.jpg',
+    preview: false
+  },
+  {
+    name: 'Ant Paradise',
+    url: 'https://cdn.zmescience.com/wp-content/uploads/2020/10/245835_web-1024x576.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Scenic Plot of Dirt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/45/River_Bank_Erosion_-_geograph.org.uk_-_565767.jpg',
+    preview: true
+  },
+  {
+    name: 'Scenic Plot of Dirt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/45/River_Bank_Erosion_-_geograph.org.uk_-_565767.jpg',
+    preview: false
+  },
+  {
+    name: 'Scenic Plot of Dirt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/45/River_Bank_Erosion_-_geograph.org.uk_-_565767.jpg',
+    preview: false
+  },
+  {
+    name: 'Scenic Plot of Dirt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/45/River_Bank_Erosion_-_geograph.org.uk_-_565767.jpg',
+    preview: false
+  },
+  {
+    name: 'Scenic Plot of Dirt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/45/River_Bank_Erosion_-_geograph.org.uk_-_565767.jpg',
+    preview: false
+  },
+
+  {
+    name: 'One Dirt Hill',
+    url: 'https://t4.ftcdn.net/jpg/04/35/53/05/360_F_435530538_Cjh5pqDSuvNmkWQK7ckH8RJtGWqUPjWR.jpg',
+    preview: true
+  },
+  {
+    name: 'One Dirt Hill',
+    url: 'https://t4.ftcdn.net/jpg/04/35/53/05/360_F_435530538_Cjh5pqDSuvNmkWQK7ckH8RJtGWqUPjWR.jpg',
+    preview: false
+  },
+  {
+    name: 'One Dirt Hill',
+    url: 'https://t4.ftcdn.net/jpg/04/35/53/05/360_F_435530538_Cjh5pqDSuvNmkWQK7ckH8RJtGWqUPjWR.jpg',
+    preview: false
+  },
+  {
+    name: 'One Dirt Hill',
+    url: 'https://t4.ftcdn.net/jpg/04/35/53/05/360_F_435530538_Cjh5pqDSuvNmkWQK7ckH8RJtGWqUPjWR.jpg',
+    preview: false
+  },
+  {
+    name: 'One Dirt Hill',
+    url: 'https://t4.ftcdn.net/jpg/04/35/53/05/360_F_435530538_Cjh5pqDSuvNmkWQK7ckH8RJtGWqUPjWR.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Ash Plot',
+    url: 'https://i.natgeofe.com/n/8b8f3685-f097-4057-8542-dfaf8b44bf97/MM9797_210919_1650_4x3.jpg',
+    preview: true
+  },
+  {
+    name: 'Ash Plot',
+    url: 'https://i.natgeofe.com/n/8b8f3685-f097-4057-8542-dfaf8b44bf97/MM9797_210919_1650_4x3.jpg',
+    preview: false
+  },
+  {
+    name: 'Ash Plot',
+    url: 'https://i.natgeofe.com/n/8b8f3685-f097-4057-8542-dfaf8b44bf97/MM9797_210919_1650_4x3.jpg',
+    preview: false
+  },
+  {
+    name: 'Ash Plot',
+    url: 'https://i.natgeofe.com/n/8b8f3685-f097-4057-8542-dfaf8b44bf97/MM9797_210919_1650_4x3.jpg',
+    preview: false
+  },
+  {
+    name: 'Ash Plot',
+    url: 'https://i.natgeofe.com/n/8b8f3685-f097-4057-8542-dfaf8b44bf97/MM9797_210919_1650_4x3.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Soily Soil',
+    url: 'https://2.bp.blogspot.com/--GNmi1oB40o/UVBmhU6tpWI/AAAAAAAAAII/f41C3C_Y_7g/s1600/dirt_soil_lg.jpg',
+    preview: true
+  },
+  {
+    name: 'Soily Soil',
+    url: 'https://2.bp.blogspot.com/--GNmi1oB40o/UVBmhU6tpWI/AAAAAAAAAII/f41C3C_Y_7g/s1600/dirt_soil_lg.jpg',
+    preview: false
+  },
+  {
+    name: 'Soily Soil',
+    url: 'https://2.bp.blogspot.com/--GNmi1oB40o/UVBmhU6tpWI/AAAAAAAAAII/f41C3C_Y_7g/s1600/dirt_soil_lg.jpg',
+    preview: false
+  },
+  {
+    name: 'Soily Soil',
+    url: 'https://2.bp.blogspot.com/--GNmi1oB40o/UVBmhU6tpWI/AAAAAAAAAII/f41C3C_Y_7g/s1600/dirt_soil_lg.jpg',
+    preview: false
+  },
+  {
+    name: 'Soily Soil',
+    url: 'https://2.bp.blogspot.com/--GNmi1oB40o/UVBmhU6tpWI/AAAAAAAAAII/f41C3C_Y_7g/s1600/dirt_soil_lg.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Dirty Dirt',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1152392832.jpg',
+    preview: true
+  },
+  {
+    name: 'Dirty Dirt',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1152392832.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirty Dirt',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1152392832.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirty Dirt',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1152392832.jpg',
+    preview: false
+  },
+  {
+    name: 'Dirty Dirt',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1152392832.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Compost Land',
+    url: 'https://npr.brightspotcdn.com/dims4/default/b695898/2147483647/strip/true/crop/1254x836+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201809%2Fcomposting-container-istock-curtoicurto.jpg',
+    preview: true
+  },
+  {
+    name: 'Compost Land',
+    url: 'https://npr.brightspotcdn.com/dims4/default/b695898/2147483647/strip/true/crop/1254x836+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201809%2Fcomposting-container-istock-curtoicurto.jpg',
+    preview: false
+  },
+  {
+    name: 'Compost Land',
+    url: 'https://npr.brightspotcdn.com/dims4/default/b695898/2147483647/strip/true/crop/1254x836+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201809%2Fcomposting-container-istock-curtoicurto.jpg',
+    preview: false
+  },
+  {
+    name: 'Compost Land',
+    url: 'https://npr.brightspotcdn.com/dims4/default/b695898/2147483647/strip/true/crop/1254x836+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201809%2Fcomposting-container-istock-curtoicurto.jpg',
+    preview: false
+  },
+  {
+    name: 'Compost Land',
+    url: 'https://npr.brightspotcdn.com/dims4/default/b695898/2147483647/strip/true/crop/1254x836+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fvpr%2Ffiles%2F201809%2Fcomposting-container-istock-curtoicurto.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Trash and Dirt Plot',
+    url: 'https://cloudfront-us-east-1.images.arcpublishing.com/opb/7ZZFYI3GLVB4XFRN6PUD6GR6F4.jpg',
+    preview: true
+  },
+  {
+    name: 'Trash and Dirt Plot',
+    url: 'https://cloudfront-us-east-1.images.arcpublishing.com/opb/7ZZFYI3GLVB4XFRN6PUD6GR6F4.jpg',
+    preview: false
+  },
+  {
+    name: 'Trash and Dirt Plot',
+    url: 'https://cloudfront-us-east-1.images.arcpublishing.com/opb/7ZZFYI3GLVB4XFRN6PUD6GR6F4.jpg',
+    preview: false
+  },
+  {
+    name: 'Trash and Dirt Plot',
+    url: 'https://cloudfront-us-east-1.images.arcpublishing.com/opb/7ZZFYI3GLVB4XFRN6PUD6GR6F4.jpg',
+    preview: false
+  },
+  {
+    name: 'Trash and Dirt Plot',
+    url: 'https://cloudfront-us-east-1.images.arcpublishing.com/opb/7ZZFYI3GLVB4XFRN6PUD6GR6F4.jpg',
+    preview: false
+  },
+
+  {
+    name: 'Muddy Plot',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1142679668.jpg',
+    preview: true
+  },
+  {
+    name: 'Muddy Plot',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1142679668.jpg',
+    preview: false
+  },
+  {
+    name: 'Muddy Plot',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1142679668.jpg',
+    preview: false
+  },
+  {
+    name: 'Muddy Plot',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1142679668.jpg',
+    preview: false
+  },
+  {
+    name: 'Muddy Plot',
+    url: 'https://cfaes.osu.edu/sites/cfaes_main/files/site-library/site-images/news/GettyImages-1142679668.jpg',
+    preview: false
+  }
 ];
 
 module.exports = {
