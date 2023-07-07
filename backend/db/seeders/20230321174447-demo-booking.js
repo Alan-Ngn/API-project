@@ -13,17 +13,17 @@ const bookings = [
   {
     renter: 'Thomas King',
     spots: [
-      { name: 'Prince Street Pizza', startDate: '2023-02-01', endDate: '2023-02-14'},
-      { name: 'Space Needle', startDate: '2023-05-06', endDate: '2023-05-20'},
-      { name: 'Costco Wholesale', startDate: '2022-06-07', endDate: '2022-06-08'}
+      { name: 'Glorious Plot', startDate: '2023-02-01', endDate: '2023-02-14'},
+      { name: 'Compost Land', startDate: '2023-05-06', endDate: '2023-05-20'},
+      { name: 'Dirt Patch #4', startDate: '2022-06-07', endDate: '2022-06-08'}
     ]
   },
   {
     renter: 'Denise Nguyen',
     spots: [
-      { name: 'Costco Wholesale', startDate: '2022-11-15', endDate: '2022-11-21'},
-      { name: 'Prince Street Pizza', startDate: '2023-03-21', endDate: '2023-03-25'},
-      { name: 'Space Needle', startDate: '2023-07-08', endDate: '2023-09-10'}
+      { name: 'Muddy Plot', startDate: '2022-11-15', endDate: '2022-11-21'},
+      { name: 'German Dirt Plot', startDate: '2023-03-21', endDate: '2023-03-25'},
+      { name: 'Dirt Patch #5', startDate: '2023-07-08', endDate: '2023-09-10'}
     ]
   }
 ]
