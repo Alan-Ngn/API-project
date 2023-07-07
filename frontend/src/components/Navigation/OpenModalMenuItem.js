@@ -16,7 +16,7 @@ function OpenModalMenuItem({
   };
 
   return (
-    <div onClick={onClick}>{itemText}</div>
+    <div className='login-sign-up-button' onClick={onClick}>{itemText}</div>
   );
 }
 

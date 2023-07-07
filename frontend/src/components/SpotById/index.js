@@ -48,6 +48,8 @@ const SpotById = () => {
         console.log('HOW DO MY ERRORS LOOK LIKE', data)
         if (data) {
             setErrors(data.errors.endDate);
+        } else {
+            alert("Spot Booked!");
         }
         // else {
         //     setStartDate(new Date())
@@ -129,7 +131,9 @@ const SpotById = () => {
                             }
                     </div>
                     )}
-                    <button className="reserve" onClick={handleSubmit}>Reserve</button>
+                    {(user && user.id !== spots.ownerId && !reviewArr.map(review => review.userId).includes(user.id)) && (
+                        <button className="reserve" onClick={handleSubmit}>Reserve</button>
+                    )}
                 </div>
             </div>
 

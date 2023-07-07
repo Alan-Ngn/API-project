@@ -88,7 +88,8 @@ const SpotForm  = ({input, formType}) => {
         if(description.length < 30) errors.description = 'Description needs a minimum of 30 characters'
         if(!name) errors.name = 'Name is required'
         if(!price) errors.price = 'Price is required'
-
+        if(lat<-90 || lat> 90) errors.lat = 'Latitude must be between -90 and 90'
+        if(lng<-90 || lng> 90) errors.lng = 'Longitude must be between -180 and 180'
         console.log('what errors do i have',errors)
         // setErr(errors)
         if(country || address || city || state || lat || lng || description || name || price || previewImage){
