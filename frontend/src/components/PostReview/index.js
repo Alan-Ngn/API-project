@@ -24,17 +24,17 @@ const PostReviewModal = ({spot, user}) => {
         reviewObj.review = review
         reviewObj.stars = rating
         setReviewPayload(reviewObj)
-        console.log('my payload',reviewObj)
+
     },[review, rating])
 
 
     const onChange = (number) => {
         setRating(parseInt(number));
       };
-      console.log(rating)
+
     const onClick = async(e) => {
         e.preventDefault()
-        console.log('spot id to create review',spot.id)
+
         // dispatch(createSpotReviewThunk(reviewPayload,spot.id, user.firstName)).then(closeModal)
         // dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(dispatch(loadSpotReviewsThunk(spot.id))).then(closeModal)
         const backendError = await dispatch(createSpotReviewThunk(reviewPayload,spot.id)).then(function(result) {
@@ -44,14 +44,9 @@ const PostReviewModal = ({spot, user}) => {
                 return closeModal()
             };
           });
-        console.log('testing response frontend for backend',backendError.errors.review)
+
         setBackendErr(backendError.errors)
-        console.log('object or array',Object.values(backendErr).length)
-        if(Object.values(backendErr).length===0){
-            console.log('close modal?')
 
-
-        }
     }
 
     return (

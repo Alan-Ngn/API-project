@@ -50,7 +50,7 @@ export const loadBookedSpots = (bookings) => {
 }
 export const loadSpotsThunk = () => async(dispatch) => {
     const response = await csrfFetch("/api/spots")
-    console.log('loadSpotsThunk started')
+
     if(response.ok){
         const data = await response.json()
         dispatch(loadSpots(data))
@@ -72,7 +72,7 @@ export const loadCurrentSpotsThunk = () => async(dispatch) =>{
 export const loadCurrentBookedSpotsThunk = () => async(dispatch) =>{
     const response = await csrfFetch("/api/bookings/current")
     if(response.ok){
-        console.log('we in current bookings')
+
         const data = await response.json()
         dispatch(loadBookedSpots(data))
     } else {
@@ -82,7 +82,7 @@ export const loadCurrentBookedSpotsThunk = () => async(dispatch) =>{
 
 export const loadOneSpotThunk = (spotId) => async(dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
-    console.log('loadOneSpotThunk started')
+
     if(response.ok){
         const data = await response.json()
         dispatch(loadOneSpot(data))
@@ -94,11 +94,11 @@ export const loadOneSpotThunk = (spotId) => async(dispatch) => {
 export const createSpotThunk = (spot, spotImg) => async(dispatch) => {
 
     // const spotImages = [...spot.imgArr]
-    console.log('inside createSpotThunk',spotImg)
+
     // delete spot.imgArr;
     spot.lat = Number(spot.lat)
     spot.lng = Number(spot.lng)
-    console.log('createSpot spot', spot)
+
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
         headers: {
@@ -106,7 +106,7 @@ export const createSpotThunk = (spot, spotImg) => async(dispatch) => {
           },
         body: JSON.stringify(spot)
     })
-    console.log('also inside createSpotThunk after deletion', response)
+
 
 
     if(response.ok){
@@ -130,8 +130,7 @@ export const createSpotThunk = (spot, spotImg) => async(dispatch) => {
 }
 
 export const updateSpotThunk = (spot, spotId) => async(dispatch) => {
-    console.log('inside update spot thunk',spot)
-    console.log('spot Id', Number(spotId))
+
     delete spot.imgArr;
     spot.lat = Number(spot.lat)
     spot.lng = Number(spot.lng)
@@ -175,12 +174,12 @@ const spotsReducer = (state = {}, action) => {
         return newState;
         case LOAD_SPOT:
           newState = {}
-          console.log('one spot reducer')
+
           newState = {...action.spot}
           return newState
         // case CREATE_SPOT:
         //     newState = {}
-        //     console.log(action.spot)
+
         //     // newState[action.spot]
         case DELETE_SPOT:
             newState = {...state}
@@ -188,10 +187,10 @@ const spotsReducer = (state = {}, action) => {
             return newState
 
         case LOAD_BOOKED:
-            console.log(action.bookings.Bookings)
+
             newState = {}
             action.bookings.Bookings.forEach((spot) => {
-                console.log(spot.id, spot)
+
                 newState[spot.id] = spot;
               });
             return newState

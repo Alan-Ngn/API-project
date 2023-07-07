@@ -31,9 +31,9 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
     let today = `${year}-${month.toString().padStart(2,'0')}-${day}`;
 
     if (type==='update-booking') {
-        console.log(disabledDates)
+
         const updateDates = disabledDates.filter(date => new Date(bookedStartDate) > date || new Date(bookedEndDate) < date)
-        console.log(updateDates,'did it filter out the dates?')
+
         disabledDates = updateDates
     }
 
@@ -42,12 +42,12 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
 		e.preventDefault();
         booking.startDate = value[0]
         booking.endDate = value[1]
-        console.log(booking)
+
         if(type==='update-booking'){
             const data = await dispatch(updateBookingThunk(booking, bookingId))
 			if (data) {
 				setErrors(data.message);
-                console.log(errors,' update creating errors')
+
 			} else {
 				closeModal();
 			}
@@ -60,7 +60,7 @@ function BookingForm({spot, bookedStartDate, bookedEndDate, bookingId, type}) {
 			// 	closeModal();
 			// }
             // e.preventDefault();
-            console.log(value, 'testing default value date')
+
             setStartDate(value[0])
             setEndDate(value[1])
             closeModal();

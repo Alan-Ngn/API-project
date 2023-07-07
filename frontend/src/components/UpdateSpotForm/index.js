@@ -8,7 +8,7 @@ const UpdateSpotForm = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots)
     useEffect(()=>{
-        console.log('inside the useEffect')
+
         dispatch(loadOneSpotThunk(spotId))
         // dispatch(loadSpotReviewsThunk(spotId))
     },[dispatch])
@@ -18,7 +18,7 @@ const UpdateSpotForm = () => {
     //     const element = spots.SpotImages[i];
     //     imgObj[element.id] = element.url
     // }
-    console.log(spots)
+
     const input = {
         country: spots.country,
         address: spots.address,

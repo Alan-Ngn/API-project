@@ -30,7 +30,7 @@ const SpotIndexItem = ({ spot, user, type, booking }) => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const handleDelete = async(e) => {
-        console.log(new Date(booking.startDate) > today)
+
         e.preventDefault()
         dispatch(deleteBookingThunk(booking.id))
     }

@@ -26,17 +26,15 @@ module.exports = {
       const reviewerInfo = await User.findOne({
         where: { firstName: reviewImageInfo.reviewer.split(' ')[0], lastName: reviewImageInfo.reviewer.split(' ')[1] }
       });
-      // console.log('reviewer info', reviewerInfo.id)
+
       const spotInfo = await Spot.findOne({
         where: { name: reviewImageInfo.spot }
       })
-      // console.log('spot info', spotInfo)
+
       const reviewInfo = await Review.findOne({
         where: { spotId: spotInfo.id, userId: reviewerInfo.id }
       })
 
-
-      // console.log('review info', reviewInfo)
       await ReviewImage.create({
         reviewId: reviewInfo.id,
         url
