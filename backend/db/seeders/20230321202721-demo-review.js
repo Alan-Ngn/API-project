@@ -13,17 +13,17 @@ const reviews = [
   {
     renter: 'Thomas King',
     spots: [
-      { name: 'Prince Street Pizza', review: 'This place was amazing', stars: 5},
-      { name: 'Space Needle', review: 'It was okay', stars: 2},
-      { name: 'Costco Wholesale', review: 'Hotdog was delicious', stars: 3}
+      { name: 'Glorious Plot', review: 'This place was amazing', stars: 5},
+      { name: 'Compost Land', review: 'It was okay', stars: 2},
+      { name: 'Dirt Patch #4', review: 'Patch of dirt was quite dirty!', stars: 3}
     ]
   },
   {
     renter: 'Denise Nguyen',
     spots: [
-      { name: 'Costco Wholesale', review: 'I spend too much money here', stars: 3},
-      { name: 'Prince Street Pizza', review: 'So good, I brought a box home on the plane.', stars: 5},
-      { name: 'Space Needle', review: 'Would only go once', stars: 1}
+      { name: 'Muddy Plot', review: 'Very muddy! I like it', stars: 3},
+      { name: 'German Dirt Plot', review: 'Wasnt German enough', stars: 5},
+      { name: 'Dirt Patch #5', review: 'Not my favorite dirt patch', stars: 1}
     ]
   }
 ]

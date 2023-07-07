@@ -12,7 +12,7 @@ const { ReviewImage, Review, Spot, User } = require('../models')
 const reviewImages = [
   {
     reviewer: 'Denise Nguyen',
-    spot: 'Costco Wholesale',
+    spot: 'Dirt Patch #5',
     url: 'Picture Placeholder',
   }
 ];
