@@ -18,6 +18,13 @@ function Navigation({ isLoaded }){
     let filteredSearch = spots.filter(spot => spot.city.toLowerCase().includes(search))
     setSpotsArr(filteredSearch)
   }
+  const handleClear = (e) => {
+    e.preventDefault()
+
+    let filteredSearch = spots.filter(spot => spot.city.toLowerCase().includes(''))
+    setSpotsArr(filteredSearch)
+    setSearch('')
+  }
 
   return (
     <nav>
@@ -41,6 +48,7 @@ function Navigation({ isLoaded }){
               onChange={e => setSearch(e.target.value)}/>
           </div>
             <button className='search-bar-button'><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button className='search-cancel-button' onClick={handleClear}><i class="fa-solid fa-x"></i></button>
         </form>
       )}
       {isLoaded && (
