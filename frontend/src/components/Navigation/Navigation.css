@@ -117,6 +117,18 @@ nav {
 .search-bar-button:hover {
     cursor: pointer;
 }
+.search-cancel-button {
+    /* border-radius: 50%; */
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: none;
+    background-color: #FF5A5F;
+}
+
+.search-cancel-button:hover {
+    cursor: pointer;
+}
 
 .login-sign-up-button:hover{
     cursor: pointer;
